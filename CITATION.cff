@@ -1,0 +1,73 @@
+cff-version: 1.2.0
+message: If you use these research materials, please cite the manuscript or the relevant paper. See
+  preferred-citation and references.
+type: software
+title: 'Rounding and Statistical Simulation: Research Materials'
+authors:
+- family-names: Bouftass
+  given-names: Samir
+- name: ChatGPT (OpenAI)
+contact:
+- family-names: Bouftass
+  given-names: Samir
+repository-code: https://github.com/Crypticator/rounding-statistical-simulation
+url: https://github.com/Crypticator/rounding-statistical-simulation
+license-url: https://github.com/Crypticator/rounding-statistical-simulation/blob/main/LICENSING.md
+abstract: 'Research materials for modular rounding and statistical simulation: a manuscript, four
+  papers, exact verifiers, numerical checks, and recorded results. Software is MIT licensed; project-authored
+  texts, figures and data compilations are CC BY 4.0 as specified in LICENSING.md. ChatGPT is credited
+  as an AI system, following the manuscripts.'
+keywords:
+- modular rounding
+- statistical simulation
+- total variation
+- Toeplitz matrices
+- reproducible research
+preferred-citation:
+  type: report
+  title: Rounding and Statistical Simulation
+  authors:
+  - family-names: Bouftass
+    given-names: Samir
+  - name: ChatGPT (OpenAI)
+  year: 2026
+  version: '0.6'
+  url: https://github.com/Crypticator/rounding-statistical-simulation/blob/main/THESIS_Rounding_Statistical_Simulation_v0_6.pdf
+  notes: Independent research manuscript. ChatGPT (OpenAI) is credited as an AI system.
+references:
+- type: article
+  title: Affine Maps Compatible with Modular Rounding
+  authors:
+  - family-names: Bouftass
+    given-names: Samir
+  - name: ChatGPT (OpenAI)
+  year: 2026
+  version: '1.1'
+  url: https://github.com/Crypticator/rounding-statistical-simulation/blob/main/Affine_Maps_Modular_Rounding.pdf
+- type: article
+  title: Noise and Simulation of Rounded Observations
+  authors:
+  - family-names: Bouftass
+    given-names: Samir
+  - name: ChatGPT (OpenAI)
+  year: 2026
+  version: '1.1'
+  url: https://github.com/Crypticator/rounding-statistical-simulation/blob/main/Noise_and_Simulation_of_Rounded_Observations.pdf
+- type: article
+  title: Dense and Toeplitz Matrices under Signed Row Permutations
+  authors:
+  - family-names: Bouftass
+    given-names: Samir
+  - name: ChatGPT (OpenAI)
+  year: 2026
+  version: '1.1'
+  url: https://github.com/Crypticator/rounding-statistical-simulation/blob/main/Dense_to_Toeplitz_Row_Transformations.pdf
+- type: article
+  title: Repeated Rounded Observations
+  authors:
+  - family-names: Bouftass
+    given-names: Samir
+  - name: ChatGPT (OpenAI)
+  year: 2026
+  version: '1.1'
+  url: https://github.com/Crypticator/rounding-statistical-simulation/blob/main/Repeated_Rounded_Observations.pdf

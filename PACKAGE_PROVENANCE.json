@@ -1,0 +1,40 @@
+{
+  "package_date": "2026-11-18",
+  "repository": "https://github.com/Crypticator/rounding-statistical-simulation",
+  "kind": "downloadable repository overlay; no remote write performed",
+  "inputs": [
+    {
+      "filename": "Four_English_Papers_and_Supplements.zip",
+      "sha256": "e0680f013b691d93290af576a8294fe916edcb5c314f458d1470db9b93af0671",
+      "size_bytes": 964095
+    },
+    {
+      "filename": "THESIS_Rounding_Statistical_Simulation_v0_6_CONSOLIDATED.zip",
+      "sha256": "601a1ccf00385d8714906f1cf8d8224aa842bfb0b0dac7127480239edc58b5b4",
+      "size_bytes": 4208206
+    }
+  ],
+  "extraction": {
+    "Four_English_Papers_and_Supplements.zip": "papers/ (member paths retained)",
+    "THESIS_Rounding_Statistical_Simulation_v0_6_CONSOLIDATED.zip": "thesis/ (single outer directory removed)"
+  },
+  "scientific_content_changed": false,
+  "upstream_status_notes": "Dated source-package notes are preserved as historical documents.",
+  "license_sources": {
+    "MIT": {
+      "url": "https://github.com/Crypticator/rounding-statistical-simulation/blob/main/LICENSE",
+      "original_blob_sha": "83fa50fc7d24a7ce16487d8a6d0ff329f9970fec",
+      "sha256": "14fad9172ea4b8347413a3a31c2de5ab7802b85979a4d8c481e4a007bcadad38"
+    },
+    "CC-BY-4.0": {
+      "url": "https://raw.githubusercontent.com/spdx/license-list-data/main/text/CC-BY-4.0.txt",
+      "canonical_url": "https://creativecommons.org/licenses/by/4.0/legalcode.en",
+      "sha256": "7f38c38147b1b5e3fc5788e34104c965873b60bbf639c52392a85297810ebcbe"
+    }
+  },
+  "cff_schema": {
+    "url": "https://raw.githubusercontent.com/citation-file-format/citation-file-format/main/schema.json",
+    "schema_id": "https://citation-file-format.github.io/1.2.0/schema.json",
+    "sha256": "e121a2844dd09233abbc9198ca26c5321316ca2b3ef2f0c57a2ad780d60169a4"
+  }
+}

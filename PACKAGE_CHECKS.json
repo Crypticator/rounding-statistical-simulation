@@ -1,0 +1,90 @@
+{
+  "status": "PASS",
+  "scientific_computations_rerun": false,
+  "scope": "Packaging, provenance, citation syntax, local links and byte preservation only.",
+  "cff_schema": "CFF 1.2.0 PASS",
+  "no_invented_doi_or_repository_release": true,
+  "source_bytes": {
+    "Four_English_Papers_and_Supplements.zip": {
+      "files": 76,
+      "identical": true
+    },
+    "THESIS_Rounding_Statistical_Simulation_v0_6_CONSOLIDATED.zip": {
+      "files": 82,
+      "identical": true
+    }
+  },
+  "source_manifests": [
+    {
+      "path": "thesis/SHA256SUMS",
+      "entries_checked": 81
+    },
+    {
+      "path": "papers/Affine_Maps_Modular_Rounding/SHA256SUMS",
+      "entries_checked": 15
+    },
+    {
+      "path": "papers/Dense_to_Toeplitz_Row_Transformations/SHA256SUMS",
+      "entries_checked": 17
+    },
+    {
+      "path": "papers/Noise_and_Simulation_of_Rounded_Observations/SHA256SUMS",
+      "entries_checked": 17
+    },
+    {
+      "path": "papers/Repeated_Rounded_Observations/SHA256SUMS",
+      "entries_checked": 22
+    }
+  ],
+  "new_readme_links": [
+    "thesis/deliverables/THESIS_Rounding_Statistical_Simulation_v0_6.pdf",
+    "thesis/",
+    "papers/Affine_Maps_Modular_Rounding/Affine_Maps_Modular_Rounding.pdf",
+    "papers/Affine_Maps_Modular_Rounding/",
+    "papers/Noise_and_Simulation_of_Rounded_Observations/Noise_and_Simulation_of_Rounded_Observations.pdf",
+    "papers/Noise_and_Simulation_of_Rounded_Observations/",
+    "papers/Dense_to_Toeplitz_Row_Transformations/Dense_to_Toeplitz_Row_Transformations.pdf",
+    "papers/Dense_to_Toeplitz_Row_Transformations/",
+    "papers/Repeated_Rounded_Observations/Repeated_Rounded_Observations.pdf",
+    "papers/Repeated_Rounded_Observations/",
+    "thesis/README.md",
+    "PACKAGE_PROVENANCE.json",
+    "PACKAGE_CHECKS.json",
+    "CITATION.cff",
+    "LICENSE-CODE.txt",
+    "LICENSE-DOCUMENTS.txt",
+    "LICENSING.md"
+  ],
+  "root_github_pdf_identity": {
+    "papers/Affine_Maps_Modular_Rounding/Affine_Maps_Modular_Rounding.pdf": {
+      "git_blob_sha": "93b2f33cdbd31b0ad3b55dd5b1e6c4451da64167",
+      "matches_observed_repository_copy": true
+    },
+    "papers/Noise_and_Simulation_of_Rounded_Observations/Noise_and_Simulation_of_Rounded_Observations.pdf": {
+      "git_blob_sha": "1bd6a80baacc9a045cda11a56a332b8108bd39ae",
+      "matches_observed_repository_copy": true
+    },
+    "papers/Dense_to_Toeplitz_Row_Transformations/Dense_to_Toeplitz_Row_Transformations.pdf": {
+      "git_blob_sha": "35c6e02e411fa9bedeaefb57b6a98a838d50c1c3",
+      "matches_observed_repository_copy": true
+    },
+    "papers/Repeated_Rounded_Observations/Repeated_Rounded_Observations.pdf": {
+      "git_blob_sha": "ecae97461dbe45b532c9708decb1c565f4168cab",
+      "matches_observed_repository_copy": true
+    },
+    "thesis/deliverables/THESIS_Rounding_Statistical_Simulation_v0_6.pdf": {
+      "git_blob_sha": "87134e08d8cd475ddd36f8acca4ac796fe326cfc",
+      "matches_observed_repository_copy": true
+    }
+  },
+  "readme_commands_resolved": {
+    "papers/Affine_Maps_Modular_Rounding/scripts/reproduce.py": true,
+    "papers/Noise_and_Simulation_of_Rounded_Observations/scripts/reproduce.py": true,
+    "papers/Dense_to_Toeplitz_Row_Transformations/scripts/reproduce.py": true,
+    "papers/Repeated_Rounded_Observations/scripts/reproduce.py": true,
+    "thesis/scripts/verify_first_part.py": true,
+    "thesis/scripts/reproduce_part_ii.py": true,
+    "thesis/scripts/reproduce_part_iii.py": true,
+    "thesis/scripts/reproduce_part_iv.py": true
+  }
+}
