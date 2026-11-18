@@ -1,0 +1,28 @@
+{
+  "title": "Affine Maps Compatible with Modular Rounding",
+  "authors": [
+    "Samir Bouftass"
+  ],
+  "language": "en",
+  "edition": "1.1",
+  "date": "2026-11-15",
+  "manuscript": "Affine_Maps_Modular_Rounding.md",
+  "canonical_pdf": {
+    "file": "Affine_Maps_Modular_Rounding.pdf",
+    "sha256": "e991e344b42fae6d145e55a7a44abf846e38ceae28e55b99bdd82534dd04d144",
+    "pages": 6
+  },
+  "editorial_revision": "Authorship and AI disclosure, 18 November 2026",
+  "editorial_revision_date": "2026-11-18",
+  "ai_assistance": {
+    "tool": "ChatGPT (OpenAI)",
+    "disclosure_heading": "Authorship and use of generative AI",
+    "scope": "Mathematical exploration; formulation and examination of arguments; proof drafting; writing and English translation; verification programs; computational checks; AI-assisted critical review.",
+    "independent_human_peer_review_claimed": false
+  },
+  "pre_revision_pdf": {
+    "file": "Affine_Maps_Modular_Rounding.pdf",
+    "sha256": "fbf725b0937c48516ffa69e09a61ea5505cad2ad736a1438084e1c68ff96a1e8"
+  },
+  "license_scope": "../../LICENSING.md"
+}

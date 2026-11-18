@@ -1,0 +1,4 @@
+# Optional dependencies for PDF construction only.
+matplotlib==3.10.8
+reportlab==4.4.9
+Pillow==13.0.0

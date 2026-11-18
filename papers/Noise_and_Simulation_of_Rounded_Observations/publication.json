@@ -1,0 +1,28 @@
+{
+  "title": "Noise and Simulation of Rounded Observations",
+  "authors": [
+    "Samir Bouftass"
+  ],
+  "language": "en",
+  "edition": "1.1",
+  "date": "2026-11-15",
+  "manuscript": "Noise_and_Simulation_of_Rounded_Observations.md",
+  "canonical_pdf": {
+    "file": "Noise_and_Simulation_of_Rounded_Observations.pdf",
+    "sha256": "6d93eaacb36ad28212d2d4b6404b6d376990385dbb3475fb606e8b037fd1b5c9",
+    "pages": 7
+  },
+  "editorial_revision": "Authorship and AI disclosure, 18 November 2026",
+  "editorial_revision_date": "2026-11-18",
+  "ai_assistance": {
+    "tool": "ChatGPT (OpenAI)",
+    "disclosure_heading": "Authorship and use of generative AI",
+    "scope": "Mathematical exploration; formulation and examination of arguments; proof drafting; writing and English translation; verification programs; computational checks; AI-assisted critical review.",
+    "independent_human_peer_review_claimed": false
+  },
+  "pre_revision_pdf": {
+    "file": "Noise_and_Simulation_of_Rounded_Observations.pdf",
+    "sha256": "97c72ccc05fb87166448482cddc4026f3a3122f9b0b6096653c1b2352cfa5cff"
+  },
+  "license_scope": "../../LICENSING.md"
+}

@@ -1,0 +1,29 @@
+{
+  "title": "Dense and Toeplitz Matrices under Signed Row Permutations",
+  "authors": [
+    "Samir Bouftass"
+  ],
+  "language": "en",
+  "edition": "1.1",
+  "date": "2026-11-16",
+  "manuscript": "Dense_to_Toeplitz_Row_Transformations.md",
+  "canonical_pdf": {
+    "file": "Dense_to_Toeplitz_Row_Transformations.pdf",
+    "sha256": "93136e09d8a07a5451fb235e2f2c27302668fdf4abdbf044a12e47c887027bd4",
+    "pages": 8
+  },
+  "editorial_revision": "Authorship and AI disclosure, 18 November 2026",
+  "editorial_revision_date": "2026-11-18",
+  "ai_assistance": {
+    "tool": "ChatGPT (OpenAI)",
+    "disclosure_heading": "Authorship and use of generative AI",
+    "scope": "Mathematical exploration; formulation and examination of arguments; proof drafting; writing and English translation; verification programs; computational checks; AI-assisted critical review.",
+    "independent_human_peer_review_claimed": false
+  },
+  "pre_revision_pdf": {
+    "file": "Dense_to_Toeplitz_Row_Transformations.pdf",
+    "sha256": "932becda9db9ececd3981b921406f6e6e2cc308da82ea30e0cb8d8cf5c8bcd90",
+    "pages": 7
+  },
+  "license_scope": "../../LICENSING.md"
+}

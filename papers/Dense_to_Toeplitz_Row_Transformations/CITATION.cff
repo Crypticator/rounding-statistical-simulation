@@ -1,0 +1,20 @@
+cff-version: 1.2.0
+message: Please cite the paper using preferred-citation when using this supplement.
+type: software
+title: Dense and Toeplitz Matrices under Signed Row Permutations - Reproducibility Supplement
+authors: &id001
+- family-names: Bouftass
+  given-names: Samir
+version: '1.1'
+date-released: '2026-11-18'
+repository-code: https://github.com/Crypticator/rounding-statistical-simulation
+license-url: https://github.com/Crypticator/rounding-statistical-simulation/blob/main/LICENSING.md
+preferred-citation:
+  type: article
+  title: Dense and Toeplitz Matrices under Signed Row Permutations
+  authors: *id001
+  year: 2026
+  version: '1.1'
+  url: https://github.com/Crypticator/rounding-statistical-simulation/blob/main/Dense_to_Toeplitz_Row_Transformations.pdf
+  notes: English edition 1.1; authorship and AI disclosure revised 18 November 2026. Research paper with
+    extensive disclosed AI assistance.

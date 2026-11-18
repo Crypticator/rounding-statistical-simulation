@@ -1,0 +1,20 @@
+cff-version: 1.2.0
+message: Please cite the paper using preferred-citation when using this supplement.
+type: software
+title: Repeated Rounded Observations - Reproducibility Supplement
+authors: &id001
+- family-names: Bouftass
+  given-names: Samir
+version: '1.1'
+date-released: '2026-11-18'
+repository-code: https://github.com/Crypticator/rounding-statistical-simulation
+license-url: https://github.com/Crypticator/rounding-statistical-simulation/blob/main/LICENSING.md
+preferred-citation:
+  type: article
+  title: Repeated Rounded Observations
+  authors: *id001
+  year: 2026
+  version: '1.1'
+  url: https://github.com/Crypticator/rounding-statistical-simulation/blob/main/Repeated_Rounded_Observations.pdf
+  notes: English edition 1.1; authorship and AI disclosure revised 18 November 2026. Research paper with
+    extensive disclosed AI assistance.
