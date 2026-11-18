@@ -1,0 +1,38 @@
+--- v0.5/tools/check_document.py
++++ v0.5.1/tools/check_document.py
+@@ -25,7 +25,18 @@
+     ns={'m':'http://schemas.openxmlformats.org/officeDocument/2006/math'}
+     val='{'+ns['m']+'}val'
+     with ZipFile(a.docx) as z:root=ET.fromstring(z.read('word/document.xml'))
++    from collections import Counter
+     issues=[];pluses=0
++    blackboard=Counter()
++    symbol_map={'Z':'ℤ','R':'ℝ','E':'𝔼'}
++    for run in root.findall('.//m:r',ns):
++        node=run.find('m:t',ns);text=node.text or '' if node is not None else ''
++        style=run.find('m:rPr/m:scr',ns)
++        if style is not None and style.get(val)=='double-struck' and text in symbol_map:
++            blackboard[symbol_map[text]]+=1
++        else:
++            blackboard.update(c for c in text if c in symbol_map.values())
++    pdf_text=[]
+     for sub in root.findall('.//m:sub',ns):
+         if ''.join(t.text or '' for t in sub.findall('.//m:t',ns))=='+':
+             pluses+=1
+@@ -36,11 +47,14 @@
+     with fitz.open(a.pdf) as d:
+         pages=len(d)
+         for i,p in enumerate(d,1):
+-            text=p.get_text()
++            text=p.get_text();pdf_text.append(text)
+             for mark in ('¿','�','<?>'):
+                 if mark in text:issues.append(f'Page {i}: possible formula import defect {mark!r}')
++    combined=''.join(pdf_text)
++    for symbol,count in blackboard.items():
++        if combined.count(symbol)!=count:issues.append(f'Double-struck symbol {symbol}: expected {count}, extracted {combined.count(symbol)}; inspect export')
+     if a.expected_pages is not None and pages!=a.expected_pages:issues.append(f'Expected {a.expected_pages} pages; found {pages}')
+-    result={'status':'FAIL' if issues else 'PASS','pdf_pages':pages,'native_math_objects':len(root.findall('.//m:oMath',ns)),'positive_part_subscripts':pluses,'issues':issues,'limit':'Visual inspection is still required; this is not mathematical proof checking.'}
++    result={'status':'FAIL' if issues else 'PASS','pdf_pages':pages,'native_math_objects':len(root.findall('.//m:oMath',ns)),'positive_part_subscripts':pluses,'double_struck_symbols':dict(blackboard),'issues':issues,'limit':'Visual inspection is still required; this is not mathematical proof checking.'}
+     print(json.dumps(result,indent=2))
+     if issues:raise SystemExit(1)
+ if __name__=='__main__':main()

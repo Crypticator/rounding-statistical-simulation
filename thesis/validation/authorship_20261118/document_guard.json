@@ -1,0 +1,13 @@
+{
+  "status": "PASS",
+  "pdf_pages": 86,
+  "native_math_objects": 1945,
+  "positive_part_subscripts": 14,
+  "double_struck_symbols": {
+    "\u2124": 30,
+    "\u211d": 1,
+    "\ud835\udd3c": 1
+  },
+  "issues": [],
+  "limit": "Visual inspection is still required; this is not mathematical proof checking."
+}

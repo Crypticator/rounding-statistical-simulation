@@ -1,0 +1,68 @@
+{
+  "title": "Rounding and Statistical Simulation",
+  "version": "0.6",
+  "date": "2026-11-17",
+  "authors": [
+    "Samir Bouftass"
+  ],
+  "pages": 86,
+  "drafted_chapters": 11,
+  "appendices": [
+    "A",
+    "B",
+    "C",
+    "D",
+    "E"
+  ],
+  "writing_status": "Complete manuscript",
+  "native_math_objects": 1945,
+  "baseline_source_sha256": "faa0065e343f728394a4841b82b8c967f8b6eb9ad4ca54c05c8255c3a94c6406",
+  "canonical_documents": {
+    "THESIS_Rounding_Statistical_Simulation_v0_6.md": "cf00e3e4a0045fe10ed9cbcd3e2fd57172b9d48c837306903000ee459e633d31",
+    "deliverables/THESIS_Rounding_Statistical_Simulation_v0_6.pdf": "24ba0242984098763e90dd75d18e3c00e44feeed35f21836b7db9d71e0a9a3e5",
+    "deliverables/THESIS_Rounding_Statistical_Simulation_v0_6.docx": "daafafae328f94921f6f33c3645ddeb625075c197455da166f07800104a8a6c3",
+    "deliverables/THESIS_Rounding_Statistical_Simulation_v0_6.html": "22b6f99549604373e07e430b77b2ad4d6dd3d0971b25c356e954f7a50a205c0d",
+    "deliverables/THESIS_Rounding_Statistical_Simulation_v0_6.tex": "31897234cac14500638f37b806322f3df0c28652716a7bafacf5f6334d41330f"
+  },
+  "limitations": [
+    "Historical internal audits used AI assistance and are not independent human peer review, an academic degree or a formal proof certificate.",
+    "The LaTeX export was not compiled.",
+    "Numerical optimization is corroboration, not a symbolic certificate.",
+    "No cryptographic security level or universal priority claim is established.",
+    "The oral preparation aid has not undergone a separate independent audit.",
+    "The earlier audit hashes identify pre-revision documents; this editorial update is not a renewed scientific audit."
+  ],
+  "package_status": "Authorship and AI disclosure editorial revision",
+  "consolidated_on": "2026-11-18",
+  "mandatory_corrections_open": 0,
+  "defense_status": "Historical defense preparation retained; no academic degree is claimed by this package.",
+  "final_audit": {
+    "path": "final_review/GPT_AUDIT_THESIS_FINAL_V0_6.md",
+    "sha256": "d768a149360de0f3ba3eae0ed2da5557557eac49a8ef0f720d953cd357e372fe",
+    "evidence_path": "final_review/GPT_AUDIT_THESIS_FINAL_EVIDENCE_V0_6.zip",
+    "evidence_sha256": "d8a477fa15ecd4a93d32bdd037c4e8b18f2e56ced8ea4cd475cc617bd32f2478"
+  },
+  "consolidation_scope": "The earlier consolidation record is historical. The current revision changes author attribution, disclosure and publication metadata; mathematical text, scientific scripts and data are preserved.",
+  "editorial_revision": "Authorship and disclosure revision, 18 November 2026",
+  "editorial_revision_date": "2026-11-18",
+  "ai_assistance": {
+    "tool": "ChatGPT (OpenAI)",
+    "disclosure_heading": "Authorship and use of generative AI",
+    "scope": "Mathematical exploration; formulation and examination of arguments; proof drafting; writing and English translation; verification programs; computational checks; AI-assisted critical review.",
+    "independent_human_peer_review_claimed": false
+  },
+  "historical_ai_assisted_review": "Final internal scientific audit of 17 November 2026: all ten controls pass within scope, no mandatory correction; prior scoped approvals retained.",
+  "pre_revision_document_hashes": {
+    "THESIS_Rounding_Statistical_Simulation_v0_6.md": "25feeefc7b118a6db654e006abcfb2f9a7a3022002a06e6eb51ea3099067e1f5",
+    "deliverables/THESIS_Rounding_Statistical_Simulation_v0_6.pdf": "ffad6b449204fed3cab41efb5874377b750343b5b2d384bdd30190712c876391",
+    "deliverables/THESIS_Rounding_Statistical_Simulation_v0_6.docx": "bb66315033effebc00d7407c32c74be40c2d88c8438f9d3e339c5cd2e7a81602"
+  },
+  "editorial_validation": {
+    "path": "validation/authorship_20261118/",
+    "scientific_source_unchanged": true,
+    "native_math_objects_unchanged": 1945,
+    "unchanged_scientific_script_files": 15,
+    "unchanged_data_files": 10,
+    "unchanged_pdf_page_contents_excluding_footer_numbers": 84
+  }
+}

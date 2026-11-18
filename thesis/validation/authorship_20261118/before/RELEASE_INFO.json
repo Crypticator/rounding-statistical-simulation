@@ -1,0 +1,46 @@
+{
+  "title": "Rounding and Statistical Simulation",
+  "version": "0.6",
+  "date": "2026-11-17",
+  "authors": [
+    "Samir Bouftass",
+    "ChatGPT (OpenAI)"
+  ],
+  "pages": 85,
+  "drafted_chapters": 11,
+  "appendices": [
+    "A",
+    "B",
+    "C",
+    "D",
+    "E"
+  ],
+  "writing_status": "Complete manuscript",
+  "independent_approval": "Final internal scientific audit of 17 November 2026: all ten controls pass within scope, no mandatory correction; prior scoped approvals retained.",
+  "independent_review_pending": null,
+  "native_math_objects": 1945,
+  "baseline_source_sha256": "faa0065e343f728394a4841b82b8c967f8b6eb9ad4ca54c05c8255c3a94c6406",
+  "canonical_documents": {
+    "THESIS_Rounding_Statistical_Simulation_v0_6.md": "25feeefc7b118a6db654e006abcfb2f9a7a3022002a06e6eb51ea3099067e1f5",
+    "deliverables/THESIS_Rounding_Statistical_Simulation_v0_6.pdf": "ffad6b449204fed3cab41efb5874377b750343b5b2d384bdd30190712c876391",
+    "deliverables/THESIS_Rounding_Statistical_Simulation_v0_6.docx": "bb66315033effebc00d7407c32c74be40c2d88c8438f9d3e339c5cd2e7a81602"
+  },
+  "limitations": [
+    "The approval is an internal scientific counter-audit, not journal peer review, a degree or a formal proof certificate.",
+    "The LaTeX export was not compiled.",
+    "Numerical optimization is corroboration, not a symbolic certificate.",
+    "No cryptographic security level or universal priority claim is established.",
+    "The oral preparation aid has not undergone a separate independent audit."
+  ],
+  "package_status": "Consolidated for oral defense",
+  "consolidated_on": "2026-11-18",
+  "mandatory_corrections_open": 0,
+  "defense_status": "Prepared; not yet held",
+  "final_audit": {
+    "path": "final_review/GPT_AUDIT_THESIS_FINAL_V0_6.md",
+    "sha256": "d768a149360de0f3ba3eae0ed2da5557557eac49a8ef0f720d953cd357e372fe",
+    "evidence_path": "final_review/GPT_AUDIT_THESIS_FINAL_EVIDENCE_V0_6.zip",
+    "evidence_sha256": "d8a477fa15ecd4a93d32bdd037c4e8b18f2e56ced8ea4cd475cc617bd32f2478"
+  },
+  "consolidation_scope": "Accompanying status, final audit evidence, integrity checks and oral preparation only; approved scientific documents, programs and data unchanged."
+}

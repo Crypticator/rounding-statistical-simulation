@@ -1,0 +1,297 @@
+{
+  "linear_programs": 72,
+  "numpy": "2.3.5",
+  "results": [
+    {
+      "P": 4,
+      "Q": 2,
+      "average": 0.5,
+      "eta": 0.0,
+      "expected": 0.5,
+      "worst": 0.5
+    },
+    {
+      "P": 4,
+      "Q": 2,
+      "average": 0.24999999999999997,
+      "eta": 0.125,
+      "expected": 0.25,
+      "worst": 0.25
+    },
+    {
+      "P": 4,
+      "Q": 2,
+      "average": 0.125,
+      "eta": 0.1875,
+      "expected": 0.125,
+      "worst": 0.125
+    },
+    {
+      "P": 4,
+      "Q": 2,
+      "average": 0.0,
+      "eta": 0.25,
+      "expected": 0.0,
+      "worst": 0.0
+    },
+    {
+      "P": 8,
+      "Q": 2,
+      "average": 0.5,
+      "eta": 0.0,
+      "expected": 0.5,
+      "worst": 0.5
+    },
+    {
+      "P": 8,
+      "Q": 2,
+      "average": 0.25,
+      "eta": 0.125,
+      "expected": 0.25,
+      "worst": 0.24999999999999997
+    },
+    {
+      "P": 8,
+      "Q": 2,
+      "average": 0.12500000000000006,
+      "eta": 0.1875,
+      "expected": 0.125,
+      "worst": 0.125
+    },
+    {
+      "P": 8,
+      "Q": 2,
+      "average": 0.0,
+      "eta": 0.25,
+      "expected": 0.0,
+      "worst": 0.0
+    },
+    {
+      "P": 8,
+      "Q": 4,
+      "average": 0.5,
+      "eta": 0.0,
+      "expected": 0.5,
+      "worst": 0.5
+    },
+    {
+      "P": 8,
+      "Q": 4,
+      "average": 0.25,
+      "eta": 0.125,
+      "expected": 0.25,
+      "worst": 0.25
+    },
+    {
+      "P": 8,
+      "Q": 4,
+      "average": 0.125,
+      "eta": 0.1875,
+      "expected": 0.125,
+      "worst": 0.125
+    },
+    {
+      "P": 8,
+      "Q": 4,
+      "average": 0.0,
+      "eta": 0.25,
+      "expected": 0.0,
+      "worst": 0.0
+    },
+    {
+      "P": 12,
+      "Q": 2,
+      "average": 0.49999999999999994,
+      "eta": 0.0,
+      "expected": 0.5,
+      "worst": 0.5
+    },
+    {
+      "P": 12,
+      "Q": 2,
+      "average": 0.25,
+      "eta": 0.125,
+      "expected": 0.25,
+      "worst": 0.25000000000000006
+    },
+    {
+      "P": 12,
+      "Q": 2,
+      "average": 0.125,
+      "eta": 0.1875,
+      "expected": 0.125,
+      "worst": 0.12499999999999999
+    },
+    {
+      "P": 12,
+      "Q": 2,
+      "average": 0.0,
+      "eta": 0.25,
+      "expected": 0.0,
+      "worst": 0.0
+    },
+    {
+      "P": 12,
+      "Q": 4,
+      "average": 0.49999999999999994,
+      "eta": 0.0,
+      "expected": 0.5,
+      "worst": 0.5
+    },
+    {
+      "P": 12,
+      "Q": 4,
+      "average": 0.24999999999999997,
+      "eta": 0.125,
+      "expected": 0.25,
+      "worst": 0.25
+    },
+    {
+      "P": 12,
+      "Q": 4,
+      "average": 0.12499999999999996,
+      "eta": 0.1875,
+      "expected": 0.125,
+      "worst": 0.125
+    },
+    {
+      "P": 12,
+      "Q": 4,
+      "average": 0.0,
+      "eta": 0.25,
+      "expected": 0.0,
+      "worst": 0.0
+    },
+    {
+      "P": 12,
+      "Q": 6,
+      "average": 0.49999999999999994,
+      "eta": 0.0,
+      "expected": 0.5,
+      "worst": 0.5
+    },
+    {
+      "P": 12,
+      "Q": 6,
+      "average": 0.24999999999999997,
+      "eta": 0.125,
+      "expected": 0.25,
+      "worst": 0.25
+    },
+    {
+      "P": 12,
+      "Q": 6,
+      "average": 0.12499999999999999,
+      "eta": 0.1875,
+      "expected": 0.125,
+      "worst": 0.125
+    },
+    {
+      "P": 12,
+      "Q": 6,
+      "average": 0.0,
+      "eta": 0.25,
+      "expected": 0.0,
+      "worst": 0.0
+    },
+    {
+      "P": 16,
+      "Q": 2,
+      "average": 0.5,
+      "eta": 0.0,
+      "expected": 0.5,
+      "worst": 0.5
+    },
+    {
+      "P": 16,
+      "Q": 2,
+      "average": 0.25,
+      "eta": 0.125,
+      "expected": 0.25,
+      "worst": 0.25000000000000006
+    },
+    {
+      "P": 16,
+      "Q": 2,
+      "average": 0.125,
+      "eta": 0.1875,
+      "expected": 0.125,
+      "worst": 0.12500000000000003
+    },
+    {
+      "P": 16,
+      "Q": 2,
+      "average": 0.0,
+      "eta": 0.25,
+      "expected": 0.0,
+      "worst": 0.0
+    },
+    {
+      "P": 16,
+      "Q": 4,
+      "average": 0.5,
+      "eta": 0.0,
+      "expected": 0.5,
+      "worst": 0.5
+    },
+    {
+      "P": 16,
+      "Q": 4,
+      "average": 0.25,
+      "eta": 0.125,
+      "expected": 0.25,
+      "worst": 0.25
+    },
+    {
+      "P": 16,
+      "Q": 4,
+      "average": 0.12499999999999999,
+      "eta": 0.1875,
+      "expected": 0.125,
+      "worst": 0.125
+    },
+    {
+      "P": 16,
+      "Q": 4,
+      "average": 0.0,
+      "eta": 0.25,
+      "expected": 0.0,
+      "worst": 0.0
+    },
+    {
+      "P": 16,
+      "Q": 8,
+      "average": 0.5,
+      "eta": 0.0,
+      "expected": 0.5,
+      "worst": 0.5
+    },
+    {
+      "P": 16,
+      "Q": 8,
+      "average": 0.25,
+      "eta": 0.125,
+      "expected": 0.25,
+      "worst": 0.25
+    },
+    {
+      "P": 16,
+      "Q": 8,
+      "average": 0.125,
+      "eta": 0.1875,
+      "expected": 0.125,
+      "worst": 0.125
+    },
+    {
+      "P": 16,
+      "Q": 8,
+      "average": 0.0,
+      "eta": 0.25,
+      "expected": 0.0,
+      "worst": 0.0
+    }
+  ],
+  "scipy": "1.17.0",
+  "status": "PASS_NUMERICAL_ONLY",
+  "tolerance": 1e-09
+}

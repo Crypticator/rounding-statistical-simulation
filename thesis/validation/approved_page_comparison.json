@@ -1,0 +1,398 @@
+{
+  "status": "PASS",
+  "dpi": 108,
+  "content_rectangle_points": [
+    0,
+    64,
+    612,
+    740
+  ],
+  "pages_compared": 72,
+  "pairs": [
+    {
+      "approved_page": 2,
+      "new_page": 2,
+      "identical": true
+    },
+    {
+      "approved_page": 4,
+      "new_page": 4,
+      "identical": true
+    },
+    {
+      "approved_page": 5,
+      "new_page": 5,
+      "identical": true
+    },
+    {
+      "approved_page": 6,
+      "new_page": 6,
+      "identical": true
+    },
+    {
+      "approved_page": 8,
+      "new_page": 8,
+      "identical": true
+    },
+    {
+      "approved_page": 9,
+      "new_page": 9,
+      "identical": true
+    },
+    {
+      "approved_page": 10,
+      "new_page": 10,
+      "identical": true
+    },
+    {
+      "approved_page": 11,
+      "new_page": 11,
+      "identical": true
+    },
+    {
+      "approved_page": 12,
+      "new_page": 12,
+      "identical": true
+    },
+    {
+      "approved_page": 13,
+      "new_page": 13,
+      "identical": true
+    },
+    {
+      "approved_page": 14,
+      "new_page": 14,
+      "identical": true
+    },
+    {
+      "approved_page": 15,
+      "new_page": 15,
+      "identical": true
+    },
+    {
+      "approved_page": 16,
+      "new_page": 16,
+      "identical": true
+    },
+    {
+      "approved_page": 17,
+      "new_page": 17,
+      "identical": true
+    },
+    {
+      "approved_page": 18,
+      "new_page": 18,
+      "identical": true
+    },
+    {
+      "approved_page": 19,
+      "new_page": 19,
+      "identical": true
+    },
+    {
+      "approved_page": 20,
+      "new_page": 20,
+      "identical": true
+    },
+    {
+      "approved_page": 21,
+      "new_page": 21,
+      "identical": true
+    },
+    {
+      "approved_page": 22,
+      "new_page": 22,
+      "identical": true
+    },
+    {
+      "approved_page": 23,
+      "new_page": 23,
+      "identical": true
+    },
+    {
+      "approved_page": 24,
+      "new_page": 24,
+      "identical": true
+    },
+    {
+      "approved_page": 25,
+      "new_page": 25,
+      "identical": true
+    },
+    {
+      "approved_page": 26,
+      "new_page": 26,
+      "identical": true
+    },
+    {
+      "approved_page": 27,
+      "new_page": 27,
+      "identical": true
+    },
+    {
+      "approved_page": 28,
+      "new_page": 28,
+      "identical": true
+    },
+    {
+      "approved_page": 29,
+      "new_page": 29,
+      "identical": true
+    },
+    {
+      "approved_page": 30,
+      "new_page": 30,
+      "identical": true
+    },
+    {
+      "approved_page": 31,
+      "new_page": 31,
+      "identical": true
+    },
+    {
+      "approved_page": 32,
+      "new_page": 32,
+      "identical": true
+    },
+    {
+      "approved_page": 33,
+      "new_page": 33,
+      "identical": true
+    },
+    {
+      "approved_page": 34,
+      "new_page": 34,
+      "identical": true
+    },
+    {
+      "approved_page": 35,
+      "new_page": 35,
+      "identical": true
+    },
+    {
+      "approved_page": 36,
+      "new_page": 36,
+      "identical": true
+    },
+    {
+      "approved_page": 37,
+      "new_page": 37,
+      "identical": true
+    },
+    {
+      "approved_page": 38,
+      "new_page": 38,
+      "identical": true
+    },
+    {
+      "approved_page": 39,
+      "new_page": 39,
+      "identical": true
+    },
+    {
+      "approved_page": 40,
+      "new_page": 40,
+      "identical": true
+    },
+    {
+      "approved_page": 41,
+      "new_page": 41,
+      "identical": true
+    },
+    {
+      "approved_page": 42,
+      "new_page": 42,
+      "identical": true
+    },
+    {
+      "approved_page": 43,
+      "new_page": 43,
+      "identical": true
+    },
+    {
+      "approved_page": 44,
+      "new_page": 44,
+      "identical": true
+    },
+    {
+      "approved_page": 45,
+      "new_page": 45,
+      "identical": true
+    },
+    {
+      "approved_page": 46,
+      "new_page": 46,
+      "identical": true
+    },
+    {
+      "approved_page": 47,
+      "new_page": 47,
+      "identical": true
+    },
+    {
+      "approved_page": 48,
+      "new_page": 48,
+      "identical": true
+    },
+    {
+      "approved_page": 49,
+      "new_page": 49,
+      "identical": true
+    },
+    {
+      "approved_page": 50,
+      "new_page": 50,
+      "identical": true
+    },
+    {
+      "approved_page": 51,
+      "new_page": 51,
+      "identical": true
+    },
+    {
+      "approved_page": 52,
+      "new_page": 52,
+      "identical": true
+    },
+    {
+      "approved_page": 53,
+      "new_page": 53,
+      "identical": true
+    },
+    {
+      "approved_page": 54,
+      "new_page": 54,
+      "identical": true
+    },
+    {
+      "approved_page": 55,
+      "new_page": 55,
+      "identical": true
+    },
+    {
+      "approved_page": 56,
+      "new_page": 56,
+      "identical": true
+    },
+    {
+      "approved_page": 57,
+      "new_page": 57,
+      "identical": true
+    },
+    {
+      "approved_page": 58,
+      "new_page": 58,
+      "identical": true
+    },
+    {
+      "approved_page": 59,
+      "new_page": 59,
+      "identical": true
+    },
+    {
+      "approved_page": 60,
+      "new_page": 60,
+      "identical": true
+    },
+    {
+      "approved_page": 61,
+      "new_page": 61,
+      "identical": true
+    },
+    {
+      "approved_page": 62,
+      "new_page": 62,
+      "identical": true
+    },
+    {
+      "approved_page": 63,
+      "new_page": 63,
+      "identical": true
+    },
+    {
+      "approved_page": 64,
+      "new_page": 64,
+      "identical": true
+    },
+    {
+      "approved_page": 65,
+      "new_page": 65,
+      "identical": true
+    },
+    {
+      "approved_page": 66,
+      "new_page": 72,
+      "identical": true
+    },
+    {
+      "approved_page": 67,
+      "new_page": 73,
+      "identical": true
+    },
+    {
+      "approved_page": 68,
+      "new_page": 74,
+      "identical": true
+    },
+    {
+      "approved_page": 69,
+      "new_page": 75,
+      "identical": true
+    },
+    {
+      "approved_page": 70,
+      "new_page": 76,
+      "identical": true
+    },
+    {
+      "approved_page": 71,
+      "new_page": 77,
+      "identical": true
+    },
+    {
+      "approved_page": 72,
+      "new_page": 78,
+      "identical": true
+    },
+    {
+      "approved_page": 73,
+      "new_page": 79,
+      "identical": true
+    },
+    {
+      "approved_page": 74,
+      "new_page": 80,
+      "identical": true
+    },
+    {
+      "approved_page": 75,
+      "new_page": 85,
+      "identical": false
+    }
+  ],
+  "limitation": "Content-region comparison excludes headers and footers; newly written pages require separate visual inspection.",
+  "identical_content_regions": 71,
+  "reference_page_resolution": {
+    "text_identical": true,
+    "visual_review": "PASS: same eleven entries, complete and readable; vertical placement differs, with no clipping or missing content.",
+    "approved_page": 75,
+    "new_page": 85
+  },
+  "visually_inspected_new_or_changed_pages": [
+    1,
+    3,
+    7,
+    66,
+    67,
+    68,
+    69,
+    70,
+    71,
+    81,
+    82,
+    83,
+    84,
+    85
+  ],
+  "new_page_visual_review": "PASS: equations, tables, repeated table headers, section headings, margins and page boundaries checked."
+}

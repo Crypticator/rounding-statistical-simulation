@@ -1,0 +1,128 @@
+{
+  "status": "PASS",
+  "arithmetic": "exact rational elimination",
+  "classification": {
+    "max_P": 16,
+    "etas": [
+      "0",
+      "1/8",
+      "1/4"
+    ],
+    "cases": 8049,
+    "full_column_rank_checks": 57,
+    "counts": {
+      "constant": 645,
+      "plus": 207,
+      "excluded": 6814,
+      "linear_inconsistency": 6814,
+      "minus": 207,
+      "parity": 176
+    },
+    "witnesses": [
+      {
+        "P": 4,
+        "Q": 2,
+        "eta": "0",
+        "c": 1,
+        "b": 1,
+        "reason": "residual",
+        "certificate": [
+          "1",
+          "0",
+          "1"
+        ]
+      },
+      {
+        "P": 4,
+        "Q": 2,
+        "eta": "0",
+        "c": 1,
+        "b": 3,
+        "reason": "residual",
+        "certificate": [
+          "1",
+          "0",
+          "-1"
+        ]
+      },
+      {
+        "P": 4,
+        "Q": 2,
+        "eta": "0",
+        "c": 2,
+        "b": 0,
+        "reason": "residual",
+        "certificate": [
+          "1",
+          "0",
+          "1"
+        ]
+      },
+      {
+        "P": 4,
+        "Q": 2,
+        "eta": "0",
+        "c": 2,
+        "b": 1,
+        "reason": "residual",
+        "certificate": [
+          "1",
+          "0",
+          "1"
+        ]
+      },
+      {
+        "P": 4,
+        "Q": 2,
+        "eta": "0",
+        "c": 2,
+        "b": 2,
+        "reason": "residual",
+        "certificate": [
+          "1",
+          "0",
+          "-1"
+        ]
+      },
+      {
+        "P": 4,
+        "Q": 2,
+        "eta": "0",
+        "c": 2,
+        "b": 3,
+        "reason": "residual",
+        "certificate": [
+          "1",
+          "0",
+          "-1"
+        ]
+      },
+      {
+        "P": 4,
+        "Q": 2,
+        "eta": "0",
+        "c": 3,
+        "b": 0,
+        "reason": "residual",
+        "certificate": [
+          "1",
+          "0",
+          "1"
+        ]
+      },
+      {
+        "P": 4,
+        "Q": 2,
+        "eta": "0",
+        "c": 3,
+        "b": 2,
+        "reason": "residual",
+        "certificate": [
+          "1",
+          "0",
+          "-1"
+        ]
+      }
+    ]
+  }
+}

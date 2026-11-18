@@ -1,0 +1,525 @@
+{
+  "status": "PASS",
+  "scope": "Editorial authorship and disclosure only; no new scientific audit.",
+  "source_changes_limited_to_author_date_disclosure": true,
+  "scientific_source_sha256": "70b306820d924f42f27418e3e1632768754a77011e2638e4677f484ca29de1dc",
+  "preserved_files": {
+    "scripts": 15,
+    "data": 10,
+    "prior_reviews": 11,
+    "final_review": 2
+  },
+  "native_equations_identical": 1945,
+  "docx_author": "Samir Bouftass",
+  "pdf_author": "Samir Bouftass",
+  "original_pages": 85,
+  "revised_pages": 86,
+  "page_comparisons_excluding_page_numbers": [
+    {
+      "old_page": 2,
+      "new_page": 2,
+      "text_identical": true,
+      "pixels_identical_72dpi": true
+    },
+    {
+      "old_page": 3,
+      "new_page": 4,
+      "text_identical": true,
+      "pixels_identical_72dpi": true
+    },
+    {
+      "old_page": 4,
+      "new_page": 5,
+      "text_identical": true,
+      "pixels_identical_72dpi": true
+    },
+    {
+      "old_page": 5,
+      "new_page": 6,
+      "text_identical": true,
+      "pixels_identical_72dpi": true
+    },
+    {
+      "old_page": 6,
+      "new_page": 7,
+      "text_identical": true,
+      "pixels_identical_72dpi": true
+    },
+    {
+      "old_page": 7,
+      "new_page": 8,
+      "text_identical": true,
+      "pixels_identical_72dpi": true
+    },
+    {
+      "old_page": 8,
+      "new_page": 9,
+      "text_identical": true,
+      "pixels_identical_72dpi": true
+    },
+    {
+      "old_page": 9,
+      "new_page": 10,
+      "text_identical": true,
+      "pixels_identical_72dpi": true
+    },
+    {
+      "old_page": 10,
+      "new_page": 11,
+      "text_identical": true,
+      "pixels_identical_72dpi": true
+    },
+    {
+      "old_page": 11,
+      "new_page": 12,
+      "text_identical": true,
+      "pixels_identical_72dpi": true
+    },
+    {
+      "old_page": 12,
+      "new_page": 13,
+      "text_identical": true,
+      "pixels_identical_72dpi": true
+    },
+    {
+      "old_page": 13,
+      "new_page": 14,
+      "text_identical": true,
+      "pixels_identical_72dpi": true
+    },
+    {
+      "old_page": 14,
+      "new_page": 15,
+      "text_identical": true,
+      "pixels_identical_72dpi": true
+    },
+    {
+      "old_page": 15,
+      "new_page": 16,
+      "text_identical": true,
+      "pixels_identical_72dpi": true
+    },
+    {
+      "old_page": 16,
+      "new_page": 17,
+      "text_identical": true,
+      "pixels_identical_72dpi": true
+    },
+    {
+      "old_page": 17,
+      "new_page": 18,
+      "text_identical": true,
+      "pixels_identical_72dpi": true
+    },
+    {
+      "old_page": 18,
+      "new_page": 19,
+      "text_identical": true,
+      "pixels_identical_72dpi": true
+    },
+    {
+      "old_page": 19,
+      "new_page": 20,
+      "text_identical": true,
+      "pixels_identical_72dpi": true
+    },
+    {
+      "old_page": 20,
+      "new_page": 21,
+      "text_identical": true,
+      "pixels_identical_72dpi": true
+    },
+    {
+      "old_page": 21,
+      "new_page": 22,
+      "text_identical": true,
+      "pixels_identical_72dpi": true
+    },
+    {
+      "old_page": 22,
+      "new_page": 23,
+      "text_identical": true,
+      "pixels_identical_72dpi": true
+    },
+    {
+      "old_page": 23,
+      "new_page": 24,
+      "text_identical": true,
+      "pixels_identical_72dpi": true
+    },
+    {
+      "old_page": 24,
+      "new_page": 25,
+      "text_identical": true,
+      "pixels_identical_72dpi": true
+    },
+    {
+      "old_page": 25,
+      "new_page": 26,
+      "text_identical": true,
+      "pixels_identical_72dpi": true
+    },
+    {
+      "old_page": 26,
+      "new_page": 27,
+      "text_identical": true,
+      "pixels_identical_72dpi": true
+    },
+    {
+      "old_page": 27,
+      "new_page": 28,
+      "text_identical": true,
+      "pixels_identical_72dpi": true
+    },
+    {
+      "old_page": 28,
+      "new_page": 29,
+      "text_identical": true,
+      "pixels_identical_72dpi": true
+    },
+    {
+      "old_page": 29,
+      "new_page": 30,
+      "text_identical": true,
+      "pixels_identical_72dpi": true
+    },
+    {
+      "old_page": 30,
+      "new_page": 31,
+      "text_identical": true,
+      "pixels_identical_72dpi": true
+    },
+    {
+      "old_page": 31,
+      "new_page": 32,
+      "text_identical": true,
+      "pixels_identical_72dpi": true
+    },
+    {
+      "old_page": 32,
+      "new_page": 33,
+      "text_identical": true,
+      "pixels_identical_72dpi": true
+    },
+    {
+      "old_page": 33,
+      "new_page": 34,
+      "text_identical": true,
+      "pixels_identical_72dpi": true
+    },
+    {
+      "old_page": 34,
+      "new_page": 35,
+      "text_identical": true,
+      "pixels_identical_72dpi": true
+    },
+    {
+      "old_page": 35,
+      "new_page": 36,
+      "text_identical": true,
+      "pixels_identical_72dpi": true
+    },
+    {
+      "old_page": 36,
+      "new_page": 37,
+      "text_identical": true,
+      "pixels_identical_72dpi": true
+    },
+    {
+      "old_page": 37,
+      "new_page": 38,
+      "text_identical": true,
+      "pixels_identical_72dpi": true
+    },
+    {
+      "old_page": 38,
+      "new_page": 39,
+      "text_identical": true,
+      "pixels_identical_72dpi": true
+    },
+    {
+      "old_page": 39,
+      "new_page": 40,
+      "text_identical": true,
+      "pixels_identical_72dpi": true
+    },
+    {
+      "old_page": 40,
+      "new_page": 41,
+      "text_identical": true,
+      "pixels_identical_72dpi": true
+    },
+    {
+      "old_page": 41,
+      "new_page": 42,
+      "text_identical": true,
+      "pixels_identical_72dpi": true
+    },
+    {
+      "old_page": 42,
+      "new_page": 43,
+      "text_identical": true,
+      "pixels_identical_72dpi": true
+    },
+    {
+      "old_page": 43,
+      "new_page": 44,
+      "text_identical": true,
+      "pixels_identical_72dpi": true
+    },
+    {
+      "old_page": 44,
+      "new_page": 45,
+      "text_identical": true,
+      "pixels_identical_72dpi": true
+    },
+    {
+      "old_page": 45,
+      "new_page": 46,
+      "text_identical": true,
+      "pixels_identical_72dpi": true
+    },
+    {
+      "old_page": 46,
+      "new_page": 47,
+      "text_identical": true,
+      "pixels_identical_72dpi": true
+    },
+    {
+      "old_page": 47,
+      "new_page": 48,
+      "text_identical": true,
+      "pixels_identical_72dpi": true
+    },
+    {
+      "old_page": 48,
+      "new_page": 49,
+      "text_identical": true,
+      "pixels_identical_72dpi": true
+    },
+    {
+      "old_page": 49,
+      "new_page": 50,
+      "text_identical": true,
+      "pixels_identical_72dpi": true
+    },
+    {
+      "old_page": 50,
+      "new_page": 51,
+      "text_identical": true,
+      "pixels_identical_72dpi": true
+    },
+    {
+      "old_page": 51,
+      "new_page": 52,
+      "text_identical": true,
+      "pixels_identical_72dpi": true
+    },
+    {
+      "old_page": 52,
+      "new_page": 53,
+      "text_identical": true,
+      "pixels_identical_72dpi": true
+    },
+    {
+      "old_page": 53,
+      "new_page": 54,
+      "text_identical": true,
+      "pixels_identical_72dpi": true
+    },
+    {
+      "old_page": 54,
+      "new_page": 55,
+      "text_identical": true,
+      "pixels_identical_72dpi": true
+    },
+    {
+      "old_page": 55,
+      "new_page": 56,
+      "text_identical": true,
+      "pixels_identical_72dpi": true
+    },
+    {
+      "old_page": 56,
+      "new_page": 57,
+      "text_identical": true,
+      "pixels_identical_72dpi": true
+    },
+    {
+      "old_page": 57,
+      "new_page": 58,
+      "text_identical": true,
+      "pixels_identical_72dpi": true
+    },
+    {
+      "old_page": 58,
+      "new_page": 59,
+      "text_identical": true,
+      "pixels_identical_72dpi": true
+    },
+    {
+      "old_page": 59,
+      "new_page": 60,
+      "text_identical": true,
+      "pixels_identical_72dpi": true
+    },
+    {
+      "old_page": 60,
+      "new_page": 61,
+      "text_identical": true,
+      "pixels_identical_72dpi": true
+    },
+    {
+      "old_page": 61,
+      "new_page": 62,
+      "text_identical": true,
+      "pixels_identical_72dpi": true
+    },
+    {
+      "old_page": 62,
+      "new_page": 63,
+      "text_identical": true,
+      "pixels_identical_72dpi": true
+    },
+    {
+      "old_page": 63,
+      "new_page": 64,
+      "text_identical": true,
+      "pixels_identical_72dpi": true
+    },
+    {
+      "old_page": 64,
+      "new_page": 65,
+      "text_identical": true,
+      "pixels_identical_72dpi": true
+    },
+    {
+      "old_page": 65,
+      "new_page": 66,
+      "text_identical": true,
+      "pixels_identical_72dpi": true
+    },
+    {
+      "old_page": 66,
+      "new_page": 67,
+      "text_identical": true,
+      "pixels_identical_72dpi": true
+    },
+    {
+      "old_page": 67,
+      "new_page": 68,
+      "text_identical": true,
+      "pixels_identical_72dpi": true
+    },
+    {
+      "old_page": 68,
+      "new_page": 69,
+      "text_identical": true,
+      "pixels_identical_72dpi": true
+    },
+    {
+      "old_page": 69,
+      "new_page": 70,
+      "text_identical": true,
+      "pixels_identical_72dpi": true
+    },
+    {
+      "old_page": 70,
+      "new_page": 71,
+      "text_identical": true,
+      "pixels_identical_72dpi": true
+    },
+    {
+      "old_page": 71,
+      "new_page": 72,
+      "text_identical": true,
+      "pixels_identical_72dpi": true
+    },
+    {
+      "old_page": 72,
+      "new_page": 73,
+      "text_identical": true,
+      "pixels_identical_72dpi": true
+    },
+    {
+      "old_page": 73,
+      "new_page": 74,
+      "text_identical": true,
+      "pixels_identical_72dpi": true
+    },
+    {
+      "old_page": 74,
+      "new_page": 75,
+      "text_identical": true,
+      "pixels_identical_72dpi": true
+    },
+    {
+      "old_page": 75,
+      "new_page": 76,
+      "text_identical": true,
+      "pixels_identical_72dpi": true
+    },
+    {
+      "old_page": 76,
+      "new_page": 77,
+      "text_identical": true,
+      "pixels_identical_72dpi": true
+    },
+    {
+      "old_page": 77,
+      "new_page": 78,
+      "text_identical": true,
+      "pixels_identical_72dpi": true
+    },
+    {
+      "old_page": 78,
+      "new_page": 79,
+      "text_identical": true,
+      "pixels_identical_72dpi": true
+    },
+    {
+      "old_page": 79,
+      "new_page": 80,
+      "text_identical": true,
+      "pixels_identical_72dpi": true
+    },
+    {
+      "old_page": 80,
+      "new_page": 81,
+      "text_identical": true,
+      "pixels_identical_72dpi": true
+    },
+    {
+      "old_page": 81,
+      "new_page": 82,
+      "text_identical": true,
+      "pixels_identical_72dpi": true
+    },
+    {
+      "old_page": 82,
+      "new_page": 83,
+      "text_identical": true,
+      "pixels_identical_72dpi": true
+    },
+    {
+      "old_page": 83,
+      "new_page": 84,
+      "text_identical": true,
+      "pixels_identical_72dpi": true
+    },
+    {
+      "old_page": 84,
+      "new_page": 85,
+      "text_identical": true,
+      "pixels_identical_72dpi": true
+    },
+    {
+      "old_page": 85,
+      "new_page": 86,
+      "text_identical": true,
+      "pixels_identical_72dpi": true
+    }
+  ],
+  "identical_page_texts": 84,
+  "identical_page_pixels": 84
+}
