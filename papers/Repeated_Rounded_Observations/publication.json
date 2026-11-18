@@ -1,0 +1,16 @@
+{
+  "title": "Repeated Rounded Observations",
+  "authors": [
+    "Samir Bouftass",
+    "ChatGPT (OpenAI)"
+  ],
+  "language": "en",
+  "edition": "1.1",
+  "date": "2026-11-16",
+  "manuscript": "Repeated_Rounded_Observations.md",
+  "canonical_pdf": {
+    "file": "Repeated_Rounded_Observations.pdf",
+    "sha256": "ebc435366c3589193383ed8096dd51e22908250040a3bad8759a67ddb3f27f96",
+    "pages": 7
+  }
+}

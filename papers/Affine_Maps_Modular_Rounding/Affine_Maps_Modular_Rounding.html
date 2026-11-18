@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Samir Bouftass and ChatGPT (OpenAI)" />
+  <title>Affine Maps Compatible with Modular Rounding</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Affine Maps Compatible with Modular Rounding</h1>
+<p class="subtitle">Exact factorization, missing carries, and prediction
+loss</p>
+<p class="author">Samir Bouftass and ChatGPT (OpenAI)</p>
+<p class="date">15 November 2026 · English edition 1.1</p>
+</header>
+<h2 id="abstract">Abstract</h2>
+<p>Let
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><mo>=</mo><mi>K</mi><mi>Q</mi></mrow><annotation encoding="application/x-tex">P=KQ</annotation></semantics></math>
+with
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>K</mi><mo>,</mo><mi>Q</mi><mo>≥</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">K,Q\ge2</annotation></semantics></math>,
+and let
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>F</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>z</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mo stretchy="false" form="prefix">⌊</mo><msub><mrow><mo stretchy="true" form="prefix">[</mo><mi>z</mi><mo stretchy="true" form="postfix">]</mo></mrow><mi>P</mi></msub><mi>/</mi><mi>Q</mi><mo stretchy="false" form="postfix">⌋</mo></mrow><annotation encoding="application/x-tex">F(z)=\lfloor[z]_P/Q\rfloor</annotation></semantics></math>
+act coordinatewise. We classify all affine maps for which
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>F</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>U</mi><mi>z</mi><mo>+</mo><mi>b</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">F(Uz+b)</annotation></semantics></math>
+can be computed from
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>F</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>z</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">F(z)</annotation></semantics></math>
+for every input. Each row of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>U</mi><annotation encoding="application/x-tex">U</annotation></semantics></math>,
+reduced modulo
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>P</mi><annotation encoding="application/x-tex">P</annotation></semantics></math>,
+must be zero or contain exactly one nonzero entry, equal to
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>1</mn><annotation encoding="application/x-tex">1</annotation></semantics></math>
+or
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>−</mi><mn>1</mn></mrow><annotation encoding="application/x-tex">-1</annotation></semantics></math>.
+Positive and negative rows require different congruences on the
+translation. In particular, an invertible square linear map compatible
+with this rounding is a permutation matrix; allowing an appropriate
+translation enlarges the class to signed permutations. We also quantify
+the information lost in a two-coordinate sum. Its optimal prediction
+error from the rounded inputs is
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mo stretchy="true" form="prefix">(</mo><mi>Q</mi><mo>−</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow><mi>/</mi><mrow><mo stretchy="true" form="prefix">(</mo><mn>2</mn><mi>Q</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">(Q-1)/(2Q)</annotation></semantics></math>.
+Resampling the missing carry reproduces the public marginal exactly, but
+generally fails to preserve its dependence on the unrounded input or a
+hidden secret. The contribution is an explicit normal form for a fixed
+interval partition and elementary, sharp examples of the distinction
+between public simulation and joint simulation. The general principles
+of factorization through fibers and optimal finite prediction are
+standard.</p>
+<h2 id="question-and-setting">1. Question and setting</h2>
+<p>Rounding occurs in lattice-based cryptography, including Learning
+with Rounding and its variants [1–5]. A linear operation on an unrounded
+value need not remain computable after rounding: the operation may
+depend on a remainder that has already been discarded. The question
+considered here is exact and algebraic. For which public affine maps
+does there exist a function
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>g</mi><annotation encoding="application/x-tex">g</annotation></semantics></math>
+such that</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>F</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>U</mi><mi>z</mi><mo>+</mo><mi>b</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mi>g</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>F</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>z</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo stretchy="true" form="postfix">)</mo></mrow><mspace width="2.0em"></mspace><mrow><mtext mathvariant="normal">for every </mtext><mspace width="0.333em"></mspace></mrow><mi>z</mi><mo>∈</mo><msubsup><mi>ℤ</mi><mi>P</mi><mi>m</mi></msubsup><mi>?</mi></mrow><annotation encoding="application/x-tex">
+F(Uz+b)=g(F(z))\qquad\text{for every }z\in\mathbb Z_P^m?
+\tag{1}
+</annotation></semantics></math></p>
+<p>We write
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mrow><mo stretchy="true" form="prefix">[</mo><mi>x</mi><mo stretchy="true" form="postfix">]</mo></mrow><mi>P</mi></msub><annotation encoding="application/x-tex">[x]_P</annotation></semantics></math>
+for the representative of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>x</mi><annotation encoding="application/x-tex">x</annotation></semantics></math>
+in
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">{</mo><mn>0</mn><mo>,</mo><mi>…</mi><mo>,</mo><mi>P</mi><mo>−</mo><mn>1</mn><mo stretchy="false" form="postfix">}</mo></mrow><annotation encoding="application/x-tex">\{0,\ldots,P-1\}</annotation></semantics></math>.
+Fix integers
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><mo>=</mo><mi>K</mi><mi>Q</mi></mrow><annotation encoding="application/x-tex">P=KQ</annotation></semantics></math>,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>K</mi><mo>,</mo><mi>Q</mi><mo>≥</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">K,Q\ge2</annotation></semantics></math>,
+and positive dimensions
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>m</mi><mo>,</mo><mi>n</mi></mrow><annotation encoding="application/x-tex">m,n</annotation></semantics></math>.
+The map
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>F</mi><mo>:</mo><msubsup><mi>ℤ</mi><mi>P</mi><mi>m</mi></msubsup><mo>→</mo><msubsup><mi>ℤ</mi><mi>K</mi><mi>m</mi></msubsup></mrow><annotation encoding="application/x-tex">F:\mathbb Z_P^m\to\mathbb Z_K^m</annotation></semantics></math>
+is applied coordinatewise. The matrix
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>U</mi><annotation encoding="application/x-tex">U</annotation></semantics></math>
+has size
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>×</mo><mi>m</mi></mrow><annotation encoding="application/x-tex">n\times m</annotation></semantics></math>,
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>b</mi><annotation encoding="application/x-tex">b</annotation></semantics></math>
+has length
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>;
+both have integer entries interpreted modulo
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>P</mi><annotation encoding="application/x-tex">P</annotation></semantics></math>.
+No linearity, efficiency, or other restriction is imposed on
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>g</mi><annotation encoding="application/x-tex">g</annotation></semantics></math>.</p>
+<p>Equation (1) is a universal identity. It differs from an identity
+valid only on a special input support, from a probabilistic
+approximation, and from a cryptographic reduction that changes
+dimensions, secrets, noise, or moduli. We make these distinctions
+explicit after proving the classification.</p>
+<p>The fibers of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>F</mi><annotation encoding="application/x-tex">F</annotation></semantics></math>
+form a fixed partition into products of consecutive intervals. Maps
+preserving a partition are classical objects [6]; congruence-preserving
+maps concern a related but different kind of partition [7]. Our result
+computes the affine maps compatible with this particular interval
+partition. It does not introduce the general fiber-factorization
+criterion.</p>
+<h2 id="the-exact-carry-identity">2. The exact carry identity</h2>
+<p>For each input, write</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>z</mi><mo>=</mo><mi>Q</mi><mi>y</mi><mo>+</mo><mi>r</mi><mo>+</mo><mi>P</mi><mi>h</mi><mo>,</mo><mspace width="2.0em"></mspace><mi>y</mi><mo>=</mo><mi>F</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>z</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>,</mo><mspace width="2.0em"></mspace><mn>0</mn><mo>≤</mo><msub><mi>r</mi><mi>j</mi></msub><mo>&lt;</mo><mi>Q</mi><mo>,</mo></mrow><annotation encoding="application/x-tex">
+z=Qy+r+Ph,\qquad y=F(z),\qquad 0\le r_j&lt;Q,
+</annotation></semantics></math></p>
+<p>where
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>h</mi><annotation encoding="application/x-tex">h</annotation></semantics></math>
+is an integer vector if an arbitrary integer representative of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>z</mi><annotation encoding="application/x-tex">z</annotation></semantics></math>
+is used. Euclidean division gives</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>F</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>U</mi><mi>z</mi><mo>+</mo><mi>b</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><msub><mrow><mo stretchy="true" form="prefix">[</mo><mi>U</mi><mi>y</mi><mo>+</mo><mrow><mo stretchy="true" form="prefix">⌊</mo><mfrac><mrow><mi>U</mi><mi>r</mi><mo>+</mo><mi>b</mi></mrow><mi>Q</mi></mfrac><mo stretchy="true" form="postfix">⌋</mo></mrow><mo stretchy="true" form="postfix">]</mo></mrow><mi>K</mi></msub><mi>.</mi></mrow><annotation encoding="application/x-tex">
+F(Uz+b)=\left[Uy+\left\lfloor\frac{Ur+b}{Q}\right\rfloor\right]_K.
+\tag{2}
+</annotation></semantics></math></p>
+<p>Indeed, adding a multiple of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><mo>=</mo><mi>K</mi><mi>Q</mi></mrow><annotation encoding="application/x-tex">P=KQ</annotation></semantics></math>
+changes the integer quotient by a multiple of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>K</mi><annotation encoding="application/x-tex">K</annotation></semantics></math>.
+The remaining multiple
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Q</mi><mi>U</mi><mi>y</mi></mrow><annotation encoding="application/x-tex">QUy</annotation></semantics></math>
+can be taken outside the floor. This proves (2), including negative
+coefficients, negative translations, and modular wraparound. Floors and
+reductions in this formula act coordinatewise.</p>
+<p>The correction term depends on the discarded remainder
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>r</mi><annotation encoding="application/x-tex">r</annotation></semantics></math>.
+Consequently, (1) holds if and only if
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>F</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>U</mi><mi>r</mi><mo>+</mo><mi>b</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">F(Ur+b)</annotation></semantics></math>
+is constant over the zero cell
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">{</mo><mn>0</mn><mo>,</mo><mi>…</mi><mo>,</mo><mi>Q</mi><mo>−</mo><mn>1</mn><msup><mo stretchy="false" form="postfix">}</mo><mi>m</mi></msup></mrow><annotation encoding="application/x-tex">\{0,\ldots,Q-1\}^m</annotation></semantics></math>.
+Necessity follows by taking
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>y</mi><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">y=0</annotation></semantics></math>.
+For sufficiency, (2) then gives the same correction for every
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>y</mi><annotation encoding="application/x-tex">y</annotation></semantics></math>.</p>
+<h2 id="complete-affine-classification">3. Complete affine
+classification</h2>
+<p><strong>Lemma 1 (a progression contained in one cell).</strong>
+Suppose
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>a</mi><mo>≠</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">a\ne0</annotation></semantics></math>
+in
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>ℤ</mi><mi>P</mi></msub><annotation encoding="application/x-tex">\mathbb Z_P</annotation></semantics></math>.
+If the
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>Q</mi><annotation encoding="application/x-tex">Q</annotation></semantics></math>
+points
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mrow><mo stretchy="true" form="prefix">[</mo><mi>t</mi><mo>+</mo><mi>a</mi><mi>r</mi><mo stretchy="true" form="postfix">]</mo></mrow><mi>P</mi></msub><annotation encoding="application/x-tex">[t+ar]_P</annotation></semantics></math>,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>0</mn><mo>≤</mo><mi>r</mi><mo>&lt;</mo><mi>Q</mi></mrow><annotation encoding="application/x-tex">0\le r&lt;Q</annotation></semantics></math>,
+lie in one aligned interval of length
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>Q</mi><annotation encoding="application/x-tex">Q</annotation></semantics></math>,
+then either
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>a</mi><mo>=</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">a=1</annotation></semantics></math>
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>t</mi><mo>≡</mo><mn>0</mn><mrow><mspace width="0.222em"></mspace><mo stretchy="false" form="prefix">(</mo><mo>mod</mo><mspace width="0.222em"></mspace><mi>Q</mi><mo stretchy="false" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">t\equiv0\pmod Q</annotation></semantics></math>,
+or
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>a</mi><mo>=</mo><mi>−</mi><mn>1</mn></mrow><annotation encoding="application/x-tex">a=-1</annotation></semantics></math>
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>t</mi><mo>≡</mo><mi>Q</mi><mo>−</mo><mn>1</mn><mrow><mspace width="0.222em"></mspace><mo stretchy="false" form="prefix">(</mo><mo>mod</mo><mspace width="0.222em"></mspace><mi>Q</mi><mo stretchy="false" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">t\equiv Q-1\pmod Q</annotation></semantics></math>.</p>
+<p><strong>Proof.</strong> Set
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>d</mi><mo>=</mo><mo>gcd</mo><mrow><mo stretchy="true" form="prefix">(</mo><mi>a</mi><mo>,</mo><mi>P</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">d=\gcd(a,P)</annotation></semantics></math>
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>ℓ</mo><mo>=</mo><mi>P</mi><mi>/</mi><mi>d</mi></mrow><annotation encoding="application/x-tex">\ell=P/d</annotation></semantics></math>,
+the order of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>a</mi><annotation encoding="application/x-tex">a</annotation></semantics></math>.
+If
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>ℓ</mo><mo>&lt;</mo><mi>Q</mi></mrow><annotation encoding="application/x-tex">\ell&lt;Q</annotation></semantics></math>,
+the progression contains the entire coset of the subgroup generated by
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>a</mi><annotation encoding="application/x-tex">a</annotation></semantics></math>.
+Its representatives have span
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><mo>−</mo><mi>d</mi><mo>≥</mo><mi>P</mi><mi>/</mi><mn>2</mn><mo>≥</mo><mi>Q</mi></mrow><annotation encoding="application/x-tex">P-d\ge P/2\ge Q</annotation></semantics></math>,
+so they cannot fit in an interval of span
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Q</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">Q-1</annotation></semantics></math>.
+If
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>ℓ</mo><mo>=</mo><mi>Q</mi></mrow><annotation encoding="application/x-tex">\ell=Q</annotation></semantics></math>,
+the
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>Q</mi><annotation encoding="application/x-tex">Q</annotation></semantics></math>
+distinct points fill the interval. Since all have one residue modulo
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>d</mi><annotation encoding="application/x-tex">d</annotation></semantics></math>,
+two consecutive points force
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>d</mi><mo>=</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">d=1</annotation></semantics></math>,
+contradicting
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>ℓ</mo><mo>=</mo><mi>Q</mi><mo>&lt;</mo><mi>P</mi></mrow><annotation encoding="application/x-tex">\ell=Q&lt;P</annotation></semantics></math>.</p>
+<p>Thus
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>ℓ</mo><mo>&gt;</mo><mi>Q</mi></mrow><annotation encoding="application/x-tex">\ell&gt;Q</annotation></semantics></math>.
+The
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>Q</mi><annotation encoding="application/x-tex">Q</annotation></semantics></math>
+points again fill the interval, forcing
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>d</mi><mo>=</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">d=1</annotation></semantics></math>.
+Write this interval as
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>C</mi><annotation encoding="application/x-tex">C</annotation></semantics></math>.
+The progressions indexed by
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>0</mn><mo>,</mo><mi>…</mi><mo>,</mo><mi>Q</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">0,\ldots,Q-1</annotation></semantics></math>
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn><mo>,</mo><mi>…</mi><mo>,</mo><mi>Q</mi></mrow><annotation encoding="application/x-tex">1,\ldots,Q</annotation></semantics></math>
+have exactly
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Q</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">Q-1</annotation></semantics></math>
+common points, so
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mo stretchy="true" form="prefix">|</mo><mi>C</mi><mo>∩</mo><mrow><mo stretchy="true" form="prefix">(</mo><mi>C</mi><mo>+</mo><mi>a</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo stretchy="true" form="postfix">|</mo></mrow><mo>=</mo><mi>Q</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">|C\cap(C+a)|=Q-1</annotation></semantics></math>.
+For
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn><mo>≤</mo><mi>a</mi><mo>&lt;</mo><mi>P</mi></mrow><annotation encoding="application/x-tex">1\le a&lt;P</annotation></semantics></math>
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Q</mi><mo>≤</mo><mi>P</mi><mi>/</mi><mn>2</mn></mrow><annotation encoding="application/x-tex">Q\le P/2</annotation></semantics></math>,</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mo stretchy="true" form="prefix">|</mo><mi>C</mi><mo>∩</mo><mrow><mo stretchy="true" form="prefix">(</mo><mi>C</mi><mo>+</mo><mi>a</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo stretchy="true" form="postfix">|</mo></mrow><mo>=</mo><mo>max</mo><mrow><mo stretchy="true" form="prefix">(</mo><mn>0</mn><mo>,</mo><mi>Q</mi><mo>−</mo><mi>a</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>+</mo><mo>max</mo><mrow><mo stretchy="true" form="prefix">(</mo><mn>0</mn><mo>,</mo><mi>Q</mi><mo>−</mo><mrow><mo stretchy="true" form="prefix">(</mo><mi>P</mi><mo>−</mo><mi>a</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo stretchy="true" form="postfix">)</mo></mrow><mi>.</mi></mrow><annotation encoding="application/x-tex">
+|C\cap(C+a)|=\max(0,Q-a)+\max(0,Q-(P-a)).
+</annotation></semantics></math></p>
+<p>At most one term is positive. Equality with
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Q</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">Q-1</annotation></semantics></math>
+therefore forces
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>a</mi><mo>=</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">a=1</annotation></semantics></math>
+or
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>a</mi><mo>=</mo><mi>P</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">a=P-1</annotation></semantics></math>.
+Alignment of the first or last point gives the stated congruence on
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>t</mi><annotation encoding="application/x-tex">t</annotation></semantics></math>.
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>▫</mi><annotation encoding="application/x-tex">\square</annotation></semantics></math></p>
+<p><strong>Theorem 1 (normal form).</strong> The following conditions
+are equivalent:</p>
+<ol type="1">
+<li>There exists
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>g</mi><annotation encoding="application/x-tex">g</annotation></semantics></math>
+satisfying (1).</li>
+<li>The map
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>r</mi><mo>↦</mo><mi>F</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>U</mi><mi>r</mi><mo>+</mo><mi>b</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">r\mapsto F(Ur+b)</annotation></semantics></math>
+is constant on
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">{</mo><mn>0</mn><mo>,</mo><mi>…</mi><mo>,</mo><mi>Q</mi><mo>−</mo><mn>1</mn><msup><mo stretchy="false" form="postfix">}</mo><mi>m</mi></msup></mrow><annotation encoding="application/x-tex">\{0,\ldots,Q-1\}^m</annotation></semantics></math>.</li>
+<li>Every row of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>U</mi><annotation encoding="application/x-tex">U</annotation></semantics></math>,
+modulo
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>P</mi><annotation encoding="application/x-tex">P</annotation></semantics></math>,
+has one of the forms in the table below, with the indicated condition on
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>b</mi><mi>i</mi></msub><annotation encoding="application/x-tex">b_i</annotation></semantics></math>.</li>
+</ol>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Row of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>U</mi><annotation encoding="application/x-tex">U</annotation></semantics></math></th>
+<th>Translation condition</th>
+<th>Output coordinate
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>g</mi><mi>i</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>y</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">g_i(y)</annotation></semantics></math>
+in
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>ℤ</mi><mi>K</mi></msub><annotation encoding="application/x-tex">\mathbb Z_K</annotation></semantics></math></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Zero</td>
+<td>Any
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>b</mi><mi>i</mi></msub><annotation encoding="application/x-tex">b_i</annotation></semantics></math></td>
+<td><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">⌊</mo><msub><mrow><mo stretchy="true" form="prefix">[</mo><msub><mi>b</mi><mi>i</mi></msub><mo stretchy="true" form="postfix">]</mo></mrow><mi>P</mi></msub><mi>/</mi><mi>Q</mi><mo stretchy="false" form="postfix">⌋</mo></mrow><annotation encoding="application/x-tex">\lfloor[b_i]_P/Q\rfloor</annotation></semantics></math></td>
+</tr>
+<tr class="even">
+<td>One entry
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>+</mi><mn>1</mn></mrow><annotation encoding="application/x-tex">+1</annotation></semantics></math>
+in column
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>j</mi><annotation encoding="application/x-tex">j</annotation></semantics></math></td>
+<td><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>b</mi><mi>i</mi></msub><mo>≡</mo><mn>0</mn><mrow><mspace width="0.222em"></mspace><mo stretchy="false" form="prefix">(</mo><mo>mod</mo><mspace width="0.222em"></mspace><mi>Q</mi><mo stretchy="false" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">b_i\equiv0\pmod Q</annotation></semantics></math></td>
+<td><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>y</mi><mi>j</mi></msub><mo>+</mo><mo stretchy="false" form="prefix">⌊</mo><msub><mrow><mo stretchy="true" form="prefix">[</mo><msub><mi>b</mi><mi>i</mi></msub><mo stretchy="true" form="postfix">]</mo></mrow><mi>P</mi></msub><mi>/</mi><mi>Q</mi><mo stretchy="false" form="postfix">⌋</mo></mrow><annotation encoding="application/x-tex">y_j+\lfloor[b_i]_P/Q\rfloor</annotation></semantics></math></td>
+</tr>
+<tr class="odd">
+<td>One entry
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>−</mi><mn>1</mn></mrow><annotation encoding="application/x-tex">-1</annotation></semantics></math>
+in column
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>j</mi><annotation encoding="application/x-tex">j</annotation></semantics></math></td>
+<td><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>b</mi><mi>i</mi></msub><mo>≡</mo><mi>Q</mi><mo>−</mo><mn>1</mn><mrow><mspace width="0.222em"></mspace><mo stretchy="false" form="prefix">(</mo><mo>mod</mo><mspace width="0.222em"></mspace><mi>Q</mi><mo stretchy="false" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">b_i\equiv Q-1\pmod Q</annotation></semantics></math></td>
+<td><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>−</mi><msub><mi>y</mi><mi>j</mi></msub><mo>+</mo><mo stretchy="false" form="prefix">⌊</mo><msub><mrow><mo stretchy="true" form="prefix">[</mo><msub><mi>b</mi><mi>i</mi></msub><mo stretchy="true" form="postfix">]</mo></mrow><mi>P</mi></msub><mi>/</mi><mi>Q</mi><mo stretchy="false" form="postfix">⌋</mo></mrow><annotation encoding="application/x-tex">-y_j+\lfloor[b_i]_P/Q\rfloor</annotation></semantics></math></td>
+</tr>
+</tbody>
+</table>
+<p>Different rows may use the same column. Whenever it exists,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>g</mi><annotation encoding="application/x-tex">g</annotation></semantics></math>
+is unique.</p>
+<p><strong>Proof.</strong> The equivalence of the first two conditions
+follows from (2). Consider a row satisfying the second condition.
+Varying one remainder coordinate while fixing the others at zero and
+applying Lemma 1 shows that every nonzero coefficient is
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>1</mn><annotation encoding="application/x-tex">1</annotation></semantics></math>
+or
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>−</mi><mn>1</mn></mrow><annotation encoding="application/x-tex">-1</annotation></semantics></math>,
+with the corresponding congruence on the row translation. A row cannot
+contain both signs, because this would require
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>b</mi><mi>i</mi></msub><mo>≡</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">b_i\equiv0</annotation></semantics></math>
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>b</mi><mi>i</mi></msub><mo>≡</mo><mi>Q</mi><mo>−</mo><mn>1</mn><mrow><mspace width="0.222em"></mspace><mo stretchy="false" form="prefix">(</mo><mo>mod</mo><mspace width="0.222em"></mspace><mi>Q</mi><mo stretchy="false" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">b_i\equiv Q-1\pmod Q</annotation></semantics></math>,
+which are distinct for
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Q</mi><mo>≥</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">Q\ge2</annotation></semantics></math>.</p>
+<p>If two coefficients are
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>1</mn><annotation encoding="application/x-tex">1</annotation></semantics></math>,
+the translation is
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Q</mi><mi>β</mi></mrow><annotation encoding="application/x-tex">Q\beta</annotation></semantics></math>.
+Setting both corresponding remainders to
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Q</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">Q-1</annotation></semantics></math>
+changes the correction quotient from
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>β</mi><annotation encoding="application/x-tex">\beta</annotation></semantics></math>
+to
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>β</mi><mo>+</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">\beta+1</annotation></semantics></math>.
+If two coefficients are
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>−</mi><mn>1</mn></mrow><annotation encoding="application/x-tex">-1</annotation></semantics></math>,
+write the translation as
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Q</mi><mi>β</mi><mo>+</mo><mi>Q</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">Q\beta+Q-1</annotation></semantics></math>.
+The same choice changes the correction from
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>β</mi><annotation encoding="application/x-tex">\beta</annotation></semantics></math>
+to
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>β</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">\beta-1</annotation></semantics></math>.
+These changes are nonzero modulo
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>K</mi><mo>≥</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">K\ge2</annotation></semantics></math>,
+contradicting constancy. Thus at most one coefficient is nonzero.
+Substitution into (2) proves sufficiency and the formulas in the table.
+Finally,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>F</mi><annotation encoding="application/x-tex">F</annotation></semantics></math>
+is surjective, which gives uniqueness.
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>▫</mi><annotation encoding="application/x-tex">\square</annotation></semantics></math></p>
+<p><strong>Corollary 1.</strong> With
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>b</mi><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">b=0</annotation></semantics></math>,
+each row is zero or selects one coordinate with coefficient
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>1</mn><annotation encoding="application/x-tex">1</annotation></semantics></math>.
+If
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>U</mi><annotation encoding="application/x-tex">U</annotation></semantics></math>
+is square and invertible over
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>ℤ</mi><mi>P</mi></msub><annotation encoding="application/x-tex">\mathbb Z_P</annotation></semantics></math>,
+it is a permutation matrix. With unrestricted admissible translations,
+square invertible matrices are exactly signed permutation matrices.</p>
+<p>For the last assertion, invertibility rules out zero rows and
+repeated selected columns. Conversely, signed permutations are
+invertible, and the prescribed translations make their rows admissible.
+The classification concerns coefficients modulo
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>P</mi><annotation encoding="application/x-tex">P</annotation></semantics></math>,
+not merely modulo the smaller output modulus
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>K</mi><annotation encoding="application/x-tex">K</annotation></semantics></math>.</p>
+<h2 id="examples-and-support-restrictions">4. Examples and support
+restrictions</h2>
+<p><strong>An invertible shear fails.</strong> Take
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><mo>=</mo><mn>4</mn></mrow><annotation encoding="application/x-tex">P=4</annotation></semantics></math>,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Q</mi><mo>=</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">Q=2</annotation></semantics></math>,
+and the map
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>z</mi><mn>1</mn></msub><mo>,</mo><msub><mi>z</mi><mn>2</mn></msub><mo stretchy="true" form="postfix">)</mo></mrow><mo>↦</mo><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>z</mi><mn>1</mn></msub><mo>+</mo><msub><mi>z</mi><mn>2</mn></msub><mo>,</mo><msub><mi>z</mi><mn>2</mn></msub><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">(z_1,z_2)\mapsto(z_1+z_2,z_2)</annotation></semantics></math>.
+Inputs
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="true" form="prefix">(</mo><mn>0</mn><mo>,</mo><mn>0</mn><mo stretchy="true" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">(0,0)</annotation></semantics></math>
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="true" form="prefix">(</mo><mn>1</mn><mo>,</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">(1,1)</annotation></semantics></math>
+have the same rounded value
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="true" form="prefix">(</mo><mn>0</mn><mo>,</mo><mn>0</mn><mo stretchy="true" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">(0,0)</annotation></semantics></math>.
+Their transformed rounded values are
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="true" form="prefix">(</mo><mn>0</mn><mo>,</mo><mn>0</mn><mo stretchy="true" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">(0,0)</annotation></semantics></math>
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="true" form="prefix">(</mo><mn>1</mn><mo>,</mo><mn>0</mn><mo stretchy="true" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">(1,0)</annotation></semantics></math>.
+Thus invertibility before rounding does not imply computability after
+rounding.</p>
+<p><strong>A corrected reflection succeeds.</strong> For every
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>z</mi><annotation encoding="application/x-tex">z</annotation></semantics></math>,</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>F</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>−</mi><mi>z</mi><mo>−</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mi>K</mi><mo>−</mo><mn>1</mn><mo>−</mo><mi>F</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>z</mi><mo stretchy="true" form="postfix">)</mo></mrow><mi>.</mi></mrow><annotation encoding="application/x-tex">
+F(-z-1)=K-1-F(z).
+\tag{3}
+</annotation></semantics></math></p>
+<p>The translation is essential. Unshifted negation does not, in
+general, preserve the rounding cells. More generally, translations by
+multiples of the quantization step commute with the quotient in the
+familiar way; related translation identities also appear in modulo
+quantization [8].</p>
+<p><strong>Restricted supports can change the answer.</strong> If every
+coordinate of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>z</mi><annotation encoding="application/x-tex">z</annotation></semantics></math>
+is a multiple of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>Q</mi><annotation encoding="application/x-tex">Q</annotation></semantics></math>,
+all remainder coordinates vanish, and every integer matrix satisfies
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>F</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>U</mi><mi>z</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><msub><mrow><mo stretchy="true" form="prefix">[</mo><mi>U</mi><mi>F</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>z</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo stretchy="true" form="postfix">]</mo></mrow><mi>K</mi></msub></mrow><annotation encoding="application/x-tex">F(Uz)=[UF(z)]_K</annotation></semantics></math>.
+This does not contradict Theorem 1, whose hypothesis ranges over all
+inputs.</p>
+<p>For an arbitrary subset
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Ω</mi><mo>⊆</mo><msubsup><mi>ℤ</mi><mi>P</mi><mi>m</mi></msubsup></mrow><annotation encoding="application/x-tex">\Omega\subseteq\mathbb Z_P^m</annotation></semantics></math>,
+a factorization exists on
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>Ω</mi><annotation encoding="application/x-tex">\Omega</annotation></semantics></math>
+exactly when
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>F</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>U</mi><mi>z</mi><mo>+</mo><mi>b</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">F(Uz+b)</annotation></semantics></math>
+is constant on each nonempty set
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Ω</mi><mo>∩</mo><msup><mi>F</mi><mrow><mi>−</mi><mn>1</mn></mrow></msup><mrow><mo stretchy="true" form="prefix">(</mo><mi>y</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Omega\cap F^{-1}(y)</annotation></semantics></math>.
+Necessity is immediate; for sufficiency, define
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>g</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>y</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">g(y)</annotation></semantics></math>
+by that constant and choose arbitrary values on unused fibers. This is a
+set-theoretic criterion and supplies no efficient algorithm by
+itself.</p>
+<h2 id="optimal-prediction-of-a-missing-carry">5. Optimal prediction of
+a missing carry</h2>
+<p>Let
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>Z</mi><annotation encoding="application/x-tex">Z</annotation></semantics></math>
+have a specified finite distribution, and set
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Y</mi><mo>=</mo><mi>F</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>Z</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">Y=F(Z)</annotation></semantics></math>
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>T</mi><mo>=</mo><mi>F</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>U</mi><mi>Z</mi><mo>+</mo><mi>b</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">T=F(UZ+b)</annotation></semantics></math>.
+A simulator receives only
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>Y</mi><annotation encoding="application/x-tex">Y</annotation></semantics></math>
+and uses fresh randomness, independent of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>Z</mi><annotation encoding="application/x-tex">Z</annotation></semantics></math>
+conditional on
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>Y</mi><annotation encoding="application/x-tex">Y</annotation></semantics></math>.
+Its smallest disagreement probability is</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>ε</mi><mo>*</mo></msub><mo>=</mo><mn>1</mn><mo>−</mo><munder><mo>∑</mo><mi>y</mi></munder><munder><mo>max</mo><mi>t</mi></munder><mo>Pr</mo><mrow><mo stretchy="true" form="prefix">(</mo><mi>Y</mi><mo>=</mo><mi>y</mi><mo>,</mo><mi>T</mi><mo>=</mo><mi>t</mi><mo stretchy="true" form="postfix">)</mo></mrow><mi>.</mi></mrow><annotation encoding="application/x-tex">
+\varepsilon_* =1-\sum_y\max_t\Pr(Y=y,T=t).
+\tag{4}
+</annotation></semantics></math></p>
+<p>For a kernel
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>K</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>y</mi><mo>,</mo><mi>t</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">K(y,t)</annotation></semantics></math>,
+success is
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mo>∑</mo><mrow><mi>y</mi><mo>,</mo><mi>t</mi></mrow></msub><mo>Pr</mo><mrow><mo stretchy="true" form="prefix">(</mo><mi>Y</mi><mo>=</mo><mi>y</mi><mo>,</mo><mi>T</mi><mo>=</mo><mi>t</mi><mo stretchy="true" form="postfix">)</mo></mrow><mi>K</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>y</mi><mo>,</mo><mi>t</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\sum_{y,t}\Pr(Y=y,T=t)K(y,t)</annotation></semantics></math>.
+Maximizing each row of this linear expression puts all its mass on a
+most likely target value. This proves (4). The optimum is
+information-theoretic; computing the required conditional probabilities
+may be difficult.</p>
+<p>Now let
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>Z</mi><mn>1</mn></msub><mo>,</mo><msub><mi>Z</mi><mn>2</mn></msub></mrow><annotation encoding="application/x-tex">Z_1,Z_2</annotation></semantics></math>
+be independent and uniform on
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>ℤ</mi><mi>P</mi></msub><annotation encoding="application/x-tex">\mathbb Z_P</annotation></semantics></math>,
+and set
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Y</mi><mo>=</mo><mrow><mo stretchy="true" form="prefix">(</mo><mi>F</mi><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>Z</mi><mn>1</mn></msub><mo stretchy="true" form="postfix">)</mo></mrow><mo>,</mo><mi>F</mi><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>Z</mi><mn>2</mn></msub><mo stretchy="true" form="postfix">)</mo></mrow><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">Y=(F(Z_1),F(Z_2))</annotation></semantics></math>
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>T</mi><mo>=</mo><mi>F</mi><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>Z</mi><mn>1</mn></msub><mo>+</mo><msub><mi>Z</mi><mn>2</mn></msub><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">T=F(Z_1+Z_2)</annotation></semantics></math>.
+The remainders
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>R</mi><mn>1</mn></msub><mo>,</mo><msub><mi>R</mi><mn>2</mn></msub></mrow><annotation encoding="application/x-tex">R_1,R_2</annotation></semantics></math>
+are independent uniform elements of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">{</mo><mn>0</mn><mo>,</mo><mi>…</mi><mo>,</mo><mi>Q</mi><mo>−</mo><mn>1</mn><mo stretchy="false" form="postfix">}</mo></mrow><annotation encoding="application/x-tex">\{0,\ldots,Q-1\}</annotation></semantics></math>,
+independent of the quotients. The missing carry
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>C</mi><mo>=</mo><mo stretchy="false" form="prefix">⌊</mo><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>R</mi><mn>1</mn></msub><mo>+</mo><msub><mi>R</mi><mn>2</mn></msub><mo stretchy="true" form="postfix">)</mo></mrow><mi>/</mi><mi>Q</mi><mo stretchy="false" form="postfix">⌋</mo></mrow><annotation encoding="application/x-tex">C=\lfloor(R_1+R_2)/Q\rfloor</annotation></semantics></math>
+is binary, with</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>p</mi><mn>0</mn></msub><mo>=</mo><mo>Pr</mo><mrow><mo stretchy="true" form="prefix">(</mo><mi>C</mi><mo>=</mo><mn>0</mn><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mfrac><mrow><mi>Q</mi><mo>+</mo><mn>1</mn></mrow><mrow><mn>2</mn><mi>Q</mi></mrow></mfrac><mo>,</mo><mspace width="2.0em"></mspace><msub><mi>p</mi><mn>1</mn></msub><mo>=</mo><mo>Pr</mo><mrow><mo stretchy="true" form="prefix">(</mo><mi>C</mi><mo>=</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mfrac><mrow><mi>Q</mi><mo>−</mo><mn>1</mn></mrow><mrow><mn>2</mn><mi>Q</mi></mrow></mfrac><mi>.</mi></mrow><annotation encoding="application/x-tex">
+p_0=\Pr(C=0)=\frac{Q+1}{2Q},\qquad p_1=\Pr(C=1)=\frac{Q-1}{2Q}.
+\tag{5}
+</annotation></semantics></math></p>
+<p>There are
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Q</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>Q</mi><mo>+</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow><mi>/</mi><mn>2</mn></mrow><annotation encoding="application/x-tex">Q(Q+1)/2</annotation></semantics></math>
+pairs whose sum is below
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>Q</mi><annotation encoding="application/x-tex">Q</annotation></semantics></math>.
+The two possible output values differ modulo
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>K</mi><mo>≥</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">K\ge2</annotation></semantics></math>.
+Hence</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>ε</mi><mo>*</mo></msub><mo>=</mo><mfrac><mrow><mi>Q</mi><mo>−</mo><mn>1</mn></mrow><mrow><mn>2</mn><mi>Q</mi></mrow></mfrac><mi>.</mi></mrow><annotation encoding="application/x-tex">
+\varepsilon_* =\frac{Q-1}{2Q}.
+\tag{6}
+</annotation></semantics></math></p>
+<p>The same optimum holds for the entire shear output, since its second
+quotient is already known.</p>
+<h2 id="public-simulation-and-joint-simulation">6. Public simulation and
+joint simulation</h2>
+<p>We use total variation in the convention
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Δ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>μ</mi><mo>,</mo><mi>ν</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mfrac displaystyle="false"><mn>1</mn><mn>2</mn></mfrac><msub><mo>∑</mo><mi>x</mi></msub><mrow><mo stretchy="true" form="prefix">|</mo><mi>μ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>x</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>−</mo><mi>ν</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>x</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo stretchy="true" form="postfix">|</mo></mrow></mrow><annotation encoding="application/x-tex">\Delta(\mu,\nu)=\tfrac12\sum_x|\mu(x)-\nu(x)|</annotation></semantics></math>.
+In the preceding example, independently drawing a new carry with
+probabilities
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>p</mi><mn>0</mn></msub><mo>,</mo><msub><mi>p</mi><mn>1</mn></msub><mo stretchy="true" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">(p_0,p_1)</annotation></semantics></math>
+reproduces the law of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="true" form="prefix">(</mo><mi>Y</mi><mo>,</mo><mi>T</mi><mo stretchy="true" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">(Y,T)</annotation></semantics></math>
+exactly. It need not reproduce the dependence of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>T</mi><annotation encoding="application/x-tex">T</annotation></semantics></math>
+on the original unrounded input.</p>
+<p>Whenever
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>T</mi><annotation encoding="application/x-tex">T</annotation></semantics></math>
+is deterministic given
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>Z</mi><annotation encoding="application/x-tex">Z</annotation></semantics></math>
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>Y</mi><annotation encoding="application/x-tex">Y</annotation></semantics></math>
+is a function of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>Z</mi><annotation encoding="application/x-tex">Z</annotation></semantics></math>,
+a fresh
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>Y</mi><annotation encoding="application/x-tex">Y</annotation></semantics></math>-only
+simulator satisfies</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Δ</mi><mo minsize="1.2" maxsize="1.2" stretchy="false" form="prefix">(</mo><mi>ℒ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>Z</mi><mo>,</mo><mi>T</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>,</mo><mi>ℒ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>Z</mi><mo>,</mo><mover><mi>T</mi><mo accent="true">̃</mo></mover><mo stretchy="true" form="postfix">)</mo></mrow><mo minsize="1.2" maxsize="1.2" stretchy="false" form="postfix">)</mo><mo>=</mo><mo>Pr</mo><mrow><mo stretchy="true" form="prefix">(</mo><mi>T</mi><mo>≠</mo><mover><mi>T</mi><mo accent="true">̃</mo></mover><mo stretchy="true" form="postfix">)</mo></mrow><mi>.</mi></mrow><annotation encoding="application/x-tex">
+\Delta\bigl(\mathcal L(Z,T),\mathcal L(Z,\widetilde T)\bigr)
+=\Pr(T\ne\widetilde T).
+\tag{7}
+</annotation></semantics></math></p>
+<p>To prove this, condition on each
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>z</mi><annotation encoding="application/x-tex">z</annotation></semantics></math>:
+the distance from the point mass at
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>T</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>z</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">T(z)</annotation></semantics></math>
+to the simulated conditional distribution is
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn><mo>−</mo><mo>Pr</mo><mrow><mo stretchy="true" form="prefix">(</mo><mover><mi>T</mi><mo accent="true">̃</mo></mover><mo>=</mo><mi>T</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>z</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>∣</mo><mi>z</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">1-\Pr(\widetilde T=T(z)\mid z)</annotation></semantics></math>.
+Averaging proves the identity. For independent posterior resampling of
+the carry, (7) gives</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2</mn><msub><mi>p</mi><mn>0</mn></msub><msub><mi>p</mi><mn>1</mn></msub><mo>=</mo><mfrac><mrow><msup><mi>Q</mi><mn>2</mn></msup><mo>−</mo><mn>1</mn></mrow><mrow><mn>2</mn><msup><mi>Q</mi><mn>2</mn></msup></mrow></mfrac><mo>,</mo></mrow><annotation encoding="application/x-tex">
+2p_0p_1=\frac{Q^2-1}{2Q^2},
+\tag{8}
+</annotation></semantics></math></p>
+<p>whereas the smallest joint distance is
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>p</mi><mn>1</mn></msub><annotation encoding="application/x-tex">p_1</annotation></semantics></math>,
+obtained by always predicting the more likely carry. Exactness of a
+public marginal and optimality for a stronger joint view are therefore
+different objectives.</p>
+<p>A binary-secret example makes the distinction especially transparent.
+Let
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><mo>=</mo><mn>4</mn></mrow><annotation encoding="application/x-tex">P=4</annotation></semantics></math>,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Q</mi><mo>=</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">Q=2</annotation></semantics></math>,
+take the public column
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>A</mi><mo>=</mo><msup><mrow><mo stretchy="true" form="prefix">(</mo><mn>1</mn><mo>,</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow><mi>𝖳</mi></msup></mrow><annotation encoding="application/x-tex">A=(1,1)^\mathsf{T}</annotation></semantics></math>,
+a uniform bit
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>S</mi><annotation encoding="application/x-tex">S</annotation></semantics></math>,
+and no noise. The observed vector
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Y</mi><mo>=</mo><mi>F</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>A</mi><mi>S</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">Y=F(AS)</annotation></semantics></math>
+is always
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="true" form="prefix">(</mo><mn>0</mn><mo>,</mo><mn>0</mn><mo stretchy="true" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">(0,0)</annotation></semantics></math>.
+Under the shear
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>z</mi><mn>1</mn></msub><mo>,</mo><msub><mi>z</mi><mn>2</mn></msub><mo stretchy="true" form="postfix">)</mo></mrow><mo>↦</mo><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>z</mi><mn>1</mn></msub><mo>+</mo><msub><mi>z</mi><mn>2</mn></msub><mo>,</mo><msub><mi>z</mi><mn>2</mn></msub><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">(z_1,z_2)\mapsto(z_1+z_2,z_2)</annotation></semantics></math>,
+the target is
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>T</mi><mo>=</mo><mrow><mo stretchy="true" form="prefix">(</mo><mi>S</mi><mo>,</mo><mn>0</mn><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">T=(S,0)</annotation></semantics></math>.
+Every simulator using only
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="true" form="prefix">(</mo><mi>A</mi><mo>,</mo><mi>Y</mi><mo stretchy="true" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">(A,Y)</annotation></semantics></math>
+is independent of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>S</mi><annotation encoding="application/x-tex">S</annotation></semantics></math>,
+so its distance from the joint law of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="true" form="prefix">(</mo><mi>S</mi><mo>,</mo><mi>T</mi><mo stretchy="true" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">(S,T)</annotation></semantics></math>
+is at least
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn><mi>/</mi><mn>2</mn></mrow><annotation encoding="application/x-tex">1/2</annotation></semantics></math>.
+Equality is attained by every simulator supported on
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="true" form="prefix">(</mo><mn>0</mn><mo>,</mo><mn>0</mn><mo stretchy="true" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">(0,0)</annotation></semantics></math>
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="true" form="prefix">(</mo><mn>1</mn><mo>,</mo><mn>0</mn><mo stretchy="true" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">(1,0)</annotation></semantics></math>;
+an equal mixture also reproduces the public target marginal exactly. No
+choice of fresh public randomness reconstructs the missing correlation
+with
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>S</mi><annotation encoding="application/x-tex">S</annotation></semantics></math>.</p>
+<p>These examples do not exclude more general reductions with additional
+information or altered distributions. They identify a specific
+information constraint:
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Z</mi><mo>→</mo><mi>Y</mi><mo>→</mo><mover><mi>T</mi><mo accent="true">̃</mo></mover></mrow><annotation encoding="application/x-tex">Z\to Y\to\widetilde T</annotation></semantics></math>
+is a Markov chain, while the real target can retain information about
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>Z</mi><annotation encoding="application/x-tex">Z</annotation></semantics></math>
+beyond
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>Y</mi><annotation encoding="application/x-tex">Y</annotation></semantics></math>.</p>
+<h2 id="relation-to-earlier-work-and-scope">7. Relation to earlier work
+and scope</h2>
+<p>Partition-preserving transformation semigroups provide the general
+language for condition (1) [6]. The normal form above computes the
+intersection of affine maps with transformations preserving a fixed
+product of interval cells. Congruence-preserving functions [7] are
+defined using algebraic congruences. Our cells are not cosets of a
+proper subgroup: a cell containing both
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>0</mn><annotation encoding="application/x-tex">0</annotation></semantics></math>
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>1</mn><annotation encoding="application/x-tex">1</annotation></semantics></math>
+cannot be such a coset. For example, multiplication by
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>2</mn><annotation encoding="application/x-tex">2</annotation></semantics></math>
+modulo
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>4</mn><annotation encoding="application/x-tex">4</annotation></semantics></math>
+preserves group congruences, but separates
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>0</mn><annotation encoding="application/x-tex">0</annotation></semantics></math>
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>1</mn><annotation encoding="application/x-tex">1</annotation></semantics></math>
+in the same rounding cell for
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Q</mi><mo>=</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">Q=2</annotation></semantics></math>.
+Even translation by
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>1</mn><annotation encoding="application/x-tex">1</annotation></semantics></math>
+can split a cell. These differences prevent an automatic transfer of
+classifications for subgroup partitions to this setting.</p>
+<p>The LWE and LWR literature [1–5] supplies the cryptographic
+motivation, not a hardness consequence of Theorem 1. The theorem
+concerns universal exact postprocessing at fixed parameters. It does not
+cover unequal cells when
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>Q</mi><annotation encoding="application/x-tex">Q</annotation></semantics></math>
+does not divide
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>P</mi><annotation encoding="application/x-tex">P</annotation></semantics></math>,
+nearest-integer conventions, changes of moduli or dimensions, adaptive
+side information, or simulations required only on a restricted
+secret-dependent support. The carry identity, finite prediction formula,
+and marginal-versus-joint distinction are standard tools; the specific
+affine classification and sharp examples constitute the contribution of
+this note.</p>
+<h2 id="reproducible-finite-verification">8. Reproducible finite
+verification</h2>
+<p>The supplementary program <code>scripts/verify.py</code> uses integer
+arithmetic and <code>fractions.Fraction</code>. It checks all affine
+rows and translations for proper divisors
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Q</mi><mo>≥</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">Q\ge2</annotation></semantics></math>
+of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>4</mn><mo>≤</mo><mi>P</mi><mo>≤</mo><mn>12</mn></mrow><annotation encoding="application/x-tex">4\le P\le12</annotation></semantics></math>,
+in dimensions
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>m</mi><mo>=</mo><mn>1</mn><mo>,</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">m=1,2</annotation></semantics></math>,
+and also
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>m</mi><mo>=</mo><mn>3</mn></mrow><annotation encoding="application/x-tex">m=3</annotation></semantics></math>
+for
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><mo>≤</mo><mn>6</mn></mrow><annotation encoding="application/x-tex">P\le6</annotation></semantics></math>.
+Direct constancy on the zero cell is compared with the stated normal
+form; the verifier finds a collision witness for every excluded affine
+row map. This covers <strong>15,082 affine rows</strong>,
+<strong>1,923,906 evaluated points</strong>, and <strong>14,578 excluded
+maps for which a collision is found</strong>. The predicted number of
+admissible affine rows for a fixed domain is
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><mo>+</mo><mn>2</mn><mi>m</mi><mi>K</mi></mrow><annotation encoding="application/x-tex">P+2mK</annotation></semantics></math>.</p>
+<p>Further checks verify (2) in <strong>1,451,375</strong> signed
+arithmetic cases and verify the prediction and joint-distance formulas
+for <strong>45</strong> laws with
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2</mn><mo>≤</mo><mi>Q</mi><mo>≤</mo><mn>16</mn></mrow><annotation encoding="application/x-tex">2\le Q\le16</annotation></semantics></math>
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>K</mi><mo>∈</mo><mo stretchy="false" form="prefix">{</mo><mn>2</mn><mo>,</mo><mn>3</mn><mo>,</mo><mn>4</mn><mo stretchy="false" form="postfix">}</mo></mrow><annotation encoding="application/x-tex">K\in\{2,3,4\}</annotation></semantics></math>.
+Reflection and restricted-support examples are also checked. The
+binary-secret proof is analytic; its additional probability-grid check
+is only a finite corroboration. Complete outputs, parameter domains,
+dependencies, and reproduction commands accompany the paper. These
+computations do not replace the proofs or establish any cryptographic
+security level.</p>
+<h2 id="references">References</h2>
+<p>[1] Oded Regev. <em>The Learning with Errors Problem</em>. IEEE
+Conference on Computational Complexity, 2010, pp. 191–204. <a
+href="https://cims.nyu.edu/~regev/papers/lwesurvey.pdf">Author
+version</a>.</p>
+<p>[2] Abhishek Banerjee, Chris Peikert, and Alon Rosen.
+<em>Pseudorandom Functions and Lattices</em>. EUROCRYPT 2012. <a
+href="https://web.eecs.umich.edu/~cpeikert/pubs/prf-lattice.pdf">Author
+version</a>.</p>
+<p>[3] Joël Alwen, Stephan Krenn, Krzysztof Pietrzak, and Daniel Wichs.
+<em>Learning with Rounding, Revisited: New Reduction, Properties and
+Applications</em>. CRYPTO 2013, pp. 57–74. <a
+href="https://crypto.ethz.ch/publications/files/AKPW13.pdf">Author
+version</a>. DOI: 10.1007/978-3-642-40041-4_4.</p>
+<p>[4] Andrej Bogdanov, Siyao Guo, Daniel Masny, Silas Richelson, and
+Alon Rosen. <em>On the Hardness of Learning with Rounding over Small
+Modulus</em>. TCC 2016-A. <a
+href="https://people.csail.mit.edu/sirichel/lwr.pdf">Author
+version</a>.</p>
+<p>[5] Shi Bai, Katharina Boudgoust, Dipayan Das, Adeline Roux-Langlois,
+Weiqiang Wen, and Zhenfei Zhang. <em>Middle-Product Learning with
+Rounding Problem and its Applications</em>. ASIACRYPT 2019, pp. 55–81.
+<a href="https://eprint.iacr.org/2019/1001">IACR ePrint
+2019/1001</a>.</p>
+<p>[6] Mosarof Sarkar and Shubh N. Singh. <em>On certain semigroups of
+transformations that preserve a partition</em>. Communications in
+Algebra 49 (2021), 331–342. <a
+href="https://doi.org/10.1080/00927872.2020.1799224">DOI:
+10.1080/00927872.2020.1799224</a>. <a
+href="https://arxiv.org/abs/2006.04242">Author version:
+arXiv:2006.04242</a>.</p>
+<p>[7] C. J. Maxson and Frederik Saxinger. <em>Rings of congruence
+preserving functions</em>. Monatshefte für Mathematik 187 (2018),
+531–542. <a href="https://doi.org/10.1007/s00605-017-1105-3">DOI:
+10.1007/s00605-017-1105-3</a>.</p>
+<p>[8] Yuanxin Guo, Stark C. Draper, and Wei Yu. <em>Modulo Quantization
+Coding for Gaussian Primitive Relay Channel with Perfectly Correlated
+Noises</em>. IEEE International Symposium on Information Theory, 2025.
+<a
+href="https://www.comm.utoronto.ca/~weiyu/2025_ISIT_Yuanxin.pdf">Author
+version</a>.</p>
+</body>
+</html>

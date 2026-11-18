@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Samir Bouftass and ChatGPT (OpenAI)" />
+  <title>Repeated Rounded Observations</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Repeated Rounded Observations</h1>
+<p class="subtitle">Block simulation, a shared hidden state, and
+two-world error bounds</p>
+<p class="author">Samir Bouftass and ChatGPT (OpenAI)</p>
+<p class="date">16 November 2026 · English edition 1.1</p>
+</header>
+<h2 id="abstract">Abstract</h2>
+<p>We determine the exact error of simulating noisy parities from a
+block of rounded observations sharing one hidden state. The noise has
+probabilities
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="true" form="prefix">(</mo><mn>1</mn><mi>/</mi><mn>4</mn><mo>,</mo><mn>1</mn><mi>/</mi><mn>2</mn><mo>,</mo><mn>1</mn><mi>/</mi><mn>4</mn><mo stretchy="true" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">(1/4,1/2,1/4)</annotation></semantics></math>
+on
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="true" form="prefix">(</mo><mi>−</mi><mn>1</mn><mo>,</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">(-1,0,1)</annotation></semantics></math>,
+the rounding cells have even length
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Q</mi><mo>≥</mo><mn>4</mn></mrow><annotation encoding="application/x-tex">Q\ge4</annotation></semantics></math>,
+and there are
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>L</mi><mo>≥</mo><mn>3</mn></mrow><annotation encoding="application/x-tex">L\ge3</annotation></semantics></math>
+cells. Each parity is individually fair conditional on the state, but
+its dependence on the rounded observations prevents an exact simulation
+of the full joint view. We derive a closed formula for the optimal total
+variation at every block length and give an exact sampler with expected
+polynomial running time. The optimal error tends to zero, whereas using
+independent fair coins has error tending to
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2</mn><mi>/</mi><mi>Q</mi></mrow><annotation encoding="application/x-tex">2/Q</annotation></semantics></math>.
+Posterior resampling reproduces the public view exactly and lies within
+a factor of two of the optimal full-view error. At block length two,
+however, every full-view optimizer incurs a positive null-world error.
+We compute both errors exactly and exhibit parameters where their sum is
+larger than for independent coins. The example separates optimal
+simulation of one joint experiment from optimization of a two-world
+distinguishing bound.</p>
+<h2 id="model-and-objectives">1. Model and objectives</h2>
+<p>Let
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Q</mi><mo>≥</mo><mn>4</mn></mrow><annotation encoding="application/x-tex">Q\ge4</annotation></semantics></math>
+be even,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>L</mi><mo>≥</mo><mn>3</mn></mrow><annotation encoding="application/x-tex">L\ge3</annotation></semantics></math>,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><mo>=</mo><mi>L</mi><mi>Q</mi></mrow><annotation encoding="application/x-tex">P=LQ</annotation></semantics></math>,
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>k</mi><mo>≥</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">k\ge1</annotation></semantics></math>.
+The hidden state
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>Z</mi><annotation encoding="application/x-tex">Z</annotation></semantics></math>
+is uniform on
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>ℤ</mi><mi>P</mi></msub><annotation encoding="application/x-tex">\mathbb Z_P</annotation></semantics></math>.
+Independently of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>Z</mi><annotation encoding="application/x-tex">Z</annotation></semantics></math>,
+the noises
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>E</mi><mn>1</mn></msub><mo>,</mo><mi>…</mi><mo>,</mo><msub><mi>E</mi><mi>k</mi></msub></mrow><annotation encoding="application/x-tex">E_1,\ldots,E_k</annotation></semantics></math>
+are independent, with probabilities
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn><mi>/</mi><mn>4</mn><mo>,</mo><mn>1</mn><mi>/</mi><mn>2</mn><mo>,</mo><mn>1</mn><mi>/</mi><mn>4</mn></mrow><annotation encoding="application/x-tex">1/4,1/2,1/4</annotation></semantics></math>
+on
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>−</mi><mn>1</mn><mo>,</mo><mn>0</mn><mo>,</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">-1,0,1</annotation></semantics></math>.
+Write</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>X</mi><mi>i</mi></msub><mo>=</mo><msub><mrow><mo stretchy="true" form="prefix">[</mo><mi>Z</mi><mo>+</mo><msub><mi>E</mi><mi>i</mi></msub><mo stretchy="true" form="postfix">]</mo></mrow><mi>P</mi></msub><mo>,</mo><mspace width="2.0em"></mspace><msub><mi>Y</mi><mi>i</mi></msub><mo>=</mo><mrow><mo stretchy="true" form="prefix">⌊</mo><msub><mi>X</mi><mi>i</mi></msub><mi>/</mi><mi>Q</mi><mo stretchy="true" form="postfix">⌋</mo></mrow><mo>,</mo><mspace width="2.0em"></mspace><msub><mi>B</mi><mi>i</mi></msub><mo>=</mo><msub><mi>X</mi><mi>i</mi></msub><mrow><mspace width="0.222em"></mspace><mo>mod</mo><mspace width="0.222em"></mspace><mn>2</mn></mrow><mi>.</mi></mrow><annotation encoding="application/x-tex">
+X_i=[Z+E_i]_P,\qquad Y_i=\left\lfloor X_i/Q\right\rfloor,
+\qquad B_i=X_i\bmod2.
+\tag{1}
+</annotation></semantics></math></p>
+<p>Here
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mrow><mo stretchy="true" form="prefix">[</mo><mi>x</mi><mo stretchy="true" form="postfix">]</mo></mrow><mi>P</mi></msub><annotation encoding="application/x-tex">[x]_P</annotation></semantics></math>
+is the representative in
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">{</mo><mn>0</mn><mo>,</mo><mi>…</mi><mo>,</mo><mi>P</mi><mo>−</mo><mn>1</mn><mo stretchy="false" form="postfix">}</mo></mrow><annotation encoding="application/x-tex">\{0,\ldots,P-1\}</annotation></semantics></math>.
+The parity
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>B</mi><mi>i</mi></msub><annotation encoding="application/x-tex">B_i</annotation></semantics></math>
+is a bijective encoding of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>F</mi><mrow><mo stretchy="true" form="prefix">(</mo><mrow><mo stretchy="true" form="prefix">(</mo><mi>P</mi><mi>/</mi><mn>2</mn><mo stretchy="true" form="postfix">)</mo></mrow><msub><mi>X</mi><mi>i</mi></msub><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">F((P/2)X_i)</annotation></semantics></math>:
+even inputs give
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>0</mn><annotation encoding="application/x-tex">0</annotation></semantics></math>,
+and odd inputs give
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">⌊</mo><mi>L</mi><mi>/</mi><mn>2</mn><mo stretchy="false" form="postfix">⌋</mo></mrow><annotation encoding="application/x-tex">\lfloor L/2\rfloor</annotation></semantics></math>,
+where
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>F</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>x</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mo stretchy="false" form="prefix">⌊</mo><msub><mrow><mo stretchy="true" form="prefix">[</mo><mi>x</mi><mo stretchy="true" form="postfix">]</mo></mrow><mi>P</mi></msub><mi>/</mi><mi>Q</mi><mo stretchy="false" form="postfix">⌋</mo></mrow><annotation encoding="application/x-tex">F(x)=\lfloor[x]_P/Q\rfloor</annotation></semantics></math>.
+Thus the binary target also represents a particular rounded
+multiplicative observation.</p>
+<p>A simulator sees the entire block
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Y</mi><mo>=</mo><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>Y</mi><mn>1</mn></msub><mo>,</mo><mi>…</mi><mo>,</mo><msub><mi>Y</mi><mi>k</mi></msub><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">Y=(Y_1,\ldots,Y_k)</annotation></semantics></math>,
+uses fresh randomness to sample
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mover><mi>B</mi><mo accent="true">̃</mo></mover><annotation encoding="application/x-tex">\widetilde B</annotation></semantics></math>
+from a kernel
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>K</mi><mi>Y</mi></msub><annotation encoding="application/x-tex">K_Y</annotation></semantics></math>,
+and retains the original
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>Y</mi><annotation encoding="application/x-tex">Y</annotation></semantics></math>.
+It has no access to
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>Z</mi><annotation encoding="application/x-tex">Z</annotation></semantics></math>
+or the noises. Its error is</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>δ</mi><mi>k</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>K</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mi>Δ</mi><mo minsize="1.2" maxsize="1.2" stretchy="false" form="prefix">(</mo><mi>ℒ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>Z</mi><mo>,</mo><mi>Y</mi><mo>,</mo><mi>B</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>,</mo><mi>ℒ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>Z</mi><mo>,</mo><mi>Y</mi><mo>,</mo><mover><mi>B</mi><mo accent="true">̃</mo></mover><mo stretchy="true" form="postfix">)</mo></mrow><mo minsize="1.2" maxsize="1.2" stretchy="false" form="postfix">)</mo><mo>,</mo><mspace width="2.0em"></mspace><msubsup><mi>δ</mi><mi>k</mi><mo>*</mo></msubsup><mo>=</mo><munder><mo>inf</mo><mi>K</mi></munder><msub><mi>δ</mi><mi>k</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>K</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>,</mo></mrow><annotation encoding="application/x-tex">
+\delta_k(K)=\Delta\bigl(\mathcal L(Z,Y,B),\mathcal L(Z,Y,\widetilde B)\bigr),
+\qquad \delta_k^*=\inf_K\delta_k(K),
+\tag{2}
+</annotation></semantics></math></p>
+<p>with
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>Δ</mi><annotation encoding="application/x-tex">\Delta</annotation></semantics></math>
+equal to half the
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mo>ℓ</mo><mn>1</mn></msup><annotation encoding="application/x-tex">\ell^1</annotation></semantics></math>
+distance [1]. This is an average over the specified uniform prior, not a
+worst-state distance. The simulator is offline: it may use later
+observations to generate earlier output bits.</p>
+<p>Conditional on any fixed
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>Z</mi><annotation encoding="application/x-tex">Z</annotation></semantics></math>,
+the bits
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>B</mi><mi>i</mi></msub><annotation encoding="application/x-tex">B_i</annotation></semantics></math>
+are independent fair bits. Therefore independent fair coins reproduce
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="true" form="prefix">(</mo><mi>Z</mi><mo>,</mo><mi>B</mi><mo stretchy="true" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">(Z,B)</annotation></semantics></math>
+exactly for every
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>k</mi><annotation encoding="application/x-tex">k</annotation></semantics></math>.
+Equation (2) asks for more: it retains the dependence of those bits on
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>Y</mi><annotation encoding="application/x-tex">Y</annotation></semantics></math>.</p>
+<h3 id="statistical-comparison-and-normalization">1.1 Statistical
+comparison and normalization</h3>
+<p>Let the source experiment at state
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>z</mi><annotation encoding="application/x-tex">z</annotation></semantics></math>
+be
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>ℰ</mi><mi>z</mi></msub><mo>=</mo><mi>ℒ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>Y</mi><mo>∣</mo><mi>Z</mi><mo>=</mo><mi>z</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\mathcal E_z=\mathcal L(Y\mid Z=z)</annotation></semantics></math>
+and the target be
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>ℱ</mi><mi>z</mi></msub><mo>=</mo><mi>ℒ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>Y</mi><mo>,</mo><mi>B</mi><mo>∣</mo><mi>Z</mi><mo>=</mo><mi>z</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\mathcal F_z=\mathcal L(Y,B\mid Z=z)</annotation></semantics></math>.
+Then (2) is a prior-weighted deficiency with a restricted class of
+kernels,</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msubsup><mi>δ</mi><mi>k</mi><mo>*</mo></msubsup><mo>=</mo><munder><mo>inf</mo><mi>K</mi></munder><mfrac><mn>1</mn><mi>P</mi></mfrac><munder><mo>∑</mo><mi>z</mi></munder><mi>Δ</mi><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>ℱ</mi><mi>z</mi></msub><mo>,</mo><mover><mi>K</mi><mo accent="true">̂</mo></mover><msub><mi>ℰ</mi><mi>z</mi></msub><mo stretchy="true" form="postfix">)</mo></mrow><mo>,</mo><mspace width="2.0em"></mspace><mover><mi>K</mi><mo accent="true">̂</mo></mover><mo>:</mo><mi>y</mi><mo>↦</mo><mrow><mo stretchy="true" form="prefix">(</mo><mi>y</mi><mo>,</mo><msub><mi>K</mi><mi>y</mi></msub><mo stretchy="true" form="postfix">)</mo></mrow><mi>.</mi></mrow><annotation encoding="application/x-tex">
+\delta_k^*=\inf_K\frac1P\sum_z\Delta(\mathcal F_z,\widehat K\mathcal E_z),
+\qquad \widehat K:y\longmapsto(y,K_y).
+\tag{3}
+</annotation></semantics></math></p>
+<p>General comparison of statistical experiments and deficiency are
+classical [2,3]. Unlike an unrestricted randomization,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mover><mi>K</mi><mo accent="true">̂</mo></mover><annotation encoding="application/x-tex">\widehat K</annotation></semantics></math>
+must preserve the observed block itself. We use half the
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mo>ℓ</mo><mn>1</mn></msup><annotation encoding="application/x-tex">\ell^1</annotation></semantics></math>
+norm; a convention using the full norm doubles all distances. No
+unrestricted decision-theoretic duality is asserted for the restricted
+class in (3). Repeated observations in comparison theory are also
+studied in [4]; the present calculation uses the particular boundary
+geometry of (1).</p>
+<h2 id="conditional-total-variation-minimization">2. Conditional
+total-variation minimization</h2>
+<p>For
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>w</mi><mrow><mi>z</mi><mo>,</mo><mi>y</mi></mrow></msub><mo>=</mo><mo>Pr</mo><mrow><mo stretchy="true" form="prefix">(</mo><mi>Z</mi><mo>=</mo><mi>z</mi><mo>,</mo><mi>Y</mi><mo>=</mo><mi>y</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">w_{z,y}=\Pr(Z=z,Y=y)</annotation></semantics></math>
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>μ</mi><mrow><mi>z</mi><mo>,</mo><mi>y</mi></mrow></msub><mo>=</mo><mi>ℒ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>B</mi><mo>∣</mo><mi>z</mi><mo>,</mo><mi>y</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\mu_{z,y}=\mathcal L(B\mid z,y)</annotation></semantics></math>,
+disjointness of the
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="true" form="prefix">(</mo><mi>z</mi><mo>,</mo><mi>y</mi><mo stretchy="true" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">(z,y)</annotation></semantics></math>
+fibers gives</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>δ</mi><mi>k</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>K</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><munder><mo>∑</mo><mi>y</mi></munder><munder><mo>∑</mo><mi>z</mi></munder><msub><mi>w</mi><mrow><mi>z</mi><mo>,</mo><mi>y</mi></mrow></msub><mi>Δ</mi><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>μ</mi><mrow><mi>z</mi><mo>,</mo><mi>y</mi></mrow></msub><mo>,</mo><msub><mi>K</mi><mi>y</mi></msub><mo stretchy="true" form="postfix">)</mo></mrow><mi>.</mi></mrow><annotation encoding="application/x-tex">
+\delta_k(K)=\sum_y\sum_z w_{z,y}\Delta(\mu_{z,y},K_y).
+\tag{4}
+</annotation></semantics></math></p>
+<p>Two elementary consequences of the triangle inequality solve each
+observed block.</p>
+<p><strong>Lemma 1 (dominant component).</strong> If
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>a</mi><mo>≥</mo><msub><mo>∑</mo><mi>j</mi></msub><msub><mi>b</mi><mi>j</mi></msub></mrow><annotation encoding="application/x-tex">a\ge\sum_j b_j</annotation></semantics></math>
+with nonnegative weights, then
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>K</mi><mo>=</mo><mi>U</mi></mrow><annotation encoding="application/x-tex">K=U</annotation></semantics></math>
+minimizes
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>a</mi><mi>Δ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>U</mi><mo>,</mo><mi>K</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>+</mo><msub><mo>∑</mo><mi>j</mi></msub><msub><mi>b</mi><mi>j</mi></msub><mi>Δ</mi><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>μ</mi><mi>j</mi></msub><mo>,</mo><mi>K</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">a\Delta(U,K)+\sum_j b_j\Delta(\mu_j,K)</annotation></semantics></math>.
+If the inequality is strict, the minimizing distribution is unique.</p>
+<p><strong>Proof.</strong> Since
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Δ</mi><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>μ</mi><mi>j</mi></msub><mo>,</mo><mi>K</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>≥</mo><mi>Δ</mi><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>μ</mi><mi>j</mi></msub><mo>,</mo><mi>U</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>−</mo><mi>Δ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>U</mi><mo>,</mo><mi>K</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Delta(\mu_j,K)\ge\Delta(\mu_j,U)-\Delta(U,K)</annotation></semantics></math>,
+the objective is at least
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mo>∑</mo><mi>j</mi></msub><msub><mi>b</mi><mi>j</mi></msub><mi>Δ</mi><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>μ</mi><mi>j</mi></msub><mo>,</mo><mi>U</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>+</mo><mrow><mo stretchy="true" form="prefix">(</mo><mi>a</mi><mo>−</mo><msub><mo>∑</mo><mi>j</mi></msub><msub><mi>b</mi><mi>j</mi></msub><mo stretchy="true" form="postfix">)</mo></mrow><mi>Δ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>U</mi><mo>,</mo><mi>K</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\sum_j b_j\Delta(\mu_j,U)+(a-\sum_jb_j)\Delta(U,K)</annotation></semantics></math>.
+This is attained at
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>U</mi><annotation encoding="application/x-tex">U</annotation></semantics></math>,
+and strictness forces equality only there.
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>▫</mi><annotation encoding="application/x-tex">\square</annotation></semantics></math></p>
+<p><strong>Lemma 2 (two components).</strong> For nonnegative
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>a</mi><mo>,</mo><mi>b</mi></mrow><annotation encoding="application/x-tex">a,b</annotation></semantics></math>,</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><munder><mo>inf</mo><mi>K</mi></munder><mo stretchy="false" form="prefix">{</mo><mi>a</mi><mi>Δ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>μ</mi><mo>,</mo><mi>K</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>+</mo><mi>b</mi><mi>Δ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>ν</mi><mo>,</mo><mi>K</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo stretchy="false" form="postfix">}</mo><mo>=</mo><mo>min</mo><mrow><mo stretchy="true" form="prefix">(</mo><mi>a</mi><mo>,</mo><mi>b</mi><mo stretchy="true" form="postfix">)</mo></mrow><mi>Δ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>μ</mi><mo>,</mo><mi>ν</mi><mo stretchy="true" form="postfix">)</mo></mrow><mi>.</mi></mrow><annotation encoding="application/x-tex">
+\inf_K\{a\Delta(\mu,K)+b\Delta(\nu,K)\}
+=\min(a,b)\Delta(\mu,\nu).
+\tag{5}
+</annotation></semantics></math></p>
+<p>Choosing the law of larger weight attains the bound. If the weights
+are equal, any mixture of the two laws attains it. The lower bound
+follows by retaining the smaller weight and applying the triangle
+inequality.</p>
+<h2 id="the-exact-block-optimum">3. The exact block optimum</h2>
+<p>Let
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>U</mi><mi>k</mi></msub><annotation encoding="application/x-tex">U_k</annotation></semantics></math>
+be uniform on
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">{</mo><mn>0</mn><mo>,</mo><mn>1</mn><msup><mo stretchy="false" form="postfix">}</mo><mi>k</mi></msup></mrow><annotation encoding="application/x-tex">\{0,1\}^k</annotation></semantics></math>,
+and let
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>H</mi><mi>k</mi></msub><annotation encoding="application/x-tex">H_k</annotation></semantics></math>
+be the product law with bit probability
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2</mn><mi>/</mi><mn>3</mn></mrow><annotation encoding="application/x-tex">2/3</annotation></semantics></math>.
+Define</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>S</mi><mi>k</mi></msub><mo>=</mo><mi>Δ</mi><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>H</mi><mi>k</mi></msub><mo>,</mo><msub><mi>U</mi><mi>k</mi></msub><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><munderover><mo>∑</mo><mrow><mi>j</mi><mo>=</mo><mn>0</mn></mrow><mi>k</mi></munderover><mrow><mo stretchy="true" form="prefix">(</mo><mfrac linethickness="0"><mi>k</mi><mi>j</mi></mfrac><mo stretchy="true" form="postfix">)</mo></mrow><mrow><mo stretchy="true" form="prefix">|</mo><mfrac><msup><mn>2</mn><mi>j</mi></msup><msup><mn>3</mn><mi>k</mi></msup></mfrac><mo>−</mo><msup><mn>2</mn><mrow><mi>−</mi><mi>k</mi></mrow></msup><mo stretchy="true" form="postfix">|</mo></mrow><mi>.</mi></mrow><annotation encoding="application/x-tex">
+S_k=\Delta(H_k,U_k)=\frac12\sum_{j=0}^k\binom{k}{j}
+\left|\frac{2^j}{3^k}-2^{-k}\right|.
+\tag{6}
+</annotation></semantics></math></p>
+<p><strong>Theorem 1.</strong> Under the assumptions of Section 1,</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msubsup><mi>δ</mi><mi>k</mi><mo>*</mo></msubsup><mo>=</mo><msub><mi>C</mi><mi>k</mi></msub><mo>+</mo><msub><mi>M</mi><mi>k</mi></msub><mo>,</mo></mrow><annotation encoding="application/x-tex">
+\delta_k^*=C_k+M_k,
+\tag{7}
+</annotation></semantics></math></p>
+<p>where</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>C</mi><mi>k</mi></msub><mo>=</mo><mfrac><mn>1</mn><mi>Q</mi></mfrac><mrow><mo stretchy="true" form="prefix">[</mo><mn>2</mn><msup><mrow><mo stretchy="true" form="prefix">(</mo><mn>3</mn><mi>/</mi><mn>4</mn><mo stretchy="true" form="postfix">)</mo></mrow><mi>k</mi></msup><msub><mi>S</mi><mi>k</mi></msub><mo>+</mo><mn>2</mn><msup><mrow><mo stretchy="true" form="prefix">(</mo><mn>1</mn><mi>/</mi><mn>4</mn><mo stretchy="true" form="postfix">)</mo></mrow><mi>k</mi></msup><mrow><mo stretchy="true" form="prefix">(</mo><mn>1</mn><mo>−</mo><msup><mn>2</mn><mrow><mi>−</mi><mi>k</mi></mrow></msup><mo stretchy="true" form="postfix">)</mo></mrow><mo stretchy="true" form="postfix">]</mo></mrow></mrow><annotation encoding="application/x-tex">
+C_k=\frac1Q\left[2(3/4)^kS_k+2(1/4)^k(1-2^{-k})\right]
+\tag{8}
+</annotation></semantics></math></p>
+<p>and</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>M</mi><mi>k</mi></msub><mo>=</mo><mfrac><mn>1</mn><mrow><mi>Q</mi><msup><mn>4</mn><mi>k</mi></msup></mrow></mfrac><munderover><mo>∑</mo><mrow><mo>ℓ</mo><mo>=</mo><mn>1</mn></mrow><mrow><mi>k</mi><mo>−</mo><mn>1</mn></mrow></munderover><mrow><mo stretchy="true" form="prefix">(</mo><mfrac linethickness="0"><mi>k</mi><mo>ℓ</mo></mfrac><mo stretchy="true" form="postfix">)</mo></mrow><msup><mn>3</mn><mrow><mo>min</mo><mrow><mo stretchy="true" form="prefix">(</mo><mo>ℓ</mo><mo>,</mo><mi>k</mi><mo>−</mo><mo>ℓ</mo><mo stretchy="true" form="postfix">)</mo></mrow></mrow></msup><mrow><mo stretchy="true" form="prefix">[</mo><mn>1</mn><mo>−</mo><msup><mrow><mo stretchy="true" form="prefix">(</mo><mn>2</mn><mi>/</mi><mn>3</mn><mo stretchy="true" form="postfix">)</mo></mrow><mrow><mo>max</mo><mrow><mo stretchy="true" form="prefix">(</mo><mo>ℓ</mo><mo>,</mo><mi>k</mi><mo>−</mo><mo>ℓ</mo><mo stretchy="true" form="postfix">)</mo></mrow></mrow></msup><mo stretchy="true" form="postfix">]</mo></mrow><mi>.</mi></mrow><annotation encoding="application/x-tex">
+M_k=\frac1{Q4^k}\sum_{\ell=1}^{k-1}\binom{k}{\ell}3^{\min(\ell,k-\ell)}
+\left[1-(2/3)^{\max(\ell,k-\ell)}\right].
+\tag{9}
+</annotation></semantics></math></p>
+<p>In particular,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msubsup><mi>δ</mi><mn>1</mn><mo>*</mo></msubsup><mo>=</mo><mn>1</mn><mi>/</mi><mrow><mo stretchy="true" form="prefix">(</mo><mn>2</mn><mi>Q</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\delta_1^*=1/(2Q)</annotation></semantics></math>
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msubsup><mi>δ</mi><mn>2</mn><mo>*</mo></msubsup><mo>=</mo><mn>7</mn><mi>/</mi><mrow><mo stretchy="true" form="prefix">(</mo><mn>16</mn><mi>Q</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\delta_2^*=7/(16Q)</annotation></semantics></math>.</p>
+<p><strong>Proof for constant blocks.</strong> Suppose
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Y</mi><mo>=</mo><mrow><mo stretchy="true" form="prefix">(</mo><mi>v</mi><mo>,</mo><mi>…</mi><mo>,</mo><mi>v</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">Y=(v,\ldots,v)</annotation></semantics></math>.
+There are
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Q</mi><mo>−</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">Q-2</annotation></semantics></math>
+interior states in cell
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>v</mi><annotation encoding="application/x-tex">v</annotation></semantics></math>,
+each with likelihood one and conditional bit law
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>U</mi><mi>k</mi></msub><annotation encoding="application/x-tex">U_k</annotation></semantics></math>.
+The two boundary states inside that cell have likelihood
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mrow><mo stretchy="true" form="prefix">(</mo><mn>3</mn><mi>/</mi><mn>4</mn><mo stretchy="true" form="postfix">)</mo></mrow><mi>k</mi></msup><annotation encoding="application/x-tex">(3/4)^k</annotation></semantics></math>
+and laws
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>H</mi><mi>k</mi></msub><annotation encoding="application/x-tex">H_k</annotation></semantics></math>
+and its bitwise complement. The two neighboring states outside it have
+likelihood
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mrow><mo stretchy="true" form="prefix">(</mo><mn>1</mn><mi>/</mi><mn>4</mn><mo stretchy="true" form="postfix">)</mo></mrow><mi>k</mi></msup><annotation encoding="application/x-tex">(1/4)^k</annotation></semantics></math>
+and deterministic all-zero or all-one laws. These states are distinct
+because
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Q</mi><mo>≥</mo><mn>4</mn></mrow><annotation encoding="application/x-tex">Q\ge4</annotation></semantics></math>
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>L</mi><mo>≥</mo><mn>3</mn></mrow><annotation encoding="application/x-tex">L\ge3</annotation></semantics></math>.</p>
+<p>The weight
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Q</mi><mo>−</mo><mn>2</mn><mo>≥</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">Q-2\ge2</annotation></semantics></math>
+of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>U</mi><mi>k</mi></msub><annotation encoding="application/x-tex">U_k</annotation></semantics></math>
+dominates the total other weight
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2</mn><msup><mrow><mo stretchy="true" form="prefix">(</mo><mn>3</mn><mi>/</mi><mn>4</mn><mo stretchy="true" form="postfix">)</mo></mrow><mi>k</mi></msup><mo>+</mo><mn>2</mn><msup><mrow><mo stretchy="true" form="prefix">(</mo><mn>1</mn><mi>/</mi><mn>4</mn><mo stretchy="true" form="postfix">)</mo></mrow><mi>k</mi></msup><mo>≤</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">2(3/4)^k+2(1/4)^k\le2</annotation></semantics></math>.
+Lemma 1 makes
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>U</mi><mi>k</mi></msub><annotation encoding="application/x-tex">U_k</annotation></semantics></math>
+optimal. The distances to the two biased product laws equal
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>S</mi><mi>k</mi></msub><annotation encoding="application/x-tex">S_k</annotation></semantics></math>;
+those to the point masses equal
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn><mo>−</mo><msup><mn>2</mn><mrow><mi>−</mi><mi>k</mi></mrow></msup></mrow><annotation encoding="application/x-tex">1-2^{-k}</annotation></semantics></math>.
+Multiplying by the prior
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn><mi>/</mi><mi>P</mi></mrow><annotation encoding="application/x-tex">1/P</annotation></semantics></math>
+and summing over the
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>L</mi><annotation encoding="application/x-tex">L</annotation></semantics></math>
+cells gives (8).</p>
+<p><strong>Proof for mixed blocks.</strong> A nonconstant block of
+positive probability uses two cyclically adjacent cells
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>u</mi><mo>,</mo><mi>v</mi></mrow><annotation encoding="application/x-tex">u,v</annotation></semantics></math>
+with
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>v</mi><mo>=</mo><mi>u</mi><mo>+</mo><mn>1</mn><mrow><mspace width="0.222em"></mspace><mo>mod</mo><mspace width="0.222em"></mspace><mi>L</mi></mrow></mrow><annotation encoding="application/x-tex">v=u+1\bmod L</annotation></semantics></math>.
+The orientation is unique for
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>L</mi><mo>≥</mo><mn>3</mn></mrow><annotation encoding="application/x-tex">L\ge3</annotation></semantics></math>.
+Let
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mo>ℓ</mo><annotation encoding="application/x-tex">\ell</annotation></semantics></math>
+be the number of entries equal to
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>u</mi><annotation encoding="application/x-tex">u</annotation></semantics></math>
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>r</mi><mo>=</mo><mi>k</mi><mo>−</mo><mo>ℓ</mo></mrow><annotation encoding="application/x-tex">r=k-\ell</annotation></semantics></math>
+the number equal to
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>v</mi><annotation encoding="application/x-tex">v</annotation></semantics></math>.
+Only two states are possible:
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>z</mi><mo>−</mo></msub><mo>=</mo><mi>v</mi><mi>Q</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">z_-=vQ-1</annotation></semantics></math>,
+which is odd, and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>z</mi><mo>+</mo></msub><mo>=</mo><mi>v</mi><mi>Q</mi></mrow><annotation encoding="application/x-tex">z_+=vQ</annotation></semantics></math>,
+which is even. Their likelihoods are
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>3</mn><mo>ℓ</mo></msup><mi>/</mi><msup><mn>4</mn><mi>k</mi></msup></mrow><annotation encoding="application/x-tex">3^\ell/4^k</annotation></semantics></math>
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>3</mn><mi>r</mi></msup><mi>/</mi><msup><mn>4</mn><mi>k</mi></msup></mrow><annotation encoding="application/x-tex">3^r/4^k</annotation></semantics></math>.</p>
+<p>Under
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>z</mi><mo>−</mo></msub><annotation encoding="application/x-tex">z_-</annotation></semantics></math>,
+the bits at positions in cell
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>v</mi><annotation encoding="application/x-tex">v</annotation></semantics></math>
+are zero and those in cell
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>u</mi><annotation encoding="application/x-tex">u</annotation></semantics></math>
+have independent probability
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2</mn><mi>/</mi><mn>3</mn></mrow><annotation encoding="application/x-tex">2/3</annotation></semantics></math>
+of being one. Call this law
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>μ</mi><mo>−</mo></msub><annotation encoding="application/x-tex">\mu_-</annotation></semantics></math>.
+Under
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>z</mi><mo>+</mo></msub><annotation encoding="application/x-tex">z_+</annotation></semantics></math>,
+the bits in cell
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>u</mi><annotation encoding="application/x-tex">u</annotation></semantics></math>
+are one and those in cell
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>v</mi><annotation encoding="application/x-tex">v</annotation></semantics></math>
+have independent probability
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn><mi>/</mi><mn>3</mn></mrow><annotation encoding="application/x-tex">1/3</annotation></semantics></math>
+of being one; call it
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>μ</mi><mo>+</mo></msub><annotation encoding="application/x-tex">\mu_+</annotation></semantics></math>.
+Their supports meet at exactly one vector, with ones on
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>u</mi><annotation encoding="application/x-tex">u</annotation></semantics></math>
+and zeros on
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>v</mi><annotation encoding="application/x-tex">v</annotation></semantics></math>.
+Its respective probabilities are
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mrow><mo stretchy="true" form="prefix">(</mo><mn>2</mn><mi>/</mi><mn>3</mn><mo stretchy="true" form="postfix">)</mo></mrow><mo>ℓ</mo></msup><annotation encoding="application/x-tex">(2/3)^\ell</annotation></semantics></math>
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mrow><mo stretchy="true" form="prefix">(</mo><mn>2</mn><mi>/</mi><mn>3</mn><mo stretchy="true" form="postfix">)</mo></mrow><mi>r</mi></msup><annotation encoding="application/x-tex">(2/3)^r</annotation></semantics></math>.
+Hence</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Δ</mi><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>μ</mi><mo>−</mo></msub><mo>,</mo><msub><mi>μ</mi><mo>+</mo></msub><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mn>1</mn><mo>−</mo><msup><mrow><mo stretchy="true" form="prefix">(</mo><mn>2</mn><mi>/</mi><mn>3</mn><mo stretchy="true" form="postfix">)</mo></mrow><mrow><mo>max</mo><mrow><mo stretchy="true" form="prefix">(</mo><mo>ℓ</mo><mo>,</mo><mi>r</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow></msup><mi>.</mi></mrow><annotation encoding="application/x-tex">
+\Delta(\mu_-,\mu_+)=1-(2/3)^{\max(\ell,r)}.
+\tag{10}
+</annotation></semantics></math></p>
+<p>Apply Lemma 2, multiply by
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn><mi>/</mi><mi>P</mi></mrow><annotation encoding="application/x-tex">1/P</annotation></semantics></math>,
+and count
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>L</mi><mrow><mo stretchy="true" form="prefix">(</mo><mfrac linethickness="0"><mi>k</mi><mo>ℓ</mo></mfrac><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">L\binom{k}{\ell}</annotation></semantics></math>
+patterns for each
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mo>ℓ</mo><annotation encoding="application/x-tex">\ell</annotation></semantics></math>.
+This gives (9). All other observed patterns have probability zero,
+completing the proof.
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>▫</mi><annotation encoding="application/x-tex">\square</annotation></semantics></math></p>
+<h3 id="an-exact-optimal-sampler">3.1 An exact optimal sampler</h3>
+<p>An optimal kernel
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi>K</mi><mo>*</mo></msup><annotation encoding="application/x-tex">K^*</annotation></semantics></math>
+uses fair bits on constant blocks. For a mixed block, it chooses
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>μ</mi><mo>−</mo></msub><annotation encoding="application/x-tex">\mu_-</annotation></semantics></math>
+if
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>ℓ</mo><mo>&gt;</mo><mi>r</mi></mrow><annotation encoding="application/x-tex">\ell&gt;r</annotation></semantics></math>,
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>μ</mi><mo>+</mo></msub><annotation encoding="application/x-tex">\mu_+</annotation></semantics></math>
+if
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>r</mi><mo>&gt;</mo><mo>ℓ</mo></mrow><annotation encoding="application/x-tex">r&gt;\ell</annotation></semantics></math>.
+At a tie, choose one of these two laws with a single fair choice for the
+whole block. On impossible patterns, use fair bits. Choosing
+independently between the two laws at each coordinate would be a
+different kernel.</p>
+<p>Reading the block and generating its output uses
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>k</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">O(k)</annotation></semantics></math>
+word operations in expectation, with word lengths
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mrow><mo stretchy="true" form="prefix">(</mo><mo>log</mo><mi>P</mi><mo>+</mo><mo>log</mo><mi>k</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">O(\log P+\log k)</annotation></semantics></math>.
+A Bernoulli bit with probability
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn><mi>/</mi><mn>3</mn></mrow><annotation encoding="application/x-tex">1/3</annotation></semantics></math>
+or
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2</mn><mi>/</mi><mn>3</mn></mrow><annotation encoding="application/x-tex">2/3</annotation></semantics></math>
+can be sampled exactly by drawing two fair bits, rejecting the value
+three, and using the three accepted values appropriately. The expected
+number of trials is
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>4</mn><mi>/</mi><mn>3</mn></mrow><annotation encoding="application/x-tex">4/3</annotation></semantics></math>.
+Thus the algorithm has expected polynomial running time; it is not
+claimed to have a fixed worst-case random-bit budget.</p>
+<p>The bounds
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>S</mi><mi>k</mi></msub><mo>≤</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">S_k\le1</annotation></semantics></math>
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>min</mo><mrow><mo stretchy="true" form="prefix">(</mo><mo>ℓ</mo><mo>,</mo><mi>k</mi><mo>−</mo><mo>ℓ</mo><mo stretchy="true" form="postfix">)</mo></mrow><mo>≤</mo><mi>k</mi><mi>/</mi><mn>2</mn></mrow><annotation encoding="application/x-tex">\min(\ell,k-\ell)\le k/2</annotation></semantics></math>
+imply</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msubsup><mi>δ</mi><mi>k</mi><mo>*</mo></msubsup><mo>≤</mo><mfrac><mn>1</mn><mi>Q</mi></mfrac><mrow><mo stretchy="true" form="prefix">[</mo><mn>2</mn><msup><mrow><mo stretchy="true" form="prefix">(</mo><mn>3</mn><mi>/</mi><mn>4</mn><mo stretchy="true" form="postfix">)</mo></mrow><mi>k</mi></msup><mo>+</mo><mn>2</mn><msup><mrow><mo stretchy="true" form="prefix">(</mo><mn>1</mn><mi>/</mi><mn>4</mn><mo stretchy="true" form="postfix">)</mo></mrow><mi>k</mi></msup><mo>+</mo><msup><mrow><mo stretchy="true" form="prefix">(</mo><msqrt><mn>3</mn></msqrt><mi>/</mi><mn>2</mn><mo stretchy="true" form="postfix">)</mo></mrow><mi>k</mi></msup><mo stretchy="true" form="postfix">]</mo></mrow><mo>→</mo><mn>0</mn><mi>.</mi></mrow><annotation encoding="application/x-tex">
+\delta_k^*\le\frac1Q\left[2(3/4)^k+2(1/4)^k+(\sqrt{3}/2)^k\right]\longrightarrow0.
+\tag{11}
+</annotation></semantics></math></p>
+<p>The improvement comes from additional information in the observed
+block that helps the simulator identify the boundary state. It is not a
+statement that more observations reveal less information about the
+hidden state.</p>
+<h2 id="independent-coins-have-a-different-limit">4. Independent coins
+have a different limit</h2>
+<p>Let
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi>K</mi><mrow><mi mathvariant="normal">f</mi><mi mathvariant="normal">a</mi><mi mathvariant="normal">i</mi><mi mathvariant="normal">r</mi></mrow></msup><annotation encoding="application/x-tex">K^{\mathrm{fair}}</annotation></semantics></math>
+always output independent fair bits. Only the two boundary states per
+cell contribute error. At a fixed boundary, classify one coordinate by
+whether it stays in the original cell and whether its parity agrees with
+the state. In the order “same cell, same parity,” “same cell, opposite
+parity,” “neighboring cell, opposite parity,” and “neighboring cell,
+same parity,” the real and simulated probabilities are</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mo stretchy="true" form="prefix">(</mo><mn>1</mn><mi>/</mi><mn>2</mn><mo>,</mo><mn>1</mn><mi>/</mi><mn>4</mn><mo>,</mo><mn>1</mn><mi>/</mi><mn>4</mn><mo>,</mo><mn>0</mn><mo stretchy="true" form="postfix">)</mo></mrow><mspace width="2.0em"></mspace><mtext mathvariant="normal">and</mtext><mspace width="2.0em"></mspace><mrow><mo stretchy="true" form="prefix">(</mo><mn>3</mn><mi>/</mi><mn>8</mn><mo>,</mo><mn>3</mn><mi>/</mi><mn>8</mn><mo>,</mo><mn>1</mn><mi>/</mi><mn>8</mn><mo>,</mo><mn>1</mn><mi>/</mi><mn>8</mn><mo stretchy="true" form="postfix">)</mo></mrow><mi>.</mi></mrow><annotation encoding="application/x-tex">
+(1/2,1/4,1/4,0)\qquad\text{and}\qquad(3/8,3/8,1/8,1/8).
+</annotation></semantics></math></p>
+<p>The common mass of their
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>k</mi><annotation encoding="application/x-tex">k</annotation></semantics></math>-fold
+products gives</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>τ</mi><mi>k</mi></msub><mo>=</mo><mn>1</mn><mo>−</mo><munder><mo>∑</mo><mrow><mi>a</mi><mo>+</mo><mi>b</mi><mo>+</mo><mi>c</mi><mo>=</mo><mi>k</mi></mrow></munder><mfrac><mrow><mi>k</mi><mi>!</mi></mrow><mrow><mi>a</mi><mi>!</mi><mi>b</mi><mi>!</mi><mi>c</mi><mi>!</mi></mrow></mfrac><mo>min</mo><mrow><mo stretchy="true" form="prefix">(</mo><mfrac><msup><mn>2</mn><mi>a</mi></msup><msup><mn>4</mn><mi>k</mi></msup></mfrac><mo>,</mo><mfrac><msup><mn>3</mn><mrow><mi>a</mi><mo>+</mo><mi>b</mi></mrow></msup><msup><mn>8</mn><mi>k</mi></msup></mfrac><mo stretchy="true" form="postfix">)</mo></mrow><mo>,</mo><mspace width="2.0em"></mspace><msub><mi>δ</mi><mi>k</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><msup><mi>K</mi><mrow><mi mathvariant="normal">f</mi><mi mathvariant="normal">a</mi><mi mathvariant="normal">i</mi><mi mathvariant="normal">r</mi></mrow></msup><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mfrac><mn>2</mn><mi>Q</mi></mfrac><msub><mi>τ</mi><mi>k</mi></msub><mi>.</mi></mrow><annotation encoding="application/x-tex">
+\tau_k=1-\sum_{a+b+c=k}\frac{k!}{a!b!c!}
+\min\left(\frac{2^a}{4^k},\frac{3^{a+b}}{8^k}\right),
+\qquad \delta_k(K^{\mathrm{fair}})=\frac2Q\tau_k.
+\tag{12}
+</annotation></semantics></math></p>
+<p>The sum ranges over nonnegative integers. The fourth category never
+occurs in the real distribution but has probability
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn><mi>/</mi><mn>8</mn></mrow><annotation encoding="application/x-tex">1/8</annotation></semantics></math>
+per simulated coordinate. Testing its occurrence yields
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>τ</mi><mi>k</mi></msub><mo>≥</mo><mn>1</mn><mo>−</mo><msup><mrow><mo stretchy="true" form="prefix">(</mo><mn>7</mn><mi>/</mi><mn>8</mn><mo stretchy="true" form="postfix">)</mo></mrow><mi>k</mi></msup></mrow><annotation encoding="application/x-tex">\tau_k\ge1-(7/8)^k</annotation></semantics></math>.
+Therefore</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>δ</mi><mi>k</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><msup><mi>K</mi><mrow><mi mathvariant="normal">f</mi><mi mathvariant="normal">a</mi><mi mathvariant="normal">i</mi><mi mathvariant="normal">r</mi></mrow></msup><mo stretchy="true" form="postfix">)</mo></mrow><mo>→</mo><mn>2</mn><mi>/</mi><mi>Q</mi><mi>.</mi></mrow><annotation encoding="application/x-tex">
+\delta_k(K^{\mathrm{fair}})\longrightarrow2/Q.
+\tag{13}
+</annotation></semantics></math></p>
+<figure>
+<img src="figures/block_simulation.png"
+alt="Full-view simulation error for Q = 4. The optimal block kernel tends to zero; independent fair coins tend to 1/2. Values are evaluated from the exact formulas." />
+<figcaption aria-hidden="true">Full-view simulation error for Q = 4. The
+optimal block kernel tends to zero; independent fair coins tend to 1/2.
+Values are evaluated from the exact formulas.</figcaption>
+</figure>
+<h2 id="posterior-resampling">5. Posterior resampling</h2>
+<p>Define
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msubsup><mi>K</mi><mi>y</mi><mrow><mi mathvariant="normal">p</mi><mi mathvariant="normal">o</mi><mi mathvariant="normal">s</mi><mi mathvariant="normal">t</mi></mrow></msubsup><mo>=</mo><mi>ℒ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>B</mi><mo>∣</mo><mi>Y</mi><mo>=</mo><mi>y</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">K^{\mathrm{post}}_y=\mathcal L(B\mid Y=y)</annotation></semantics></math>
+on the real support, and use fair bits elsewhere. This reproduces
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="true" form="prefix">(</mo><mi>Y</mi><mo>,</mo><mi>B</mi><mo stretchy="true" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">(Y,B)</annotation></semantics></math>
+exactly. It also satisfies</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msubsup><mi>δ</mi><mi>k</mi><mo>*</mo></msubsup><mo>≤</mo><msub><mi>δ</mi><mi>k</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><msup><mi>K</mi><mrow><mi mathvariant="normal">p</mi><mi mathvariant="normal">o</mi><mi mathvariant="normal">s</mi><mi mathvariant="normal">t</mi></mrow></msup><mo stretchy="true" form="postfix">)</mo></mrow><mo>≤</mo><mn>2</mn><msubsup><mi>δ</mi><mi>k</mi><mo>*</mo></msubsup><mi>.</mi></mrow><annotation encoding="application/x-tex">
+\delta_k^*\le\delta_k(K^{\mathrm{post}})\le2\delta_k^*.
+\tag{14}
+</annotation></semantics></math></p>
+<p>For the upper bound, fix an optimal
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msubsup><mi>K</mi><mi>y</mi><mo>*</mo></msubsup><annotation encoding="application/x-tex">K^*_y</annotation></semantics></math>.
+The posterior is the mixture of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>μ</mi><mrow><mi>z</mi><mo>,</mo><mi>y</mi></mrow></msub><annotation encoding="application/x-tex">\mu_{z,y}</annotation></semantics></math>
+with posterior state weights. Convexity gives
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Δ</mi><mrow><mo stretchy="true" form="prefix">(</mo><msubsup><mi>K</mi><mi>y</mi><mrow><mi mathvariant="normal">p</mi><mi mathvariant="normal">o</mi><mi mathvariant="normal">s</mi><mi mathvariant="normal">t</mi></mrow></msubsup><mo>,</mo><msubsup><mi>K</mi><mi>y</mi><mo>*</mo></msubsup><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Delta(K^{\mathrm{post}}_y,K^*_y)</annotation></semantics></math>
+at most the weighted mean of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Δ</mi><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>μ</mi><mrow><mi>z</mi><mo>,</mo><mi>y</mi></mrow></msub><mo>,</mo><msubsup><mi>K</mi><mi>y</mi><mo>*</mo></msubsup><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Delta(\mu_{z,y},K^*_y)</annotation></semantics></math>.
+Apply the triangle inequality to
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Δ</mi><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>μ</mi><mrow><mi>z</mi><mo>,</mo><mi>y</mi></mrow></msub><mo>,</mo><msubsup><mi>K</mi><mi>y</mi><mrow><mi mathvariant="normal">p</mi><mi mathvariant="normal">o</mi><mi mathvariant="normal">s</mi><mi mathvariant="normal">t</mi></mrow></msubsup><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Delta(\mu_{z,y},K^{\mathrm{post}}_y)</annotation></semantics></math>
+and average once more. Summing over
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>y</mi><annotation encoding="application/x-tex">y</annotation></semantics></math>
+proves (14); the lower bound follows from optimality.</p>
+<p>An exact sampler does not enumerate all
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mn>2</mn><mi>k</mi></msup><annotation encoding="application/x-tex">2^k</annotation></semantics></math>
+bit strings. On a constant block, sample the five component classes with
+integer weights</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mo stretchy="true" form="prefix">(</mo><mi>Q</mi><mo>−</mo><mn>2</mn><mo stretchy="true" form="postfix">)</mo></mrow><msup><mn>4</mn><mi>k</mi></msup><mo>,</mo><mspace width="1.0em"></mspace><msup><mn>3</mn><mi>k</mi></msup><mo>,</mo><mspace width="1.0em"></mspace><msup><mn>3</mn><mi>k</mi></msup><mo>,</mo><mspace width="1.0em"></mspace><mn>1</mn><mo>,</mo><mspace width="1.0em"></mspace><mn>1</mn><mo>,</mo></mrow><annotation encoding="application/x-tex">
+(Q-2)4^k,\quad3^k,\quad3^k,\quad1,\quad1,
+</annotation></semantics></math></p>
+<p>then sample their conditional bit laws. On a mixed block, choose the
+two boundary laws with weights
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mn>3</mn><mo>ℓ</mo></msup><annotation encoding="application/x-tex">3^\ell</annotation></semantics></math>
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mn>3</mn><mi>r</mi></msup><annotation encoding="application/x-tex">3^r</annotation></semantics></math>.
+The needed integers have
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>k</mi><mo>+</mo><mo>log</mo><mi>Q</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">O(k+\log Q)</annotation></semantics></math>
+bits. Uniform integer sampling by rejection and exact biased-bit
+generation give expected polynomial time.</p>
+<h2 id="two-worlds-at-block-length-two">6. Two worlds at block length
+two</h2>
+<p>Let
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>D</mi><mn>1</mn></msub><mo>=</mo><mi>ℒ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>Y</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">D_1=\mathcal L(Y)</annotation></semantics></math>
+in the real experiment, and let
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>D</mi><mn>0</mn></msub><annotation encoding="application/x-tex">D_0</annotation></semantics></math>
+be uniform on
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msubsup><mi>ℤ</mi><mi>L</mi><mn>2</mn></msubsup><annotation encoding="application/x-tex">\mathbb Z_L^2</annotation></semantics></math>.
+The target laws are</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>T</mi><mn>1</mn></msub><mo>=</mo><mi>ℒ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>Y</mi><mo>,</mo><mi>B</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>,</mo><mspace width="2.0em"></mspace><msub><mi>T</mi><mn>0</mn></msub><mo>=</mo><msub><mi>D</mi><mn>0</mn></msub><mo>×</mo><msub><mi>U</mi><mn>2</mn></msub><mi>.</mi></mrow><annotation encoding="application/x-tex">
+T_1=\mathcal L(Y,B),\qquad T_0=D_0\times U_2.
+</annotation></semantics></math></p>
+<p>For
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>R</mi><mi>K</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>y</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mrow><mo stretchy="true" form="prefix">(</mo><mi>y</mi><mo>,</mo><msub><mi>K</mi><mi>y</mi></msub><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">R_K(y)=(y,K_y)</annotation></semantics></math>,
+define
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>ε</mi><mi>j</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>K</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mi>Δ</mi><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>R</mi><mi>K</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>D</mi><mi>j</mi></msub><mo stretchy="true" form="postfix">)</mo></mrow><mo>,</mo><msub><mi>T</mi><mi>j</mi></msub><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\varepsilon_j(K)=\Delta(R_K(D_j),T_j)</annotation></semantics></math>.
+These are public-view errors, unlike the stronger error (2).</p>
+<p><strong>Theorem 2.</strong> The independent-coin kernel, the balanced
+optimizer described in Section 3.1, and posterior resampling have the
+following errors:</p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Kernel</th>
+<th>Real-world error
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>ε</mi><mn>1</mn></msub><annotation encoding="application/x-tex">\varepsilon_1</annotation></semantics></math></th>
+<th>Null-world error
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>ε</mi><mn>0</mn></msub><annotation encoding="application/x-tex">\varepsilon_0</annotation></semantics></math></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Independent fair bits</td>
+<td><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>7</mn><mi>/</mi><mrow><mo stretchy="true" form="prefix">(</mo><mn>16</mn><mi>Q</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">7/(16Q)</annotation></semantics></math></td>
+<td><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>0</mn><annotation encoding="application/x-tex">0</annotation></semantics></math></td>
+</tr>
+<tr class="even">
+<td>Balanced block optimizer</td>
+<td><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn><mi>/</mi><mrow><mo stretchy="true" form="prefix">(</mo><mn>8</mn><mi>Q</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">1/(8Q)</annotation></semantics></math></td>
+<td><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>5</mn><mi>/</mi><mrow><mo stretchy="true" form="prefix">(</mo><mn>6</mn><mi>L</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">5/(6L)</annotation></semantics></math></td>
+</tr>
+<tr class="odd">
+<td>Posterior resampling</td>
+<td><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>0</mn><annotation encoding="application/x-tex">0</annotation></semantics></math></td>
+<td><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>5</mn><mi>/</mi><mrow><mo stretchy="true" form="prefix">(</mo><mn>6</mn><mi>L</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>+</mo><mn>1</mn><mi>/</mi><mrow><mo stretchy="true" form="prefix">[</mo><mi>L</mi><mrow><mo stretchy="true" form="prefix">(</mo><mn>8</mn><mi>Q</mi><mo>−</mo><mn>6</mn><mo stretchy="true" form="postfix">)</mo></mrow><mo stretchy="true" form="postfix">]</mo></mrow></mrow><annotation encoding="application/x-tex">5/(6L)+1/[L(8Q-6)]</annotation></semantics></math></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Proof.</strong> A constant pair
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Y</mi><mo>=</mo><mrow><mo stretchy="true" form="prefix">(</mo><mi>v</mi><mo>,</mo><mi>v</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">Y=(v,v)</annotation></semantics></math>
+has probability
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mo stretchy="true" form="prefix">(</mo><mi>Q</mi><mo>−</mo><mn>3</mn><mi>/</mi><mn>4</mn><mo stretchy="true" form="postfix">)</mo></mrow><mi>/</mi><mi>P</mi></mrow><annotation encoding="application/x-tex">(Q-3/4)/P</annotation></semantics></math>.
+In the order
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>00</mn><mo>,</mo><mn>01</mn><mo>,</mo><mn>10</mn><mo>,</mo><mn>11</mn></mrow><annotation encoding="application/x-tex">00,01,10,11</annotation></semantics></math>,
+its conditional target probabilities are proportional to</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mo stretchy="true" form="prefix">(</mo><mi>Q</mi><mi>/</mi><mn>4</mn><mo>−</mo><mn>1</mn><mi>/</mi><mn>8</mn><mo>,</mo><mspace width="0.222em"></mspace><mi>Q</mi><mi>/</mi><mn>4</mn><mo>−</mo><mn>1</mn><mi>/</mi><mn>4</mn><mo>,</mo><mspace width="0.222em"></mspace><mi>Q</mi><mi>/</mi><mn>4</mn><mo>−</mo><mn>1</mn><mi>/</mi><mn>4</mn><mo>,</mo><mspace width="0.222em"></mspace><mi>Q</mi><mi>/</mi><mn>4</mn><mo>−</mo><mn>1</mn><mi>/</mi><mn>8</mn><mo stretchy="true" form="postfix">)</mo></mrow><mo>,</mo></mrow><annotation encoding="application/x-tex">
+(Q/4-1/8,\ Q/4-1/4,\ Q/4-1/4,\ Q/4-1/8),
+</annotation></semantics></math></p>
+<p>with normalizing factor
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Q</mi><mo>−</mo><mn>3</mn><mi>/</mi><mn>4</mn></mrow><annotation encoding="application/x-tex">Q-3/4</annotation></semantics></math>.
+Its distance from
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>U</mi><mn>2</mn></msub><annotation encoding="application/x-tex">U_2</annotation></semantics></math>
+is
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn><mi>/</mi><mrow><mo stretchy="true" form="prefix">(</mo><mn>8</mn><mi>Q</mi><mo>−</mo><mn>6</mn><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">1/(8Q-6)</annotation></semantics></math>.
+All constant pairs together therefore contribute
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn><mi>/</mi><mrow><mo stretchy="true" form="prefix">(</mo><mn>8</mn><mi>Q</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">1/(8Q)</annotation></semantics></math>
+to real-world error for a fair output. Their total null probability is
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn><mi>/</mi><mi>L</mi></mrow><annotation encoding="application/x-tex">1/L</annotation></semantics></math>.</p>
+<p>For a mixed pair, reorder the two coordinates so that the first is in
+cell
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>u</mi><annotation encoding="application/x-tex">u</annotation></semantics></math>
+and the second in
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>v</mi><mo>=</mo><mi>u</mi><mo>+</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">v=u+1</annotation></semantics></math>.
+The two boundary laws are</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>μ</mi><mo>−</mo></msub><mo>=</mo><mrow><mo stretchy="true" form="prefix">(</mo><mn>1</mn><mi>/</mi><mn>3</mn><mo>,</mo><mn>0</mn><mo>,</mo><mn>2</mn><mi>/</mi><mn>3</mn><mo>,</mo><mn>0</mn><mo stretchy="true" form="postfix">)</mo></mrow><mo>,</mo><mspace width="2.0em"></mspace><msub><mi>μ</mi><mo>+</mo></msub><mo>=</mo><mrow><mo stretchy="true" form="prefix">(</mo><mn>0</mn><mo>,</mo><mn>0</mn><mo>,</mo><mn>2</mn><mi>/</mi><mn>3</mn><mo>,</mo><mn>1</mn><mi>/</mi><mn>3</mn><mo stretchy="true" form="postfix">)</mo></mrow><mi>.</mi></mrow><annotation encoding="application/x-tex">
+\mu_-=(1/3,0,2/3,0),\qquad \mu_+=(0,0,2/3,1/3).
+</annotation></semantics></math></p>
+<p>Their equal mixture is
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="true" form="prefix">(</mo><mn>1</mn><mi>/</mi><mn>6</mn><mo>,</mo><mn>0</mn><mo>,</mo><mn>2</mn><mi>/</mi><mn>3</mn><mo>,</mo><mn>1</mn><mi>/</mi><mn>6</mn><mo stretchy="true" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">(1/6,0,2/3,1/6)</annotation></semantics></math>,
+at distance
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>5</mn><mi>/</mi><mn>12</mn></mrow><annotation encoding="application/x-tex">5/12</annotation></semantics></math>
+from
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>U</mi><mn>2</mn></msub><annotation encoding="application/x-tex">U_2</annotation></semantics></math>.
+The mixture is both the posterior and the balanced optimal kernel. Mixed
+pairs have total real probability
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>3</mn><mi>/</mi><mrow><mo stretchy="true" form="prefix">(</mo><mn>4</mn><mi>Q</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">3/(4Q)</annotation></semantics></math>
+and total null probability
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2</mn><mi>/</mi><mi>L</mi></mrow><annotation encoding="application/x-tex">2/L</annotation></semantics></math>.
+Thus fair bits have real error
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn><mi>/</mi><mrow><mo stretchy="true" form="prefix">(</mo><mn>8</mn><mi>Q</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>+</mo><mrow><mo stretchy="true" form="prefix">(</mo><mn>3</mn><mi>/</mi><mrow><mo stretchy="true" form="prefix">(</mo><mn>4</mn><mi>Q</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo stretchy="true" form="postfix">)</mo></mrow><mrow><mo stretchy="true" form="prefix">(</mo><mn>5</mn><mi>/</mi><mn>12</mn><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mn>7</mn><mi>/</mi><mrow><mo stretchy="true" form="prefix">(</mo><mn>16</mn><mi>Q</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">1/(8Q)+(3/(4Q))(5/12)=7/(16Q)</annotation></semantics></math>.
+The balanced kernel has only the constant-pair real error and mixed-pair
+null error
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mo stretchy="true" form="prefix">(</mo><mn>2</mn><mi>/</mi><mi>L</mi><mo stretchy="true" form="postfix">)</mo></mrow><mrow><mo stretchy="true" form="prefix">(</mo><mn>5</mn><mi>/</mi><mn>12</mn><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mn>5</mn><mi>/</mi><mrow><mo stretchy="true" form="prefix">(</mo><mn>6</mn><mi>L</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">(2/L)(5/12)=5/(6L)</annotation></semantics></math>.
+Posterior resampling adds the constant-pair null contribution
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn><mi>/</mi><mrow><mo stretchy="true" form="prefix">[</mo><mi>L</mi><mrow><mo stretchy="true" form="prefix">(</mo><mn>8</mn><mi>Q</mi><mo>−</mo><mn>6</mn><mo stretchy="true" form="postfix">)</mo></mrow><mo stretchy="true" form="postfix">]</mo></mrow></mrow><annotation encoding="application/x-tex">1/[L(8Q-6)]</annotation></semantics></math>.
+Impossible real patterns use fair bits for all three kernels.
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>▫</mi><annotation encoding="application/x-tex">\square</annotation></semantics></math></p>
+<h3 id="an-unavoidable-cost-for-every-strong-optimizer">6.1 An
+unavoidable cost for every strong optimizer</h3>
+<p>Every kernel attaining
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msubsup><mi>δ</mi><mn>2</mn><mo>*</mo></msubsup><annotation encoding="application/x-tex">\delta_2^*</annotation></semantics></math>
+obeys</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>ε</mi><mn>1</mn></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>K</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>≥</mo><mfrac><mn>1</mn><mrow><mn>8</mn><mi>Q</mi></mrow></mfrac><mo>,</mo><mspace width="2.0em"></mspace><msub><mi>ε</mi><mn>0</mn></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>K</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>≥</mo><mfrac><mn>5</mn><mrow><mn>6</mn><mi>L</mi></mrow></mfrac><mi>.</mi></mrow><annotation encoding="application/x-tex">
+\varepsilon_1(K)\ge\frac1{8Q},\qquad
+\varepsilon_0(K)\ge\frac5{6L}.
+\tag{15}
+</annotation></semantics></math></p>
+<p>Indeed, for constant pairs the dominant weight
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Q</mi><mo>−</mo><mn>2</mn><mo>≥</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">Q-2\ge2</annotation></semantics></math>
+strictly exceeds the other weights
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2</mn><msup><mrow><mo stretchy="true" form="prefix">(</mo><mn>3</mn><mi>/</mi><mn>4</mn><mo stretchy="true" form="postfix">)</mo></mrow><mn>2</mn></msup><mo>+</mo><mn>2</mn><msup><mrow><mo stretchy="true" form="prefix">(</mo><mn>1</mn><mi>/</mi><mn>4</mn><mo stretchy="true" form="postfix">)</mo></mrow><mn>2</mn></msup><mo>=</mo><mn>5</mn><mi>/</mi><mn>4</mn></mrow><annotation encoding="application/x-tex">2(3/4)^2+2(1/4)^2=5/4</annotation></semantics></math>.
+Lemma 1 forces
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>K</mi><mi>y</mi></msub><mo>=</mo><msub><mi>U</mi><mn>2</mn></msub></mrow><annotation encoding="application/x-tex">K_y=U_2</annotation></semantics></math>,
+giving the first lower bound. For a mixed pair, equality in the triangle
+inequality between the two equally weighted boundary laws requires each
+coordinate of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>K</mi><mi>y</mi></msub><annotation encoding="application/x-tex">K_y</annotation></semantics></math>
+to lie between their corresponding probabilities. Thus
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>K</mi><mi>y</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><mn>10</mn><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mn>2</mn><mi>/</mi><mn>3</mn></mrow><annotation encoding="application/x-tex">K_y(10)=2/3</annotation></semantics></math>
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>K</mi><mi>y</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><mn>01</mn><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">K_y(01)=0</annotation></semantics></math>.
+Its common mass with
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>U</mi><mn>2</mn></msub><annotation encoding="application/x-tex">U_2</annotation></semantics></math>
+is at most
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn><mi>/</mi><mn>4</mn><mo>+</mo><mn>1</mn><mi>/</mi><mn>3</mn><mo>=</mo><mn>7</mn><mi>/</mi><mn>12</mn></mrow><annotation encoding="application/x-tex">1/4+1/3=7/12</annotation></semantics></math>,
+so its distance is at least
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>5</mn><mi>/</mi><mn>12</mn></mrow><annotation encoding="application/x-tex">5/12</annotation></semantics></math>.
+Summing the null mass of mixed pairs gives the second bound. The
+balanced kernel attains both simultaneously.</p>
+<p>Consequently the smallest sum of two-world errors among full-view
+optimizers is</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><mn>1</mn><mrow><mn>8</mn><mi>Q</mi></mrow></mfrac><mo>+</mo><mfrac><mn>5</mn><mrow><mn>6</mn><mi>L</mi></mrow></mfrac><mi>.</mi></mrow><annotation encoding="application/x-tex">
+\frac1{8Q}+\frac5{6L}.
+\tag{16}
+</annotation></semantics></math></p>
+<p>This is larger than the fair-coin sum
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>7</mn><mi>/</mi><mrow><mo stretchy="true" form="prefix">(</mo><mn>16</mn><mi>Q</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">7/(16Q)</annotation></semantics></math>
+exactly when
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>L</mi><mo>&lt;</mo><mn>8</mn><mi>Q</mi><mi>/</mi><mn>3</mn></mrow><annotation encoding="application/x-tex">L&lt;8Q/3</annotation></semantics></math>.
+For
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>L</mi><mo>=</mo><mi>Q</mi><mo>=</mo><mn>4</mn></mrow><annotation encoding="application/x-tex">L=Q=4</annotation></semantics></math>,
+the sums for fair coins, the balanced optimizer, and posterior
+resampling are respectively
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>7</mn><mi>/</mi><mn>64</mn></mrow><annotation encoding="application/x-tex">7/64</annotation></semantics></math>,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>23</mn><mi>/</mi><mn>96</mn></mrow><annotation encoding="application/x-tex">23/96</annotation></semantics></math>,
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>17</mn><mi>/</mi><mn>78</mn></mrow><annotation encoding="application/x-tex">17/78</annotation></semantics></math>.</p>
+<p>These comparisons do not solve the global optimization of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>ε</mi><mn>0</mn></msub><mo>+</mo><msub><mi>ε</mi><mn>1</mn></msub></mrow><annotation encoding="application/x-tex">\varepsilon_0+\varepsilon_1</annotation></semantics></math>
+over all kernels. Nor do they rank actual adversarial advantages. They
+show that optimizing (2) can worsen the additive error term in a
+standard two-world bound. For every randomized target test
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>A</mi><annotation encoding="application/x-tex">A</annotation></semantics></math>,
+let the source test be
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>A</mi><mo>∘</mo><msub><mi>R</mi><mi>K</mi></msub></mrow><annotation encoding="application/x-tex">A\circ R_K</annotation></semantics></math>.
+Define each test’s advantage as the absolute difference between its
+acceptance probabilities in worlds 1 and 0. The test property of total
+variation and the triangle inequality show that these two advantages
+differ by at most
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>ε</mi><mn>0</mn></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>K</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>+</mo><msub><mi>ε</mi><mn>1</mn></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>K</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\varepsilon_0(K)+\varepsilon_1(K)</annotation></semantics></math>,
+hence [5]</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mo>Adv</mo><mrow><mi mathvariant="normal">s</mi><mi mathvariant="normal">o</mi><mi mathvariant="normal">u</mi><mi mathvariant="normal">r</mi><mi mathvariant="normal">c</mi><mi mathvariant="normal">e</mi></mrow></msub><mo>≥</mo><msub><mo>Adv</mo><mrow><mi mathvariant="normal">t</mi><mi mathvariant="normal">a</mi><mi mathvariant="normal">r</mi><mi mathvariant="normal">g</mi><mi mathvariant="normal">e</mi><mi mathvariant="normal">t</mi></mrow></msub><mo>−</mo><msub><mi>ε</mi><mn>0</mn></msub><mo>−</mo><msub><mi>ε</mi><mn>1</mn></msub><mi>.</mi></mrow><annotation encoding="application/x-tex">
+\operatorname{Adv}_{\mathrm{source}}\ge
+\operatorname{Adv}_{\mathrm{target}}-\varepsilon_0-\varepsilon_1.
+\tag{17}
+</annotation></semantics></math></p>
+<h3 id="the-source-worlds-must-also-be-distinguished">6.2 The source
+worlds must also be distinguished</h3>
+<p>For
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>k</mi><mo>=</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">k=2</annotation></semantics></math>,
+the real support of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>Y</mi><annotation encoding="application/x-tex">Y</annotation></semantics></math>
+contains
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>3</mn><mi>L</mi></mrow><annotation encoding="application/x-tex">3L</annotation></semantics></math>
+pairs:
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>L</mi><annotation encoding="application/x-tex">L</annotation></semantics></math>
+constant pairs and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2</mn><mi>L</mi></mrow><annotation encoding="application/x-tex">2L</annotation></semantics></math>
+ordered adjacent pairs. This is smaller than the null support of size
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi>L</mi><mn>2</mn></msup><annotation encoding="application/x-tex">L^2</annotation></semantics></math>
+when
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>L</mi><mo>≥</mo><mn>4</mn></mrow><annotation encoding="application/x-tex">L\ge4</annotation></semantics></math>,
+and equal to it when
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>L</mi><mo>=</mo><mn>3</mn></mrow><annotation encoding="application/x-tex">L=3</annotation></semantics></math>.
+Equal support in the latter case does not mean equal laws. For every
+allowed
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>L</mi><mo>,</mo><mi>Q</mi></mrow><annotation encoding="application/x-tex">L,Q</annotation></semantics></math>,</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><munder><mo>Pr</mo><msub><mi>D</mi><mn>1</mn></msub></munder><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>Y</mi><mn>1</mn></msub><mo>=</mo><msub><mi>Y</mi><mn>2</mn></msub><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mn>1</mn><mo>−</mo><mfrac><mn>3</mn><mrow><mn>4</mn><mi>Q</mi></mrow></mfrac><mo>,</mo><mspace width="2.0em"></mspace><munder><mo>Pr</mo><msub><mi>D</mi><mn>0</mn></msub></munder><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>Y</mi><mn>1</mn></msub><mo>=</mo><msub><mi>Y</mi><mn>2</mn></msub><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mfrac><mn>1</mn><mi>L</mi></mfrac><mi>.</mi></mrow><annotation encoding="application/x-tex">
+\Pr_{D_1}(Y_1=Y_2)=1-\frac3{4Q},\qquad
+\Pr_{D_0}(Y_1=Y_2)=\frac1L.
+\tag{18}
+</annotation></semantics></math></p>
+<p>For instance,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>L</mi><mo>=</mo><mn>3</mn><mo>,</mo><mi>Q</mi><mo>=</mo><mn>4</mn></mrow><annotation encoding="application/x-tex">L=3,Q=4</annotation></semantics></math>
+gives
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>13</mn><mi>/</mi><mn>16</mn></mrow><annotation encoding="application/x-tex">13/16</annotation></semantics></math>
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn><mi>/</mi><mn>3</mn></mrow><annotation encoding="application/x-tex">1/3</annotation></semantics></math>.
+This illustrates why the source law and null law must be specified, even
+when their supports coincide.</p>
+<h2 id="verification-and-limits">7. Verification and limits</h2>
+<p>The exact verifier enumerates 24 cases with
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="true" form="prefix">(</mo><mi>P</mi><mo>,</mo><mi>Q</mi><mo stretchy="true" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">(P,Q)</annotation></semantics></math>
+in
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">{</mo><mrow><mo stretchy="true" form="prefix">(</mo><mn>12</mn><mo>,</mo><mn>4</mn><mo stretchy="true" form="postfix">)</mo></mrow><mo>,</mo><mrow><mo stretchy="true" form="prefix">(</mo><mn>16</mn><mo>,</mo><mn>4</mn><mo stretchy="true" form="postfix">)</mo></mrow><mo>,</mo><mrow><mo stretchy="true" form="prefix">(</mo><mn>18</mn><mo>,</mo><mn>6</mn><mo stretchy="true" form="postfix">)</mo></mrow><mo>,</mo><mrow><mo stretchy="true" form="prefix">(</mo><mn>24</mn><mo>,</mo><mn>8</mn><mo stretchy="true" form="postfix">)</mo></mrow><mo stretchy="false" form="postfix">}</mo></mrow><annotation encoding="application/x-tex">\{(12,4),(16,4),(18,6),(24,8)\}</annotation></semantics></math>
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn><mo>≤</mo><mi>k</mi><mo>≤</mo><mn>6</mn></mrow><annotation encoding="application/x-tex">1\le k\le6</annotation></semantics></math>.
+It evaluates <strong>76,440 state-and-noise tuples</strong> and
+<strong>33,936 nonzero joint atoms</strong> with integers and rational
+arithmetic. It compares the three kernels, proves equality with the
+closed formulas on these finite domains, and records exact curves for
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Q</mi><mo>=</mo><mn>4</mn></mrow><annotation encoding="application/x-tex">Q=4</annotation></semantics></math>
+through
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>k</mi><mo>=</mo><mn>64</mn></mrow><annotation encoding="application/x-tex">k=64</annotation></semantics></math>.</p>
+<p>A separate linear-programming implementation constructs the
+conditional distributions independently. Nine in-domain cases and two
+deliberately invalid parameter controls use 182 conditional programs and
+60 secondary optimization calls, or <strong>242 solver calls</strong> in
+total. The secondary checks minimize each public error among numerical
+full-view optima. They use a feasibility allowance of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mn>10</mn><mrow><mi>−</mi><mn>12</mn></mrow></msup><annotation encoding="application/x-tex">10^{-12}</annotation></semantics></math>
+and comparison tolerance
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mn>10</mn><mrow><mi>−</mi><mn>9</mn></mrow></msup><annotation encoding="application/x-tex">10^{-9}</annotation></semantics></math>.
+The out-of-domain cases
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Q</mi><mo>=</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">Q=2</annotation></semantics></math>
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>L</mi><mo>=</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">L=2</annotation></semantics></math>
+disagree with (7), as expected: the proof’s dominant component or unique
+adjacency description no longer applies. These numerical controls are
+not additional exact theorems.</p>
+<p>For
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><mo>=</mo><mn>16</mn><mo>,</mo><mi>Q</mi><mo>=</mo><mn>4</mn><mo>,</mo><mi>k</mi><mo>=</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">P=16,Q=4,k=2</annotation></semantics></math>,
+the exact strong errors are
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>11</mn><mi>/</mi><mn>64</mn></mrow><annotation encoding="application/x-tex">11/64</annotation></semantics></math>
+for independent coins,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>7</mn><mi>/</mi><mn>64</mn></mrow><annotation encoding="application/x-tex">7/64</annotation></semantics></math>
+for the balanced optimizer, and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>51</mn><mi>/</mi><mn>416</mn></mrow><annotation encoding="application/x-tex">51/416</annotation></semantics></math>
+for posterior resampling. The corresponding real public errors, in the
+same order, are
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>7</mn><mi>/</mi><mn>64</mn></mrow><annotation encoding="application/x-tex">7/64</annotation></semantics></math>,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn><mi>/</mi><mn>32</mn></mrow><annotation encoding="application/x-tex">1/32</annotation></semantics></math>,
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>0</mn><annotation encoding="application/x-tex">0</annotation></semantics></math>.
+The supplement includes the exact optimal sampler, independent
+optimization code, result files, figure generator, parameter
+descriptions, and reproduction instructions.</p>
+<p>The restriction to a shared uniform state, independent three-point
+noises, even
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Q</mi><mo>≥</mo><mn>4</mn></mrow><annotation encoding="application/x-tex">Q\ge4</annotation></semantics></math>,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>L</mi><mo>≥</mo><mn>3</mn></mrow><annotation encoding="application/x-tex">L\ge3</annotation></semantics></math>,
+and an offline observation-preserving kernel is essential to the stated
+result. The paper supplies an exactly solvable example of statistical
+simulation and its two-world limitations. It does not propose a
+cryptosystem, a hardness reduction, or a general theorem that repeated
+observations improve security.</p>
+<h2 id="references">References</h2>
+<p>[1] David A. Levin and Yuval Peres, with contributions by Elizabeth
+L. Wilmer. <em>Markov Chains and Mixing Times</em>. Second edition,
+American Mathematical Society, 2017. Sections 4.1–4.2. <a
+href="https://pages.uoregon.edu/dlevin/MARKOV/markovmixing.pdf">Author
+version</a>.</p>
+<p>[2] Erik Torgersen. <em>Comparison of Statistical Experiments</em>.
+Cambridge University Press, 1991. Chapter 6, “Deficiencies,”
+pp. 222–328. <a href="https://doi.org/10.1017/CBO9780511666353.007">DOI:
+10.1017/CBO9780511666353.007</a>.</p>
+<p>[3] Brendan van Rooyen and Robert C. Williamson. <em>Le Cam meets
+LeCun: Deficiency and Generic Feature Learning</em>. 2014, version 2.
+Section 4 and Appendix 7.5. <a
+href="https://arxiv.org/abs/1402.4884">arXiv:1402.4884</a>.</p>
+<p>[4] Xiaosheng Mu, Luciano Pomatto, Philipp Strack, and Omer Tamuz.
+<em>From Blackwell Dominance in Large Samples to Rényi Divergences and
+Back Again</em>. Econometrica 89(1) (2021), 475–506. <a
+href="https://doi.org/10.3982/ECTA17548">DOI: 10.3982/ECTA17548</a>.</p>
+<p>[5] Victor Shoup. <em>Sequences of Games: A Tool for Taming
+Complexity in Security Proofs</em>. 18 January 2006. Section 1.1. <a
+href="https://www.shoup.net/papers/games.pdf">Author version</a>.</p>
+</body>
+</html>
