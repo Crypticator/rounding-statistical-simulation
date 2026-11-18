@@ -1,0 +1,107 @@
+{
+  "status": "PASS",
+  "date": "2026-11-18",
+  "reviewed_source_version": "0.6",
+  "canonical_hashes": {
+    "THESIS_Rounding_Statistical_Simulation_v0_6.md": "25feeefc7b118a6db654e006abcfb2f9a7a3022002a06e6eb51ea3099067e1f5",
+    "deliverables/THESIS_Rounding_Statistical_Simulation_v0_6.docx": "bb66315033effebc00d7407c32c74be40c2d88c8438f9d3e339c5cd2e7a81602",
+    "deliverables/THESIS_Rounding_Statistical_Simulation_v0_6.pdf": "ffad6b449204fed3cab41efb5874377b750343b5b2d384bdd30190712c876391"
+  },
+  "standalone_pdf_and_docx_match_package": true,
+  "chapters": [
+    [
+      "1",
+      "Questions and scope"
+    ],
+    [
+      "2",
+      "Modular rounding and its fibers"
+    ],
+    [
+      "3",
+      "Finite probability and simulation"
+    ],
+    [
+      "4",
+      "Affine maps compatible with rounding"
+    ],
+    [
+      "5",
+      "Noisy rounded channels"
+    ],
+    [
+      "6",
+      "Approximate simulation and optimal error"
+    ],
+    [
+      "7",
+      "Row transformations and matrix structure"
+    ],
+    [
+      "8",
+      "Exact and approximate conversion of distributions"
+    ],
+    [
+      "9",
+      "Repeated rounding of a shared hidden state"
+    ],
+    [
+      "10",
+      "The cost in a second experiment"
+    ],
+    [
+      "11",
+      "Conclusions and open problems"
+    ]
+  ],
+  "appendices": [
+    [
+      "A",
+      "Worked calculations"
+    ],
+    [
+      "B",
+      "Finite checks for noisy channels"
+    ],
+    [
+      "C",
+      "Finite checks for matrix conversion"
+    ],
+    [
+      "D",
+      "Finite checks for repeated observations"
+    ],
+    [
+      "E",
+      "Notation and model conventions"
+    ]
+  ],
+  "bibliography_entries": 11,
+  "pdf_pages": 85,
+  "blank_pdf_pages": 0,
+  "all_printed_page_labels_correct": true,
+  "docx_tracked_changes": 0,
+  "docx_comment_parts": [
+    "word/comments.xml"
+  ],
+  "scientific_campaigns_rerun": false,
+  "reason_no_scientific_rerun": "The approved scientific source, PDF, DOCX, programs and data are unchanged; this operation consolidates status and evidence.",
+  "independent_verdict": "Final internal scientific approval from GPT, 17 November 2026; no mandatory corrections.",
+  "audit_report_sha256": "d768a149360de0f3ba3eae0ed2da5557557eac49a8ef0f720d953cd357e372fe",
+  "audit_evidence_zip_sha256": "d8a477fa15ecd4a93d32bdd037c4e8b18f2e56ced8ea4cd475cc617bd32f2478",
+  "evidence_zip_crc": "PASS",
+  "evidence_zip_has_manifest": false,
+  "evidence_integrity_limit": "The supplied evidence ZIP has no SHA256SUMS manifest; its CRC and whole-archive SHA-256 are recorded. It is preserved verbatim.",
+  "docx_comment_count": 0,
+  "page_label_convention": "Unnumbered cover, followed by printed labels 2 through 85.",
+  "visual_spotcheck": {
+    "pages": [
+      1,
+      66,
+      83,
+      85
+    ],
+    "status": "PASS",
+    "scope": "Targeted confirmation on the unchanged canonical PDF, not a new full-page visual audit."
+  }
+}

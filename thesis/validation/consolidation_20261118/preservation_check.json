@@ -1,0 +1,14 @@
+{
+  "status": "PASS",
+  "old_manifest_entries": 69,
+  "unchanged_original_files": 66,
+  "changed_original_files": [
+    "README.md",
+    "RELEASE_INFO.json",
+    "THESIS_WRITING_PLAN_V0_6.md"
+  ],
+  "canonical_documents_unchanged": true,
+  "all_scientific_programs_and_data_unchanged": true,
+  "new_scientific_results": false,
+  "note": "The previous root manifest is replaced by a manifest of the consolidated package; its original bytes are archived separately."
+}

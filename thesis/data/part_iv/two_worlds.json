@@ -1,0 +1,274 @@
+{
+  "status": "PASS",
+  "model_domains": 28,
+  "source_distance_checks": 28,
+  "constant_pair_example_checked": true,
+  "elementary_state_noise_bit_tuples": 44160,
+  "weighted_objectives_checked": 217,
+  "exact_tied_rows_checked": 1104,
+  "numerical_row_lps": 836,
+  "max_objective_error": 9.974659986866641e-17,
+  "max_constraint_residual": 2.220446049250313e-16,
+  "tolerance": 1e-09,
+  "lp_skipped": false,
+  "example_L4_Q4": {
+    "strong": "77/416",
+    "public_real": "5/64",
+    "public_null": "1/104",
+    "sum": "73/832"
+  },
+  "cases": [
+    {
+      "L": 3,
+      "Q": 4,
+      "source_target_atoms": 78,
+      "global_sum": "227/2496",
+      "real_error": "5/64",
+      "null_error": "1/78",
+      "mixed_rule": "fair"
+    },
+    {
+      "L": 4,
+      "Q": 4,
+      "source_target_atoms": 104,
+      "global_sum": "73/832",
+      "real_error": "5/64",
+      "null_error": "1/104",
+      "mixed_rule": "fair"
+    },
+    {
+      "L": 7,
+      "Q": 4,
+      "source_target_atoms": 182,
+      "global_sum": "487/5824",
+      "real_error": "5/64",
+      "null_error": "1/182",
+      "mixed_rule": "fair"
+    },
+    {
+      "L": 10,
+      "Q": 4,
+      "source_target_atoms": 260,
+      "global_sum": "341/4160",
+      "real_error": "5/64",
+      "null_error": "1/260",
+      "mixed_rule": "fair"
+    },
+    {
+      "L": 16,
+      "Q": 4,
+      "source_target_atoms": 416,
+      "global_sum": "17/312",
+      "real_error": "0",
+      "null_error": "17/312",
+      "mixed_rule": "posterior"
+    },
+    {
+      "L": 20,
+      "Q": 4,
+      "source_target_atoms": 520,
+      "global_sum": "17/390",
+      "real_error": "0",
+      "null_error": "17/390",
+      "mixed_rule": "posterior"
+    },
+    {
+      "L": 32,
+      "Q": 4,
+      "source_target_atoms": 832,
+      "global_sum": "17/624",
+      "real_error": "0",
+      "null_error": "17/624",
+      "mixed_rule": "posterior"
+    },
+    {
+      "L": 3,
+      "Q": 6,
+      "source_target_atoms": 102,
+      "global_sum": "121/2016",
+      "real_error": "5/96",
+      "null_error": "1/126",
+      "mixed_rule": "fair"
+    },
+    {
+      "L": 4,
+      "Q": 6,
+      "source_target_atoms": 136,
+      "global_sum": "13/224",
+      "real_error": "5/96",
+      "null_error": "1/168",
+      "mixed_rule": "fair"
+    },
+    {
+      "L": 7,
+      "Q": 6,
+      "source_target_atoms": 238,
+      "global_sum": "87/1568",
+      "real_error": "5/96",
+      "null_error": "1/294",
+      "mixed_rule": "fair"
+    },
+    {
+      "L": 10,
+      "Q": 6,
+      "source_target_atoms": 340,
+      "global_sum": "61/1120",
+      "real_error": "5/96",
+      "null_error": "1/420",
+      "mixed_rule": "fair"
+    },
+    {
+      "L": 16,
+      "Q": 6,
+      "source_target_atoms": 544,
+      "global_sum": "3/56",
+      "real_error": "5/96",
+      "null_error": "1/672",
+      "mixed_rule": "fair_or_tie"
+    },
+    {
+      "L": 20,
+      "Q": 6,
+      "source_target_atoms": 680,
+      "global_sum": "3/70",
+      "real_error": "0",
+      "null_error": "3/70",
+      "mixed_rule": "posterior"
+    },
+    {
+      "L": 32,
+      "Q": 6,
+      "source_target_atoms": 1088,
+      "global_sum": "3/112",
+      "real_error": "0",
+      "null_error": "3/112",
+      "mixed_rule": "posterior"
+    },
+    {
+      "L": 3,
+      "Q": 8,
+      "source_target_atoms": 126,
+      "global_sum": "499/11136",
+      "real_error": "5/128",
+      "null_error": "1/174",
+      "mixed_rule": "fair"
+    },
+    {
+      "L": 4,
+      "Q": 8,
+      "source_target_atoms": 168,
+      "global_sum": "161/3712",
+      "real_error": "5/128",
+      "null_error": "1/232",
+      "mixed_rule": "fair"
+    },
+    {
+      "L": 7,
+      "Q": 8,
+      "source_target_atoms": 294,
+      "global_sum": "1079/25984",
+      "real_error": "5/128",
+      "null_error": "1/406",
+      "mixed_rule": "fair"
+    },
+    {
+      "L": 10,
+      "Q": 8,
+      "source_target_atoms": 420,
+      "global_sum": "757/18560",
+      "real_error": "5/128",
+      "null_error": "1/580",
+      "mixed_rule": "fair"
+    },
+    {
+      "L": 16,
+      "Q": 8,
+      "source_target_atoms": 672,
+      "global_sum": "149/3712",
+      "real_error": "5/128",
+      "null_error": "1/928",
+      "mixed_rule": "fair"
+    },
+    {
+      "L": 20,
+      "Q": 8,
+      "source_target_atoms": 840,
+      "global_sum": "741/18560",
+      "real_error": "5/128",
+      "null_error": "1/1160",
+      "mixed_rule": "fair"
+    },
+    {
+      "L": 32,
+      "Q": 8,
+      "source_target_atoms": 1344,
+      "global_sum": "37/1392",
+      "real_error": "0",
+      "null_error": "37/1392",
+      "mixed_rule": "posterior"
+    },
+    {
+      "L": 3,
+      "Q": 12,
+      "source_target_atoms": 174,
+      "global_sum": "257/8640",
+      "real_error": "5/192",
+      "null_error": "1/270",
+      "mixed_rule": "fair"
+    },
+    {
+      "L": 4,
+      "Q": 12,
+      "source_target_atoms": 232,
+      "global_sum": "83/2880",
+      "real_error": "5/192",
+      "null_error": "1/360",
+      "mixed_rule": "fair"
+    },
+    {
+      "L": 7,
+      "Q": 12,
+      "source_target_atoms": 406,
+      "global_sum": "557/20160",
+      "real_error": "5/192",
+      "null_error": "1/630",
+      "mixed_rule": "fair"
+    },
+    {
+      "L": 10,
+      "Q": 12,
+      "source_target_atoms": 580,
+      "global_sum": "391/14400",
+      "real_error": "5/192",
+      "null_error": "1/900",
+      "mixed_rule": "fair"
+    },
+    {
+      "L": 16,
+      "Q": 12,
+      "source_target_atoms": 928,
+      "global_sum": "77/2880",
+      "real_error": "5/192",
+      "null_error": "1/1440",
+      "mixed_rule": "fair"
+    },
+    {
+      "L": 20,
+      "Q": 12,
+      "source_target_atoms": 1160,
+      "global_sum": "383/14400",
+      "real_error": "5/192",
+      "null_error": "1/1800",
+      "mixed_rule": "fair"
+    },
+    {
+      "L": 32,
+      "Q": 12,
+      "source_target_atoms": 1856,
+      "global_sum": "19/720",
+      "real_error": "5/192",
+      "null_error": "1/2880",
+      "mixed_rule": "fair_or_tie"
+    }
+  ]
+}

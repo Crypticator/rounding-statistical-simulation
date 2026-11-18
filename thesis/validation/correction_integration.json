@@ -1,0 +1,33 @@
+{
+  "status": "PASS",
+  "approved_baseline_source_sha256": "faa0065e343f728394a4841b82b8c967f8b6eb9ad4ca54c05c8255c3a94c6406",
+  "approved_patched_builder_sha256": "23c4711835d9ad302d74e0957f697dee50a11c6a45d443a17e685dae785dfc7a",
+  "integrated_guard_sha256": "cbc2502a7b09ba1eb157fc782230faf9a577c0a27f1a13c4efb7698d5575608b",
+  "integrated_verifier_sha256": "afc8169385a45f21f34119e901aaaae871055b2801da070b8dd4cb4f6d670efd",
+  "changed_scientific_files_from_v0_5": [
+    "scripts/verify_two_worlds.py"
+  ],
+  "corrected_verifier_result_sha256": "5b9a249983e694453e961d8b1387931ba8c7416b49bb012a6bca424b7c20082f",
+  "result_byte_identical_to_prior_data_and_reviewer_corrected_run": true,
+  "rerun": {
+    "status": "PASS",
+    "model_domains": 28,
+    "source_distance_checks": 28,
+    "constant_pair_example_checked": true,
+    "elementary_state_noise_bit_tuples": 44160,
+    "weighted_objectives_checked": 217,
+    "exact_tied_rows_checked": 1104,
+    "numerical_row_lps": 836,
+    "max_objective_error": 9.974659986866641e-17,
+    "max_constraint_residual": 2.220446049250313e-16,
+    "tolerance": 1e-09,
+    "lp_skipped": false,
+    "example_L4_Q4": {
+      "strong": "77/416",
+      "public_real": "5/64",
+      "public_null": "1/104",
+      "sum": "73/832"
+    }
+  },
+  "limitation": "Other scientific campaigns were not rerun for this synthesis; their results and source programs are retained."
+}

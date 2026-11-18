@@ -1,0 +1,138 @@
+{
+  "status": "PASS",
+  "arithmetic": "IEEE 754 / SciPy HiGHS",
+  "cases": [
+    {
+      "P": 12,
+      "Q": 4,
+      "k": 1,
+      "optimum": 0.125,
+      "conditional_LPs": 3,
+      "solver_calls": 3,
+      "max_primal_residual": 0.0,
+      "elementary_bit_tuples": 48,
+      "within_theorem": true
+    },
+    {
+      "P": 12,
+      "Q": 4,
+      "k": 2,
+      "optimum": 0.10937499999999999,
+      "conditional_LPs": 9,
+      "solver_calls": 27,
+      "max_primal_residual": 5.551115123125783e-17,
+      "elementary_bit_tuples": 192,
+      "within_theorem": true,
+      "min_public_among_strong_optima": 0.031249999996982164,
+      "min_null_among_strong_optima": 0.27777777777644436,
+      "lexicographic_feasibility_allowance": 1e-12
+    },
+    {
+      "P": 12,
+      "Q": 4,
+      "k": 3,
+      "optimum": 0.09667968750000001,
+      "conditional_LPs": 21,
+      "solver_calls": 21,
+      "max_primal_residual": 2.7755575615628914e-17,
+      "elementary_bit_tuples": 768,
+      "within_theorem": true
+    },
+    {
+      "P": 12,
+      "Q": 4,
+      "k": 4,
+      "optimum": 0.09193250868055564,
+      "conditional_LPs": 45,
+      "solver_calls": 45,
+      "max_primal_residual": 1.1102230246251565e-16,
+      "elementary_bit_tuples": 3072,
+      "within_theorem": true
+    },
+    {
+      "P": 16,
+      "Q": 4,
+      "k": 2,
+      "optimum": 0.109375,
+      "conditional_LPs": 12,
+      "solver_calls": 36,
+      "max_primal_residual": 5.551115123125783e-17,
+      "elementary_bit_tuples": 256,
+      "within_theorem": true,
+      "min_public_among_strong_optima": 0.03124999999698217,
+      "min_null_among_strong_optima": 0.20833333333233334,
+      "lexicographic_feasibility_allowance": 1e-12
+    },
+    {
+      "P": 16,
+      "Q": 4,
+      "k": 3,
+      "optimum": 0.09667968750000004,
+      "conditional_LPs": 28,
+      "solver_calls": 28,
+      "max_primal_residual": 2.7755575615628914e-17,
+      "elementary_bit_tuples": 1024,
+      "within_theorem": true
+    },
+    {
+      "P": 18,
+      "Q": 6,
+      "k": 2,
+      "optimum": 0.07291666666666669,
+      "conditional_LPs": 9,
+      "solver_calls": 27,
+      "max_primal_residual": 5.551115123125783e-17,
+      "elementary_bit_tuples": 288,
+      "within_theorem": true,
+      "min_public_among_strong_optima": 0.020833333330883327,
+      "min_null_among_strong_optima": 0.27777777777644436,
+      "lexicographic_feasibility_allowance": 1e-12
+    },
+    {
+      "P": 18,
+      "Q": 6,
+      "k": 3,
+      "optimum": 0.06445312499999999,
+      "conditional_LPs": 21,
+      "solver_calls": 21,
+      "max_primal_residual": 2.7755575615628914e-17,
+      "elementary_bit_tuples": 1152,
+      "within_theorem": true
+    },
+    {
+      "P": 24,
+      "Q": 8,
+      "k": 3,
+      "optimum": 0.04833984375000002,
+      "conditional_LPs": 21,
+      "solver_calls": 21,
+      "max_primal_residual": 2.7755575615628914e-17,
+      "elementary_bit_tuples": 1536,
+      "within_theorem": true
+    },
+    {
+      "P": 6,
+      "Q": 2,
+      "k": 2,
+      "optimum": 0.20138888888888892,
+      "conditional_LPs": 9,
+      "solver_calls": 9,
+      "max_primal_residual": 5.551115123125783e-17,
+      "elementary_bit_tuples": 96,
+      "within_theorem": false
+    },
+    {
+      "P": 8,
+      "Q": 4,
+      "k": 2,
+      "optimum": 0.171875,
+      "conditional_LPs": 4,
+      "solver_calls": 4,
+      "max_primal_residual": 0.0,
+      "elementary_bit_tuples": 128,
+      "within_theorem": false
+    }
+  ],
+  "total_conditional_LPs": 182,
+  "total_solver_calls": 242
+}

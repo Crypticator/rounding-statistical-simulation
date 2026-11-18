@@ -1,0 +1,10 @@
+{
+  "status": "PASS",
+  "pages": 85,
+  "dpi": 108,
+  "all_page_text_equal": true,
+  "all_page_pixels_equal": true,
+  "rendered_sha256": "a765ce12635d0c938332d286d9e86fd317bce54573694e5b8ecff68931910303",
+  "canonical_sha256": "ffad6b449204fed3cab41efb5874377b750343b5b2d384bdd30190712c876391",
+  "limitation": "PDF signing changes file bytes while the verified page content remains identical."
+}
