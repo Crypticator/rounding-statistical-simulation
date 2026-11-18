@@ -1,0 +1,67 @@
+cff-version: 1.2.0
+message: Please cite the thesis or relevant paper when using these research materials. See preferred-citation
+  and references.
+type: software
+title: Rounding and Statistical Simulation - Thesis, Papers and Reproducibility Materials
+authors: &id001
+- family-names: Bouftass
+  given-names: Samir
+contact: *id001
+version: 2026.11.18
+date-released: '2026-11-18'
+repository-code: https://github.com/Crypticator/rounding-statistical-simulation
+url: https://github.com/Crypticator/rounding-statistical-simulation
+license-url: https://github.com/Crypticator/rounding-statistical-simulation/blob/main/LICENSING.md
+abstract: 'Complete research materials for finite modular rounding and statistical simulation: the thesis,
+  four papers, exact verification programs, numerical checks and recorded results. Extensive assistance
+  from ChatGPT (OpenAI) is disclosed in the publications and AUTHORS_AND_AI.md. Software uses MIT; project-authored
+  texts, original figures and research-data compilations use CC BY 4.0 to the extent applicable, as described
+  in LICENSING.md.'
+keywords:
+- modular rounding
+- statistical simulation
+- total variation
+- Toeplitz matrices
+- reproducible research
+preferred-citation:
+  type: report
+  title: Rounding and Statistical Simulation
+  authors: *id001
+  year: 2026
+  version: '0.6'
+  url: https://github.com/Crypticator/rounding-statistical-simulation/blob/main/THESIS_Rounding_Statistical_Simulation_v0_6.pdf
+  notes: Research manuscript, version 0.6; authorship and AI disclosure revised 18 November 2026. Extensive
+    AI assistance is disclosed in the manuscript.
+references:
+- type: article
+  title: Affine Maps Compatible with Modular Rounding
+  authors: *id001
+  year: 2026
+  version: '1.1'
+  url: https://github.com/Crypticator/rounding-statistical-simulation/blob/main/Affine_Maps_Modular_Rounding.pdf
+  notes: English edition 1.1; authorship and AI disclosure revised 18 November 2026. Research paper with
+    extensive disclosed AI assistance.
+- type: article
+  title: Noise and Simulation of Rounded Observations
+  authors: *id001
+  year: 2026
+  version: '1.1'
+  url: https://github.com/Crypticator/rounding-statistical-simulation/blob/main/Noise_and_Simulation_of_Rounded_Observations.pdf
+  notes: English edition 1.1; authorship and AI disclosure revised 18 November 2026. Research paper with
+    extensive disclosed AI assistance.
+- type: article
+  title: Dense and Toeplitz Matrices under Signed Row Permutations
+  authors: *id001
+  year: 2026
+  version: '1.1'
+  url: https://github.com/Crypticator/rounding-statistical-simulation/blob/main/Dense_to_Toeplitz_Row_Transformations.pdf
+  notes: English edition 1.1; authorship and AI disclosure revised 18 November 2026. Research paper with
+    extensive disclosed AI assistance.
+- type: article
+  title: Repeated Rounded Observations
+  authors: *id001
+  year: 2026
+  version: '1.1'
+  url: https://github.com/Crypticator/rounding-statistical-simulation/blob/main/Repeated_Rounded_Observations.pdf
+  notes: English edition 1.1; authorship and AI disclosure revised 18 November 2026. Research paper with
+    extensive disclosed AI assistance.
