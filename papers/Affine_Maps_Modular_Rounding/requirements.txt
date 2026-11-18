@@ -1,3 +1,0 @@
-# Default: core scientific verification, with no third-party dependencies.
--r requirements-core.txt
-# For document construction, install requirements-build.txt separately.
