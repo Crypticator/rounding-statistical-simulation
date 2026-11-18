@@ -1,0 +1,23 @@
+--- before/Repeated_Rounded_Observations.md
++++ after/Repeated_Rounded_Observations.md
+@@ -1,7 +1,7 @@
+ ---
+ title: "Repeated Rounded Observations"
+ subtitle: "Block simulation, a shared hidden state, and two-world error bounds"
+-author: "Samir Bouftass and ChatGPT (OpenAI)"
++author: "Samir Bouftass"
+ date: "16 November 2026 · English edition 1.1"
+ ---
+ 
+@@ -275,3 +275,11 @@
+ [4] Xiaosheng Mu, Luciano Pomatto, Philipp Strack, and Omer Tamuz. *From Blackwell Dominance in Large Samples to Rényi Divergences and Back Again*. Econometrica 89(1) (2021), 475–506. [DOI: 10.3982/ECTA17548](https://doi.org/10.3982/ECTA17548).
+ 
+ [5] Victor Shoup. *Sequences of Games: A Tool for Taming Complexity in Security Proofs*. 18 January 2006. Section 1.1. [Author version](https://www.shoup.net/papers/games.pdf).
++
++## Authorship and use of generative AI
++
++Samir Bouftass directed this research and is the sole named human author. The paper and its supporting programs were developed with extensive assistance from ChatGPT (OpenAI), including mathematical exploration, formulation and examination of arguments, proof drafting, writing and English translation, generation of verification programs, computational checks, and AI-assisted critical review. This assistance extends beyond language editing.
++
++ChatGPT is disclosed as an AI tool and is not listed as an author or metadata contributor. AI-assisted reviews are not independent human peer review, and computational checks do not replace mathematical proofs. Responsibility for the final manuscript and its publication rests with the human author. This declaration does not certify that every argument has been independently checked by a human reviewer.
++
++This authorship and disclosure revision is dated 18 November 2026. The mathematical text, scientific verification programs and recorded results of English edition 1.1 are unchanged.

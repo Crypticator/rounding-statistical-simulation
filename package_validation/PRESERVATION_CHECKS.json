@@ -1,0 +1,174 @@
+{
+  "status": "PASS",
+  "scope": "Editorial preservation and packaging; scientific campaigns not rerun.",
+  "thesis_files_preserved_byte_for_byte": 92,
+  "papers": [
+    {
+      "paper": "Affine_Maps_Modular_Rounding",
+      "source_changes_limited_to_author_and_disclosure": true,
+      "scientific_pdf_text_preserved": true,
+      "preserved_files": {
+        "scripts": 3,
+        "data": 2,
+        "figures": 0
+      },
+      "pages_before": 6,
+      "pages_after": 6,
+      "unchanged_body_page_pixels": [
+        {
+          "page": 2,
+          "original_content_pixels_identical": true
+        },
+        {
+          "page": 3,
+          "original_content_pixels_identical": true
+        },
+        {
+          "page": 4,
+          "original_content_pixels_identical": true
+        },
+        {
+          "page": 5,
+          "original_content_pixels_identical": true
+        },
+        {
+          "page": 6,
+          "original_content_pixels_identical": true
+        }
+      ],
+      "rendered_pages_for_visual_review": [
+        1,
+        6
+      ]
+    },
+    {
+      "paper": "Dense_to_Toeplitz_Row_Transformations",
+      "source_changes_limited_to_author_and_disclosure": true,
+      "scientific_pdf_text_preserved": true,
+      "preserved_files": {
+        "scripts": 5,
+        "data": 4,
+        "figures": 0
+      },
+      "pages_before": 7,
+      "pages_after": 8,
+      "unchanged_body_page_pixels": [
+        {
+          "page": 2,
+          "original_content_pixels_identical": true
+        },
+        {
+          "page": 3,
+          "original_content_pixels_identical": true
+        },
+        {
+          "page": 4,
+          "original_content_pixels_identical": true
+        },
+        {
+          "page": 5,
+          "original_content_pixels_identical": true
+        },
+        {
+          "page": 6,
+          "original_content_pixels_identical": true
+        },
+        {
+          "page": 7,
+          "original_content_pixels_identical": true
+        }
+      ],
+      "rendered_pages_for_visual_review": [
+        1,
+        7,
+        8
+      ]
+    },
+    {
+      "paper": "Noise_and_Simulation_of_Rounded_Observations",
+      "source_changes_limited_to_author_and_disclosure": true,
+      "scientific_pdf_text_preserved": true,
+      "preserved_files": {
+        "scripts": 5,
+        "data": 4,
+        "figures": 0
+      },
+      "pages_before": 7,
+      "pages_after": 7,
+      "unchanged_body_page_pixels": [
+        {
+          "page": 2,
+          "original_content_pixels_identical": true
+        },
+        {
+          "page": 3,
+          "original_content_pixels_identical": true
+        },
+        {
+          "page": 4,
+          "original_content_pixels_identical": true
+        },
+        {
+          "page": 5,
+          "original_content_pixels_identical": true
+        },
+        {
+          "page": 6,
+          "original_content_pixels_identical": true
+        },
+        {
+          "page": 7,
+          "original_content_pixels_identical": true
+        }
+      ],
+      "rendered_pages_for_visual_review": [
+        1,
+        7
+      ]
+    },
+    {
+      "paper": "Repeated_Rounded_Observations",
+      "source_changes_limited_to_author_and_disclosure": true,
+      "scientific_pdf_text_preserved": true,
+      "preserved_files": {
+        "scripts": 7,
+        "data": 4,
+        "figures": 3
+      },
+      "pages_before": 7,
+      "pages_after": 7,
+      "unchanged_body_page_pixels": [
+        {
+          "page": 2,
+          "original_content_pixels_identical": true
+        },
+        {
+          "page": 3,
+          "original_content_pixels_identical": true
+        },
+        {
+          "page": 4,
+          "original_content_pixels_identical": true
+        },
+        {
+          "page": 5,
+          "original_content_pixels_identical": true
+        },
+        {
+          "page": 6,
+          "original_content_pixels_identical": true
+        },
+        {
+          "page": 7,
+          "original_content_pixels_identical": true
+        }
+      ],
+      "rendered_pages_for_visual_review": [
+        1,
+        7
+      ]
+    }
+  ],
+  "local_readme_links_checked": 33,
+  "root_pdf_copies_and_nested_archives_match": true
+}

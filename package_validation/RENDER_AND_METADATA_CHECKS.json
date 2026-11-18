@@ -1,0 +1,27 @@
+{
+  "status": "PASS",
+  "method": "First pages and all new disclosure pages visually inspected; original scientific PDF text checked against the preceding files; remaining original body page areas verified pixel-identical at 72 dpi.",
+  "pages_visually_inspected": {
+    "Affine_Maps_Modular_Rounding": [
+      1,
+      6
+    ],
+    "Noise_and_Simulation_of_Rounded_Observations": [
+      1,
+      7
+    ],
+    "Dense_to_Toeplitz_Row_Transformations": [
+      1,
+      7,
+      8
+    ],
+    "Repeated_Rounded_Observations": [
+      1,
+      7
+    ]
+  },
+  "observations": "Author lines, headings, declarations, references and page breaks are readable; no clipping or overlap observed in the changed pages.",
+  "cff_schema_version": "1.2.0",
+  "cff_files_validated": 5,
+  "scientific_reaudit_performed": false
+}

@@ -1,0 +1,23 @@
+--- before/Dense_to_Toeplitz_Row_Transformations.md
++++ after/Dense_to_Toeplitz_Row_Transformations.md
+@@ -1,7 +1,7 @@
+ ---
+ title: "Dense and Toeplitz Matrices under Signed Row Permutations"
+ subtitle: "Orbit constraints, optimal total variation, and exact rejection"
+-author: "Samir Bouftass and ChatGPT (OpenAI)"
++author: "Samir Bouftass"
+ date: "16 November 2026 · English edition 1.1"
+ ---
+ 
+@@ -246,3 +246,11 @@
+ [2] Alexandre Verine, Muni Sreenivas Pydi, Benjamin Negrevergne, and Yann Chevaleyre. *Optimal Budgeted Rejection Sampling for Generative Models*. AISTATS 2024, PMLR 238, pp. 3367–3375. Section 3.1 and Theorem 3.1. [Proceedings and paper](https://proceedings.mlr.press/v238/verine24a.html).
+ 
+ [3] Adam Block and Yury Polyanskiy. *The Sample Complexity of Approximate Rejection Sampling With Applications to Smoothed Online Learning*. COLT 2023, PMLR 195, pp. 228–273. [Proceedings and paper](https://proceedings.mlr.press/v195/block23a.html).
++
++## Authorship and use of generative AI
++
++Samir Bouftass directed this research and is the sole named human author. The paper and its supporting programs were developed with extensive assistance from ChatGPT (OpenAI), including mathematical exploration, formulation and examination of arguments, proof drafting, writing and English translation, generation of verification programs, computational checks, and AI-assisted critical review. This assistance extends beyond language editing.
++
++ChatGPT is disclosed as an AI tool and is not listed as an author or metadata contributor. AI-assisted reviews are not independent human peer review, and computational checks do not replace mathematical proofs. Responsibility for the final manuscript and its publication rests with the human author. This declaration does not certify that every argument has been independently checked by a human reviewer.
++
++This authorship and disclosure revision is dated 18 November 2026. The mathematical text, scientific verification programs and recorded results of English edition 1.1 are unchanged.

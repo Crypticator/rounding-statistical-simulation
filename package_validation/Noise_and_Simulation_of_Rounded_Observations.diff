@@ -1,0 +1,23 @@
+--- before/Noise_and_Simulation_of_Rounded_Observations.md
++++ after/Noise_and_Simulation_of_Rounded_Observations.md
+@@ -1,7 +1,7 @@
+ ---
+ title: "Noise and Simulation of Rounded Observations"
+ subtitle: "Exact scalar classification and the cost of preserving dependencies"
+-author: "Samir Bouftass and ChatGPT (OpenAI)"
++author: "Samir Bouftass"
+ date: "15 November 2026 · English edition 1.1"
+ ---
+ 
+@@ -243,3 +243,11 @@
+ [3] Abhishek Banerjee, Chris Peikert, and Alon Rosen. *Pseudorandom Functions and Lattices*. EUROCRYPT 2012, pp. 719–737. [Author version](https://web.eecs.umich.edu/~cpeikert/pubs/prf-lattice.pdf).
+ 
+ [4] Joël Alwen, Stephan Krenn, Krzysztof Pietrzak, and Daniel Wichs. *Learning with Rounding, Revisited: New Reduction, Properties and Applications*. CRYPTO 2013, pp. 57–74. [Author version](https://crypto.ethz.ch/publications/files/AKPW13.pdf). DOI: 10.1007/978-3-642-40041-4_4.
++
++## Authorship and use of generative AI
++
++Samir Bouftass directed this research and is the sole named human author. The paper and its supporting programs were developed with extensive assistance from ChatGPT (OpenAI), including mathematical exploration, formulation and examination of arguments, proof drafting, writing and English translation, generation of verification programs, computational checks, and AI-assisted critical review. This assistance extends beyond language editing.
++
++ChatGPT is disclosed as an AI tool and is not listed as an author or metadata contributor. AI-assisted reviews are not independent human peer review, and computational checks do not replace mathematical proofs. Responsibility for the final manuscript and its publication rests with the human author. This declaration does not certify that every argument has been independently checked by a human reviewer.
++
++This authorship and disclosure revision is dated 18 November 2026. The mathematical text, scientific verification programs and recorded results of English edition 1.1 are unchanged.
